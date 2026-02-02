@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs — SelfieGym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">SelfieGym</a>
+        <ul class="nav-links">
+            <li><a href="programs.html" style="color: var(--primary)">Programs</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="nutrition.html">Nutrition</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="dashboard.html" class="nav-cta">Member Login</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>Workout Programs</h1>
+        <p>Choose a program that matches your goals. Each includes detailed workouts, video guides, and progress tracking.</p>
+    </header>
+
+    <section class="programs-section">
+        <div class="filter-bar">
+            <button class="filter-btn active">All Programs</button>
+            <button class="filter-btn">Weight Loss</button>
+            <button class="filter-btn">Muscle Building</button>
+            <button class="filter-btn">Home Workouts</button>
+            <button class="filter-btn">Gym</button>
+            <button class="filter-btn">Beginners</button>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Program 1 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=600&h=400&fit=crop" alt="Lean & Strong">
+                    <span class="program-badge">Most Popular</span>
+                </div>
+                <div class="program-content">
+                    <h3>Lean & Strong</h3>
+                    <p>Build lean muscle while burning fat. Perfect balance of strength and cardio for a toned physique.</p>
+                    <div class="program-meta">
+                        <span>📅 12 Weeks</span>
+                        <span>💪 5 Days/Week</span>
+                        <span>⚡ Intermediate</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">Start Program</button>
+                </div>
+            </div>
+
+            <!-- Program 2 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=400&fit=crop" alt="Fat Burner">
+                </div>
+                <div class="program-content">
+                    <h3>Fat Burner Pro</h3>
+                    <p>High-intensity program designed to maximize calorie burn and boost metabolism.</p>
+                    <div class="program-meta">
+                        <span>📅 8 Weeks</span>
+                        <span>💪 4 Days/Week</span>
+                        <span>⚡ All Levels</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">Start Program</button>
+                </div>
+            </div>
+
+            <!-- Program 3 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&h=400&fit=crop" alt="Home Hero">
+                    <span class="program-badge">No Equipment</span>
+                </div>
+                <div class="program-content">
+                    <h3>Home Hero</h3>
+                    <p>Full-body transformation using only your bodyweight. Train anywhere, anytime.</p>
+                    <div class="program-meta">
+                        <span>📅 8 Weeks</span>
+                        <span>💪 4 Days/Week</span>
+                        <span>⚡ Beginner</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">Start Program</button>
+                </div>
+            </div>
+
+            <!-- Program 4 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop" alt="Mass Builder">
+                </div>
+                <div class="program-content">
+                    <h3>Mass Builder</h3>
+                    <p>Serious muscle-building program with progressive overload. For those ready to grow.</p>
+                    <div class="program-meta">
+                        <span>📅 16 Weeks</span>
+                        <span>💪 5 Days/Week</span>
+                        <span>⚡ Intermediate</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">Start Program</button>
+                </div>
+            </div>
+
+            <!-- Program 5 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop" alt="Strength Basics">
+                    <span class="program-badge">Best for Beginners</span>
+                </div>
+                <div class="program-content">
+                    <h3>Strength Basics</h3>
+                    <p>Learn the fundamentals of lifting with proper form. Build a solid foundation.</p>
+                    <div class="program-meta">
+                        <span>📅 6 Weeks</span>
+                        <span>💪 3 Days/Week</span>
+                        <span>⚡ Beginner</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">Start Program</button>
+                </div>
+            </div>
+
+            <!-- Program 6 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&h=400&fit=crop" alt="HIIT Express">
+                </div>
+                <div class="program-content">
+                    <h3>HIIT Express</h3>
+                    <p>Short, intense workouts for busy schedules. Maximum results in minimum time.</p>
+                    <div class="program-meta">
+                        <span>📅 6 Weeks</span>
+                        <span>💪 4 Days/Week</span>
+                        <span>⚡ All Levels</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">Start Program</button>
+                </div>
+            </div>
+
+            <!-- Program 7 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&h=400&fit=crop" alt="Core Crusher">
+                </div>
+                <div class="program-content">
+                    <h3>Core Crusher</h3>
+                    <p>Sculpt your abs and strengthen your core. Daily targeted workouts.</p>
+                    <div class="program-meta">
+                        <span>📅 4 Weeks</span>
+                        <span>💪 6 Days/Week</span>
+                        <span>⚡ All Levels</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">Start Program</button>
+                </div>
+            </div>
+
+            <!-- Program 8 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&h=400&fit=crop" alt="Athletic Performance">
+                </div>
+                <div class="program-content">
+                    <h3>Athletic Performance</h3>
+                    <p>Train like an athlete. Improve speed, agility, and explosive power.</p>
+                    <div class="program-meta">
+                        <span>📅 10 Weeks</span>
+                        <span>💪 5 Days/Week</span>
+                        <span>⚡ Advanced</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">Start Program</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Can't decide?</h2>
+        <p>Take our quick quiz and we'll recommend the perfect program for you.</p>
+        <a href="#" class="btn-primary">Take the Quiz</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">SelfieGym</a>
+                <p>Fitness that fits your life.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <a href="programs.html">Programs</a>
+                <a href="exercises.html">Exercises</a>
+                <a href="nutrition.html">Nutrition</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SelfieGym. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

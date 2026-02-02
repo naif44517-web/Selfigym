@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfieGym — Your Fitness, Your Way</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #E07A5F;
+            --coral-light: #F2A391;
+            --cream: #FAF7F2;
+            --warm-white: #FFFDF9;
+            --charcoal: #2D2A26;
+            --brown: #5C534A;
+            --sand: #D4C5B5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: transparent;
+            transition: background 0.3s;
+        }
+
+        nav.scrolled {
+            background: var(--warm-white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--brown);
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--coral);
+        }
+
+        .nav-cta {
+            background: var(--charcoal);
+            color: var(--cream) !important;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+        }
+
+        .hero-content {
+            padding: 0 4rem 0 8rem;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--coral);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--brown);
+            margin-bottom: 2.5rem;
+            max-width: 400px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--coral);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--charcoal);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--cream) 0%, transparent 15%);
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            padding: 120px 8rem;
+            text-align: center;
+            background: var(--warm-white);
+        }
+
+        .philosophy h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .philosophy p {
+            font-size: 1.2rem;
+            color: var(--brown);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features - Visual Grid */
+        .features {
+            padding: 100px 4rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            position: relative;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .feature-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+        }
+
+        .feature-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 1;
+            color: white;
+        }
+
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-content p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Testimonial */
+        .testimonial {
+            padding: 120px 8rem;
+            background: var(--charcoal);
+            color: var(--cream);
+            text-align: center;
+        }
+
+        .testimonial-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-style: italic;
+            line-height: 1.4;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-author-info {
+            text-align: left;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+        }
+
+        .testimonial-meta {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Journey Section */
+        .journey {
+            padding: 120px 8rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .journey-image {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 500px;
+        }
+
+        .journey-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .journey-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .journey-content p {
+            color: var(--brown);
+            margin-bottom: 2rem;
+        }
+
+        .journey-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--sand);
+        }
+
+        .stat h3 {
+            font-size: 2.5rem;
+            color: var(--coral);
+        }
+
+        .stat p {
+            font-size: 0.9rem;
+            color: var(--brown);
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 120px 8rem;
+            background: var(--warm-white);
+            text-align: center;
+        }
+
+        .pricing h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing > p {
+            color: var(--brown);
+            margin-bottom: 4rem;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .pricing-card.featured {
+            background: var(--charcoal);
+            color: var(--cream);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin: 1rem 0;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            opacity: 0.6;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .pricing-card li {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .pricing-card li::before {
+            content: '✓ ';
+            color: var(--coral);
+        }
+
+        .pricing-card.featured li::before {
+            color: var(--coral-light);
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:not(.featured) .pricing-btn {
+            background: var(--charcoal);
+            color: white;
+        }
+
+        .pricing-card.featured .pricing-btn {
+            background: var(--coral);
+            color: white;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 150px 8rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--coral) 0%, var(--coral-light) 100%);
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta .btn-primary {
+            background: white;
+            color: var(--coral);
+        }
+
+        .cta .btn-primary:hover {
+            background: var(--charcoal);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 60px 8rem 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            opacity: 0.7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.3rem 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 1024px) {
+            nav { padding: 1rem 2rem; }
+            .hero { grid-template-columns: 1fr; }
+            .hero-content { padding: 120px 2rem 60px; text-align: center; }
+            .hero-content p { margin: 0 auto 2rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-image { height: 50vh; }
+            .hero-image::after { background: linear-gradient(to top, var(--cream) 0%, transparent 15%); }
+            .philosophy, .journey, .pricing, .cta { padding: 80px 2rem; }
+            .features { grid-template-columns: 1fr; padding: 60px 2rem; }
+            .feature-card { height: 350px; }
+            .journey { grid-template-columns: 1fr; gap: 2rem; }
+            .pricing-cards { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">SelfieGym</a>
+        <ul class="nav-links">
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#journey">Your Journey</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#" class="nav-cta">Get Started</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">Your body. Your rules.</span>
+            <h1>Fitness that feels like you.</h1>
+            <p>A personal coach in your pocket. Real guidance, real results — on your schedule.</p>
+            <a href="#" class="btn-primary">Start Your Journey</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&h=1400&fit=crop" alt="Fitness Journey">
+        </div>
+    </section>
+
+    <section class="philosophy" id="philosophy">
+        <h2>We believe fitness should feel good.</h2>
+        <p>No judgment. No pressure. Just a coach who understands your life, your goals, and meets you where you are.</p>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=900&fit=crop" alt="Personal Coaching">
+            <div class="feature-content">
+                <h3>Personal Coaching</h3>
+                <p>Guidance that adapts to your life</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=900&fit=crop" alt="Nutrition">
+            <div class="feature-content">
+                <h3>Nutrition Made Simple</h3>
+                <p>Eat well without the stress</p>
+            </div>
+        </div>
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&h=900&fit=crop" alt="Progress">
+            <div class="feature-content">
+                <h3>See Your Progress</h3>
+                <p>Celebrate every milestone</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial">
+        <p class="testimonial-quote">"For the first time, I actually look forward to working out. It doesn't feel like a chore anymore — it feels like me time."</p>
+        <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face" alt="Sarah">
+            <div class="testimonial-author-info">
+                <div class="testimonial-name">Sarah K.</div>
+                <div class="testimonial-meta">Lost 30 lbs in 5 months</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="journey" id="journey">
+        <div class="journey-image">
+            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=1000&fit=crop" alt="Your Journey">
+        </div>
+        <div class="journey-content">
+            <h2>Your journey, your pace.</h2>
+            <p>We're not here to push you into someone else's routine. We're here to help you build your own — one that fits your schedule, your body, and your goals.</p>
+            <p>Whether you train at home or at the gym, morning or night, we adapt to you.</p>
+            <a href="#" class="btn-primary">Learn More</a>
+            <div class="journey-stats">
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>Always there</p>
+                </div>
+                <div class="stat">
+                    <h3>100%</h3>
+                    <p>Personalized</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <h2>Simple, honest pricing.</h2>
+        <p>No hidden fees. No contracts. Cancel anytime.</p>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">Free</div>
+                <ul>
+                    <li>Basic workout plans</li>
+                    <li>Exercise library</li>
+                    <li>Progress tracking</li>
+                </ul>
+                <button class="pricing-btn">Get Started</button>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Pro</h3>
+                <div class="price">$9.99<span>/mo</span></div>
+                <ul>
+                    <li>Unlimited coaching</li>
+                    <li>Custom programs</li>
+                    <li>Nutrition guidance</li>
+                    <li>Priority support</li>
+                </ul>
+                <button class="pricing-btn">Start Free Trial</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Premium</h3>
+                <div class="price">$19.99<span>/mo</span></div>
+                <ul>
+                    <li>Everything in Pro</li>
+                    <li>Detailed meal plans</li>
+                    <li>Video analysis</li>
+                    <li>1-on-1 check-ins</li>
+                </ul>
+                <button class="pricing-btn">Start Free Trial</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to feel good?</h2>
+        <p>Start your free trial today. No credit card required.</p>
+        <a href="#" class="btn-primary">Begin Your Journey</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo" style="color: var(--cream);">SelfieGym</a>
+                <p>Fitness that feels like you. Personal coaching for your unique journey.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SelfieGym. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Nav scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

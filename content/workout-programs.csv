@@ -1,0 +1,13 @@
+Program ID,Program Name (EN),Program Name (AR),Goal,Duration (weeks),Days/week,Session Length (min),Level,Equipment,Description (EN),Description (AR)
+WP001,Beginner Full Body,برنامج الجسم الكامل للمبتدئين,General Fitness,8,3,45,Beginner,Gym,"3-day full body split perfect for beginners. Learn proper form and build base strength.","تقسيم 3 أيام للجسم الكامل مثالي للمبتدئين. تعلم الفورم الصحيح وابني قوة أساسية."
+WP002,Push Pull Legs,برنامج دفع سحب أرجل,Muscle Gain,12,6,60,Intermediate,Gym,"Classic PPL split for muscle building. Hit each muscle group twice per week.","تقسيم PPL الكلاسيكي لبناء العضلات. استهداف كل مجموعة عضلية مرتين أسبوعياً."
+WP003,Upper Lower Split,برنامج علوي سفلي,Strength,10,4,50,Intermediate,Gym,"4-day upper/lower split. Great balance of volume and recovery.","تقسيم 4 أيام علوي/سفلي. توازن ممتاز بين الحجم والراحة."
+WP004,5x5 Strength,برنامج القوة 5×5,Strength,12,3,45,Beginner,Gym,"Classic 5x5 program focusing on compound lifts. Build serious strength.","برنامج 5×5 الكلاسيكي مركز على التمارين المركبة. ابنِ قوة حقيقية."
+WP005,Home Bodyweight,برنامج المنزل بوزن الجسم,General Fitness,8,4,30,Beginner,None,"No equipment needed. Build muscle and burn fat at home.","بدون معدات. ابنِ العضلات واحرق الدهون في المنزل."
+WP006,HIIT Fat Burner,برنامج حرق الدهون HIIT,Weight Loss,6,4,25,Intermediate,Minimal,"High intensity intervals for maximum fat burning in minimum time.","فترات عالية الكثافة لأقصى حرق دهون في أقل وقت."
+WP007,Bro Split,برنامج التقسيم الكلاسيكي,Muscle Gain,12,5,60,Intermediate,Gym,"One muscle group per day. Classic bodybuilding approach.","مجموعة عضلية واحدة يومياً. نهج كمال الأجسام الكلاسيكي."
+WP008,Arnold Split,برنامج أرنولد,Muscle Gain,12,6,75,Advanced,Gym,"Chest/Back, Shoulders/Arms, Legs. Twice per week. High volume.","صدر/ظهر، أكتاف/ذراعين، أرجل. مرتين أسبوعياً. حجم عالي."
+WP009,Powerbuilding,برنامج القوة والبناء,Strength,16,4,60,Advanced,Gym,"Combine strength and hypertrophy. Heavy compounds plus isolation work.","دمج القوة والتضخم. تمارين مركبة ثقيلة مع تمارين عزل."
+WP010,Women's Toning,برنامج تنسيق الجسم للنساء,Toning,10,4,45,Beginner,Gym,"Focused on glutes legs and overall toning. Build curves and burn fat.","مركز على المؤخرة والأرجل والتنسيق العام. ابني منحنيات واحرقي الدهون."
+WP011,Senior Fitness,برنامج اللياقة لكبار السن,Health,Ongoing,3,30,Beginner,Light,"Low impact exercises for mobility strength and balance. Safe and effective.","تمارين منخفضة التأثير للحركة والقوة والتوازن. آمنة وفعالة."
+WP012,Calisthenics,برنامج الكاليسثنكس,Strength,12,4,45,Intermediate,Pull-up Bar,"Master bodyweight movements. Progress from basic to advanced skills.","أتقن حركات وزن الجسم. تقدم من المهارات الأساسية للمتقدمة."

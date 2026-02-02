@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition — SelfieGym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">SelfieGym</a>
+        <ul class="nav-links">
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="nutrition.html" style="color: var(--primary)">Nutrition</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="dashboard.html" class="nav-cta">Member Login</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>Nutrition Plans</h1>
+        <p>Eat smarter, not harder. Meal plans designed around your goals and lifestyle.</p>
+    </header>
+
+    <section class="programs-section">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <h2>Choose Your Approach</h2>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Plan 1 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop" alt="Weight Loss">
+                    <span class="program-badge">Most Popular</span>
+                </div>
+                <div class="program-content">
+                    <h3>Fat Loss Plan</h3>
+                    <p>Calorie-controlled meals that keep you full and energized while shedding fat.</p>
+                    <div class="program-meta">
+                        <span>🔥 1500-1800 cal</span>
+                        <span>🥗 High Protein</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">View Plan</button>
+                </div>
+            </div>
+
+            <!-- Plan 2 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&h=400&fit=crop" alt="Muscle Gain">
+                </div>
+                <div class="program-content">
+                    <h3>Muscle Gain Plan</h3>
+                    <p>High-protein meals to fuel muscle growth and recovery. Bulk up the smart way.</p>
+                    <div class="program-meta">
+                        <span>🔥 2500-3000 cal</span>
+                        <span>💪 Protein Focus</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">View Plan</button>
+                </div>
+            </div>
+
+            <!-- Plan 3 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop" alt="Balanced">
+                </div>
+                <div class="program-content">
+                    <h3>Balanced Lifestyle</h3>
+                    <p>Maintain your weight with balanced, delicious meals. Flexible and sustainable.</p>
+                    <div class="program-meta">
+                        <span>🔥 2000-2200 cal</span>
+                        <span>⚖️ Balanced</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">View Plan</button>
+                </div>
+            </div>
+
+            <!-- Plan 4 -->
+            <div class="program-card">
+                <div class="program-image">
+                    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=400&fit=crop" alt="Keto">
+                </div>
+                <div class="program-content">
+                    <h3>Low Carb / Keto</h3>
+                    <p>Low carbohydrate meals to help your body burn fat for fuel. Ketogenic-friendly.</p>
+                    <div class="program-meta">
+                        <span>🔥 1800-2200 cal</span>
+                        <span>🥩 High Fat</span>
+                    </div>
+                    <button class="program-btn" onclick="location.href='dashboard.html'">View Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" style="background: white;">
+        <div class="section-header">
+            <h2>What's Included</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
+                <h3>Weekly Meal Plans</h3>
+                <p>Complete 7-day meal plans with breakfast, lunch, dinner, and snacks.</p>
+            </div>
+            <div class="feature-card" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📝</div>
+                <h3>Shopping Lists</h3>
+                <p>Auto-generated shopping lists based on your weekly meals.</p>
+            </div>
+            <div class="feature-card" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">👨‍🍳</div>
+                <h3>Easy Recipes</h3>
+                <p>Quick recipes with step-by-step instructions. Most under 30 minutes.</p>
+            </div>
+            <div class="feature-card" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                <h3>Macro Tracking</h3>
+                <p>All meals include detailed nutrition info. Know exactly what you're eating.</p>
+            </div>
+            <div class="feature-card" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🔄</div>
+                <h3>Meal Swaps</h3>
+                <p>Don't like something? Swap it with similar alternatives instantly.</p>
+            </div>
+            <div class="feature-card" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🚫</div>
+                <h3>Allergy Filters</h3>
+                <p>Filter out ingredients you're allergic to or simply don't like.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="section-header">
+            <h2>Sample Day</h2>
+            <p>Here's what a typical day looks like on the Fat Loss plan</p>
+        </div>
+        <div style="max-width: 600px; margin: 2rem auto; background: white; border-radius: 16px; padding: 2rem; box-shadow: var(--shadow);">
+            <div style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #eee;">
+                <div>
+                    <span style="color: var(--primary); font-weight: 600; display: block; font-size: 0.85rem;">BREAKFAST • 7:00 AM</span>
+                    <strong>Greek Yogurt Bowl</strong>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Yogurt + berries + granola + honey</p>
+                </div>
+                <span style="color: var(--gray);">380 cal</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #eee;">
+                <div>
+                    <span style="color: var(--primary); font-weight: 600; display: block; font-size: 0.85rem;">SNACK • 10:00 AM</span>
+                    <strong>Apple & Almond Butter</strong>
+                    <p style="color: var(--gray); font-size: 0.9rem;">1 apple + 2 tbsp almond butter</p>
+                </div>
+                <span style="color: var(--gray);">220 cal</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #eee;">
+                <div>
+                    <span style="color: var(--primary); font-weight: 600; display: block; font-size: 0.85rem;">LUNCH • 1:00 PM</span>
+                    <strong>Grilled Chicken Salad</strong>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Chicken + mixed greens + avocado + olive oil dressing</p>
+                </div>
+                <span style="color: var(--gray);">450 cal</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #eee;">
+                <div>
+                    <span style="color: var(--primary); font-weight: 600; display: block; font-size: 0.85rem;">SNACK • 4:00 PM</span>
+                    <strong>Protein Shake</strong>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Whey protein + banana + almond milk</p>
+                </div>
+                <span style="color: var(--gray);">280 cal</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 1rem 0;">
+                <div>
+                    <span style="color: var(--primary); font-weight: 600; display: block; font-size: 0.85rem;">DINNER • 7:00 PM</span>
+                    <strong>Salmon with Vegetables</strong>
+                    <p style="color: var(--gray); font-size: 0.9rem;">Baked salmon + roasted broccoli + quinoa</p>
+                </div>
+                <span style="color: var(--gray);">520 cal</span>
+            </div>
+            <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid var(--primary);">
+                <strong style="font-size: 1.2rem;">Daily Total: 1,850 calories</strong>
+                <p style="color: var(--gray); font-size: 0.9rem;">Protein: 140g • Carbs: 160g • Fat: 70g</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to eat better?</h2>
+        <p>Get your personalized nutrition plan today.</p>
+        <a href="pricing.html" class="btn-primary">Start Free Trial</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">SelfieGym</a>
+                <p>Fitness that fits your life.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <a href="programs.html">Programs</a>
+                <a href="exercises.html">Exercises</a>
+                <a href="nutrition.html">Nutrition</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SelfieGym. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

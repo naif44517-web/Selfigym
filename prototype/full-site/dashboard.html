@@ -6,6 +6,91 @@
     <title>Dashboard — SelfieGym</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Dashboard layout fix */
+        .dashboard {
+            display: block !important;
+            min-height: 100vh !important;
+        }
+        .main-content {
+            margin-left: 250px !important;
+            padding: 2rem !important;
+            min-width: 0 !important;
+            width: calc(100% - 250px) !important;
+        }
+        .card {
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+        .card-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+        }
+        .card-header h3 {
+            white-space: nowrap !important;
+        }
+        /* Chat section */
+        .coach-chat-box { 
+            width: 100% !important; 
+        }
+        .coach-msg, .user-msg {
+            display: flex !important;
+            width: 100% !important;
+        }
+        .msg-bubble {
+            max-width: 75% !important;
+            min-width: 200px !important;
+            word-break: normal !important;
+            white-space: normal !important;
+        }
+        .msg-bubble p {
+            margin: 0 0 5px 0 !important;
+            line-height: 1.5 !important;
+        }
+        /* Program grid fix */
+        #programs .card-header h3 {
+            font-size: 1.1rem !important;
+        }
+        /* Workout items fix */
+        .workout-item {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            width: 100% !important;
+            overflow: visible !important;
+        }
+        .workout-item img {
+            width: 60px !important;
+            height: 60px !important;
+            min-width: 60px !important;
+            border-radius: 8px !important;
+            object-fit: cover !important;
+            background: #eee !important;
+        }
+        .workout-info {
+            flex: 1 !important;
+            min-width: 0 !important;
+            overflow: visible !important;
+        }
+        .workout-info h4 {
+            font-size: 1rem !important;
+            margin: 0 0 4px 0 !important;
+            white-space: nowrap !important;
+            overflow: visible !important;
+        }
+        .workout-info p {
+            font-size: 0.85rem !important;
+            color: #636E72 !important;
+            margin: 0 !important;
+        }
+        .workout-action {
+            flex-shrink: 0 !important;
+        }
+    </style>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body style="background: var(--cream);">
     <nav>
@@ -19,7 +104,7 @@
         </ul>
     </nav>
 
-    <div class="dashboard">
+    <div class="dashboard" style="display: block !important;">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-user">
@@ -105,7 +190,7 @@
                     </div>
 
                     <div class="workout-item">
-                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=120&h=120&fit=crop" alt="Pull-ups">
+                        <img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=120&h=120&fit=crop" alt="Pull-ups">
                         <div class="workout-info">
                             <h4>Pull-ups</h4>
                             <p>3 sets × 8 reps</p>
@@ -259,35 +344,38 @@
             </div>
 
             <!-- Coach Chat Section -->
-            <div class="card" id="chat" style="margin-top: 1.5rem;">
+            <div class="card" id="chat" style="margin-top: 1.5rem; width: 100%;">
                 <div class="card-header">
                     <h3>💬 Chat with Your Coach</h3>
                 </div>
-                <div style="background: var(--cream); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                        <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">🏋️</div>
-                        <div style="flex: 1; background: white; padding: 1rem; border-radius: 12px; border-radius: 0 12px 12px 12px;">
-                            <p style="margin: 0;">Great job on your workout yesterday, Ahmed! You're making excellent progress. Ready for today's upper body session?</p>
-                            <span style="font-size: 0.75rem; color: var(--gray);">2 hours ago</span>
+                <div class="coach-chat-box" style="background: #FAF8F5; border-radius: 12px; padding: 20px; margin-bottom: 15px; width: 100%;">
+                    <!-- Coach message 1 -->
+                    <div class="coach-msg" style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; width: 100%;">
+                        <div style="width: 40px; height: 40px; min-width: 40px; background: #E07A5F; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">🏋️</div>
+                        <div class="msg-bubble" style="background: white; padding: 12px 16px; border-radius: 4px 12px 12px 12px; flex: 1; max-width: 500px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                            <p style="margin: 0 0 6px 0; color: #2D3436; font-size: 15px; line-height: 1.5;">Great job on your workout yesterday, Ahmed! You're making excellent progress. Ready for today's upper body session?</p>
+                            <span style="font-size: 12px; color: #636E72;">2 hours ago</span>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 1rem; justify-content: flex-end;">
-                        <div style="background: var(--primary); color: white; padding: 1rem; border-radius: 12px 12px 0 12px; max-width: 70%;">
-                            <p style="margin: 0;">Thanks! Yes, I'm ready. Should I increase the bench press weight today?</p>
-                            <span style="font-size: 0.75rem; opacity: 0.8;">1 hour ago</span>
+                    <!-- User message -->
+                    <div class="user-msg" style="display: flex; justify-content: flex-end; margin-bottom: 16px; width: 100%;">
+                        <div class="msg-bubble" style="background: #E07A5F; color: white; padding: 12px 16px; border-radius: 12px 12px 4px 12px; max-width: 500px; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
+                            <p style="margin: 0 0 6px 0; font-size: 15px; line-height: 1.5;">Thanks! Yes, I'm ready. Should I increase the bench press weight today?</p>
+                            <span style="font-size: 12px; opacity: 0.8;">1 hour ago</span>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                        <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">🏋️</div>
-                        <div style="flex: 1; background: white; padding: 1rem; border-radius: 12px; border-radius: 0 12px 12px 12px;">
-                            <p style="margin: 0;">Yes! Since you completed all sets last time, let's add 2.5kg. Try 62.5kg today. If it feels too heavy, drop back down — no ego lifting! 💪</p>
-                            <span style="font-size: 0.75rem; color: var(--gray);">30 min ago</span>
+                    <!-- Coach message 2 -->
+                    <div class="coach-msg" style="display: flex; align-items: flex-start; gap: 12px; width: 100%;">
+                        <div style="width: 40px; height: 40px; min-width: 40px; background: #E07A5F; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;">🏋️</div>
+                        <div class="msg-bubble" style="background: white; padding: 12px 16px; border-radius: 4px 12px 12px 12px; flex: 1; max-width: 500px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                            <p style="margin: 0 0 6px 0; color: #2D3436; font-size: 15px; line-height: 1.5;">Yes! Since you completed all sets last time, let's add 2.5kg. Try 62.5kg today. If it feels too heavy, drop back down — no ego lifting! 💪</p>
+                            <span style="font-size: 12px; color: #636E72;">30 min ago</span>
                         </div>
                     </div>
                 </div>
-                <div style="display: flex; gap: 0.5rem;">
-                    <input type="text" placeholder="Ask your coach anything..." style="flex: 1; padding: 1rem; border: 1px solid var(--light-gray); border-radius: 50px; font-size: 0.95rem;">
-                    <button style="padding: 1rem 1.5rem; background: var(--primary); color: white; border: none; border-radius: 50px; cursor: pointer;">Send</button>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" placeholder="Ask your coach anything..." style="flex: 1; padding: 12px 20px; border: 1px solid #DFE6E9; border-radius: 50px; font-size: 15px; outline: none;">
+                    <button style="padding: 12px 24px; background: #E07A5F; color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: 500;">Send</button>
                 </div>
             </div>
 

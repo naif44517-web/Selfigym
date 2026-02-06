@@ -3,181 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SelfieGym — Fitness That Fits Your Life</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>SelfieGym — Coming Soon</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .coming-soon {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #e94560;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .notify-form {
+            display: flex;
+            gap: 12px;
+            max-width: 450px;
+            margin: 0 auto 2rem;
+        }
+
+        .notify-form input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .notify-form input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .notify-form input:focus {
+            border-color: #e94560;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .notify-form button {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .notify-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(233, 69, 96, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .social-links {
+            margin-top: 4rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #e94560;
+            transform: translateY(-3px);
+        }
+
+        .success-message {
+            display: none;
+            color: #4ade80;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .notify-form {
+                flex-direction: column;
+            }
+
+            .features {
+                gap: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html" class="logo">SelfieGym</a>
-        <ul class="nav-links">
-            <li><a href="programs.html">Programs</a></li>
-            <li><a href="exercises.html">Exercises</a></li>
-            <li><a href="nutrition.html">Nutrition</a></li>
-            <li><a href="pricing.html">Pricing</a></li>
-            <li><a href="dashboard.html" class="nav-cta">Member Login</a></li>
-        </ul>
-        <button class="mobile-menu">☰</button>
-    </nav>
+    <div class="container">
+        <div class="logo">SelfieGym</div>
+        <p class="tagline">Fitness That Fits Your Life</p>
+        
+        <p class="coming-soon">Coming Soon</p>
+        <h1>Your Personal AI Fitness Coach</h1>
+        <p class="description">
+            We're building something amazing. Personalized workouts, nutrition plans, 
+            and coaching — all powered by AI, designed for you.
+        </p>
 
-    <section class="hero">
-        <div class="hero-content">
-            <span class="hero-tag">Your journey starts here</span>
-            <h1>Fitness that<br>fits your life.</h1>
-            <p>Personal coaching, custom workouts, and real results — all on your schedule.</p>
-            <div class="hero-buttons">
-                <a href="pricing.html" class="btn-primary">Start Free Trial</a>
-                <a href="programs.html" class="btn-secondary">View Programs</a>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="hero-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=1000&fit=crop" alt="Fitness">
-                <div class="floating-stat stat-1">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">Exercises</span>
-                </div>
-                <div class="floating-stat stat-2">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">Support</span>
-                </div>
-            </div>
-        </div>
-    </section>
+        <form class="notify-form" id="notifyForm">
+            <input type="email" placeholder="Enter your email" required id="emailInput">
+            <button type="submit">Notify Me</button>
+        </form>
+        <p class="success-message" id="successMsg">✓ You're on the list! We'll notify you at launch.</p>
 
-    <section class="trust-bar">
-        <p>Trusted by <strong>10,000+</strong> members worldwide</p>
-        <div class="trust-logos">
-            <span>⭐⭐⭐⭐⭐</span>
-            <span>4.9 Rating</span>
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">💪</span>
+                <span>Smart Workouts</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🥗</span>
+                <span>Meal Plans</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🤖</span>
+                <span>AI Coach</span>
+            </div>
         </div>
-    </section>
 
-    <section class="features">
-        <div class="section-header">
-            <h2>Everything you need.</h2>
-            <p>No gym required. No equipment needed. Just you and your goals.</p>
+        <div class="social-links">
+            <a href="#" title="Instagram">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="#" title="Twitter">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="mailto:hello@selfigym.com" title="Email">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
         </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=300&fit=crop" alt="Custom Programs">
-                </div>
-                <h3>Custom Programs</h3>
-                <p>Workouts designed around your goals, schedule, and fitness level.</p>
-                <a href="programs.html">Explore Programs →</a>
-            </div>
-            <div class="feature-card">
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop" alt="Nutrition">
-                </div>
-                <h3>Nutrition Plans</h3>
-                <p>Meal guides that fit your lifestyle. No strict diets, just smart eating.</p>
-                <a href="nutrition.html">See Nutrition →</a>
-            </div>
-            <div class="feature-card">
-                <div class="feature-image">
-                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop" alt="Exercises">
-                </div>
-                <h3>Exercise Library</h3>
-                <p>500+ exercises with step-by-step guides. Perfect form every time.</p>
-                <a href="exercises.html">Browse Exercises →</a>
-            </div>
-        </div>
-    </section>
+    </div>
 
-    <section class="how-it-works">
-        <div class="section-header">
-            <h2>Simple as 1-2-3</h2>
-        </div>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>Tell us your goals</h3>
-                <p>Lose weight, build muscle, or just get healthier — you decide.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Get your plan</h3>
-                <p>Receive a personalized workout and nutrition program.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>Start transforming</h3>
-                <p>Follow your plan, track progress, see results.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="section-header">
-            <h2>Real people. Real results.</h2>
-        </div>
-        <div class="testimonials-grid">
-            <div class="testimonial">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Ahmed">
-                <p>"Lost 15kg in 4 months. The programs actually work and fit my busy schedule."</p>
-                <div class="testimonial-author">
-                    <strong>Ahmed S.</strong>
-                    <span>Dubai, UAE</span>
-                </div>
-            </div>
-            <div class="testimonial">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face" alt="Sarah">
-                <p>"Finally found something I can stick with. The exercises are easy to follow."</p>
-                <div class="testimonial-author">
-                    <strong>Sarah M.</strong>
-                    <span>Riyadh, KSA</span>
-                </div>
-            </div>
-            <div class="testimonial">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Omar">
-                <p>"Built real muscle without a gym membership. Best investment I've made."</p>
-                <div class="testimonial-author">
-                    <strong>Omar K.</strong>
-                    <span>Jeddah, KSA</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta">
-        <h2>Ready to start?</h2>
-        <p>Join thousands who've transformed their lives.</p>
-        <a href="pricing.html" class="btn-primary">Start Your Free Trial</a>
-        <span class="cta-note">No credit card required</span>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="index.html" class="logo">SelfieGym</a>
-                <p>Fitness that fits your life.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Product</h4>
-                <a href="programs.html">Programs</a>
-                <a href="exercises.html">Exercises</a>
-                <a href="nutrition.html">Nutrition</a>
-                <a href="pricing.html">Pricing</a>
-            </div>
-            <div class="footer-links">
-                <h4>Company</h4>
-                <a href="#">About</a>
-                <a href="#">Blog</a>
-                <a href="#">Contact</a>
-            </div>
-            <div class="footer-links">
-                <h4>Legal</h4>
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 SelfieGym. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
+    <script>
+        document.getElementById('notifyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            // Here you would normally send to your backend
+            console.log('Email submitted:', email);
+            document.getElementById('successMsg').style.display = 'block';
+            document.getElementById('emailInput').value = '';
+            this.querySelector('button').textContent = 'Done!';
+            setTimeout(() => {
+                this.querySelector('button').textContent = 'Notify Me';
+            }, 3000);
+        });
+    </script>
 </body>
 </html>

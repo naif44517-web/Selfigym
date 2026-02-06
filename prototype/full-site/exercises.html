@@ -6,6 +6,7 @@
     <title>Exercise Library — SelfieGym</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
     <nav>
@@ -88,7 +89,7 @@
             <!-- Exercise 5 -->
             <div class="exercise-card" onclick="location.href='dashboard.html'">
                 <div class="exercise-image">
-                    <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=400&h=300&fit=crop" alt="Pull-ups">
+                    <img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=400&h=300&fit=crop" alt="Pull-ups">
                     <span class="exercise-difficulty difficulty-intermediate">Intermediate</span>
                 </div>
                 <div class="exercise-content">
@@ -264,5 +265,49 @@
             <p>© 2025 SelfieGym. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const exerciseCards = document.querySelectorAll('.exercise-card');
+        
+        const exerciseCategories = {
+            'Push-ups': ['chest'],
+            'Bench Press': ['chest'],
+            'Squats': ['legs'],
+            'Deadlift': ['back'],
+            'Pull-ups': ['back'],
+            'Plank': ['core'],
+            'Lunges': ['legs'],
+            'Shoulder Press': ['shoulders'],
+            'Bicep Curls': ['arms'],
+            'Mountain Climbers': ['cardio', 'core'],
+            'Burpees': ['cardio'],
+            'Tricep Dips': ['arms'],
+            'Lat Pulldown': ['back'],
+            'Leg Press': ['legs'],
+            'Crunches': ['core'],
+            'Jumping Jacks': ['cardio']
+        };
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.textContent.toLowerCase();
+                
+                exerciseCards.forEach(card => {
+                    const title = card.querySelector('h4').textContent;
+                    const categories = exerciseCategories[title] || [];
+                    
+                    if (filter === 'all' || categories.includes(filter)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

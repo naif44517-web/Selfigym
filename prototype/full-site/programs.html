@@ -6,6 +6,7 @@
     <title>Programs — SelfieGym</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
     <nav>
@@ -38,7 +39,7 @@
             <!-- Program 1 -->
             <div class="program-card">
                 <div class="program-image">
-                    <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=600&h=400&fit=crop" alt="Lean & Strong">
+                    <img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=600&h=400&fit=crop" alt="Lean & Strong">
                     <span class="program-badge">Most Popular</span>
                 </div>
                 <div class="program-content">
@@ -181,6 +182,44 @@
         <p>Take our quick quiz and we'll recommend the perfect program for you.</p>
         <a href="#" class="btn-primary">Take the Quiz</a>
     </section>
+
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const programCards = document.querySelectorAll('.program-card');
+        
+        const programCategories = {
+            'Lean & Strong': ['muscle building', 'gym'],
+            'Fat Burner Pro': ['weight loss'],
+            'Home Hero': ['home workouts', 'beginners', 'weight loss'],
+            'Mass Builder': ['muscle building', 'gym'],
+            'Strength Basics': ['beginners', 'gym', 'muscle building'],
+            'HIIT Express': ['weight loss', 'home workouts'],
+            'Core Crusher': ['home workouts'],
+            'Athletic Performance': ['gym', 'muscle building']
+        };
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.textContent.toLowerCase();
+                
+                programCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent;
+                    const categories = programCategories[title] || [];
+                    
+                    if (filter === 'all programs' || categories.includes(filter)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 
     <footer>
         <div class="footer-content">

@@ -1,1 +1,199 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Coming Soon</title><style>body{display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#000;color:#fff;font-family:sans-serif}</style></head><body><h1>🚧 Coming Soon</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfieGym - Coming Soon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #7dd3fc 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+        }
+        
+        .logo {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        
+        .coming-soon {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .coming-soon h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        
+        .coming-soon p {
+            font-size: 18px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .feature {
+            background: rgba(255,255,255,0.15);
+            padding: 20px 30px;
+            border-radius: 12px;
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .feature h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .notify-form {
+            display: flex;
+            gap: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .notify-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        .notify-form button {
+            padding: 16px 32px;
+            background: #1e293b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .notify-form button:hover {
+            transform: scale(1.05);
+        }
+        
+        .social {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social a {
+            color: white;
+            font-size: 24px;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            text-decoration: none;
+        }
+        
+        .social a:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 36px;
+            }
+            .tagline {
+                font-size: 16px;
+            }
+            .coming-soon h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">💪</div>
+        <h1>SelfieGym</h1>
+        <p class="tagline">Your AI-Powered Personal Trainer</p>
+        
+        <div class="coming-soon">
+            <h2>🚀 Coming Soon</h2>
+            <p>We're building something amazing! Get personalized workout plans, AI nutrition coaching, and transform your fitness journey.</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🏋️</div>
+                <h3>AI Workouts</h3>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🥗</div>
+                <h3>Diet Plans</h3>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Track Progress</h3>
+            </div>
+        </div>
+        
+        <form class="notify-form" onsubmit="event.preventDefault(); alert('Thanks! We\'ll notify you when we launch.');">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Notify Me</button>
+        </form>
+        
+        <div class="social">
+            <a href="#">📸</a>
+            <a href="#">🐦</a>
+            <a href="#">📘</a>
+        </div>
+    </div>
+</body>
+</html>

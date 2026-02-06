@@ -3,197 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SelfieGym - Coming Soon</title>
+    <title>SelfieGym - Your AI Personal Trainer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #7dd3fc 100%);
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 600px;
-        }
-        
-        .logo {
-            font-size: 64px;
-            margin-bottom: 20px;
-        }
-        
-        h1 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .tagline {
-            font-size: 20px;
-            opacity: 0.9;
-            margin-bottom: 40px;
-        }
-        
-        .coming-soon {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .coming-soon h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-        
-        .coming-soon p {
-            font-size: 18px;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-        
-        .features {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        
-        .feature {
-            background: rgba(255,255,255,0.15);
-            padding: 20px 30px;
-            border-radius: 12px;
-        }
-        
-        .feature-icon {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-        
-        .feature h3 {
-            font-size: 16px;
-            font-weight: 600;
-        }
-        
-        .notify-form {
-            display: flex;
-            gap: 10px;
-            max-width: 400px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .notify-form input {
-            flex: 1;
-            min-width: 200px;
-            padding: 16px 24px;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-family: inherit;
-        }
-        
-        .notify-form button {
-            padding: 16px 32px;
-            background: #1e293b;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .notify-form button:hover {
-            transform: scale(1.05);
-        }
-        
-        .social {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .social a {
-            color: white;
-            font-size: 24px;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-            text-decoration: none;
-        }
-        
-        .social a:hover {
-            opacity: 1;
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 36px;
-            }
-            .tagline {
-                font-size: 16px;
-            }
-            .coming-soon h2 {
-                font-size: 24px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="logo">💪</div>
-        <h1>SelfieGym</h1>
-        <p class="tagline">Your AI-Powered Personal Trainer</p>
-        
-        <div class="coming-soon">
-            <h2>🚀 Coming Soon</h2>
-            <p>We're building something amazing! Get personalized workout plans, AI nutrition coaching, and transform your fitness journey.</p>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">💪</span>
+                <span class="logo-text">SelfieGym</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="pages/exercises.html">Exercises</a></li>
+                <li><a href="pages/diet.html">Diet Plans</a></li>
+                <li><a href="pages/about.html">About</a></li>
+                <li><a href="pages/pricing.html">Pricing</a></li>
+            </ul>
+            <a href="pages/pricing.html" class="btn btn-primary">Start Free Trial</a>
+            <button class="mobile-menu-btn">☰</button>
         </div>
-        
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">🏋️</div>
-                <h3>AI Workouts</h3>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">🤖 AI-Powered Fitness</span>
+                <h1>Your Personal Trainer,<br><span class="gradient-text">Available 24/7</span></h1>
+                <p class="hero-subtitle">Transform your body with personalized workout plans and nutrition guidance powered by artificial intelligence. No gym required.</p>
+                <div class="hero-cta">
+                    <a href="pages/pricing.html" class="btn btn-primary btn-large">Start Your Journey</a>
+                    <a href="#how-it-works" class="btn btn-outline btn-large">See How It Works</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">50K+</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4.9</span>
+                        <span class="stat-label">App Rating</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                </div>
             </div>
-            <div class="feature">
-                <div class="feature-icon">🥗</div>
-                <h3>Diet Plans</h3>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">📊</div>
-                <h3>Track Progress</h3>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=700&fit=crop" alt="Fitness Training">
+                <div class="floating-card card-1">
+                    <span class="card-icon">🔥</span>
+                    <div>
+                        <span class="card-title">Today's Burn</span>
+                        <span class="card-value">847 cal</span>
+                    </div>
+                </div>
+                <div class="floating-card card-2">
+                    <span class="card-icon">💬</span>
+                    <div>
+                        <span class="card-title">AI Coach</span>
+                        <span class="card-value">Online</span>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <form class="notify-form" onsubmit="event.preventDefault(); alert('Thanks! We\'ll notify you when we launch.');">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="submit">Notify Me</button>
-        </form>
-        
-        <div class="social">
-            <a href="#">📸</a>
-            <a href="#">🐦</a>
-            <a href="#">📘</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Why SelfieGym?</span>
+                <h2>Everything You Need to<br><span class="gradient-text">Transform Your Life</span></h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Personal Trainer</h3>
+                    <p>Chat with your AI coach anytime. Get instant answers, motivation, and form corrections.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Smart Workout Plans</h3>
+                    <p>Personalized routines that adapt to your progress, goals, and available equipment.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥗</div>
+                    <h3>Custom Meal Plans</h3>
+                    <p>Nutrition guidance tailored to your dietary preferences and fitness objectives.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Progress Tracking</h3>
+                    <p>Visual charts and insights to keep you motivated and on track.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Home & Gym Workouts</h3>
+                    <p>Flexible programs whether you're at home, in the gym, or traveling.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Community Support</h3>
+                    <p>Connect with others on the same journey. Share wins and stay accountable.</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Simple Process</span>
+                <h2>Start in<span class="gradient-text"> 3 Easy Steps</span></h2>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1434682881908-b43d0467b798?w=400&h=300&fit=crop" alt="Sign Up">
+                    </div>
+                    <h3>Tell Us About You</h3>
+                    <p>Share your goals, fitness level, and preferences. Our AI learns what you need.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=400&h=300&fit=crop" alt="Get Plan">
+                    </div>
+                    <h3>Get Your Plan</h3>
+                    <p>Receive personalized workout and meal plans designed just for you.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-image">
+                        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop" alt="Transform">
+                    </div>
+                    <h3>Transform</h3>
+                    <p>Follow your plan, chat with AI coach, and watch your body transform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Preview -->
+    <section class="programs">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Our Programs</span>
+                <h2>Choose Your<span class="gradient-text"> Path</span></h2>
+            </div>
+            <div class="programs-grid">
+                <a href="pages/exercises.html" class="program-card program-exercise">
+                    <div class="program-overlay"></div>
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop" alt="Exercise Programs">
+                    <div class="program-content">
+                        <span class="program-icon">🏋️</span>
+                        <h3>Exercise Programs</h3>
+                        <p>Strength, cardio, flexibility & more</p>
+                        <span class="program-link">Explore Programs →</span>
+                    </div>
+                </a>
+                <a href="pages/diet.html" class="program-card program-diet">
+                    <div class="program-overlay"></div>
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop" alt="Diet Plans">
+                    <div class="program-content">
+                        <span class="program-icon">🥗</span>
+                        <h3>Diet Plans</h3>
+                        <p>Nutrition plans for every goal</p>
+                        <span class="program-link">Explore Plans →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Success Stories</span>
+                <h2>Real People,<span class="gradient-text"> Real Results</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p>"I lost 30 pounds in 4 months! The AI trainer keeps me accountable and the meal plans are actually delicious."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Sarah">
+                        <div>
+                            <strong>Sarah M.</strong>
+                            <span>Lost 30 lbs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p>"As a busy dad, I needed flexibility. SelfieGym gives me quick home workouts that actually work."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Michael">
+                        <div>
+                            <strong>Michael R.</strong>
+                            <span>Gained 15 lbs muscle</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p>"The AI coach is like having a real trainer in your pocket. It even adjusts when I'm feeling tired!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" alt="Emma">
+                        <div>
+                            <strong>Emma L.</strong>
+                            <span>Completed 200+ workouts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform?</h2>
+                <p>Join thousands who've already started their fitness journey with SelfieGym.</p>
+                <div class="cta-buttons">
+                    <a href="pages/pricing.html" class="btn btn-white btn-large">Start 7-Day Free Trial</a>
+                </div>
+                <span class="cta-note">No credit card required • Cancel anytime</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">💪</span>
+                        <span class="logo-text">SelfieGym</span>
+                    </a>
+                    <p>Your AI-powered personal trainer. Transform your body, transform your life.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="pages/exercises.html">Exercises</a></li>
+                        <li><a href="pages/diet.html">Diet Plans</a></li>
+                        <li><a href="pages/pricing.html">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="pages/about.html">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 SelfieGym. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

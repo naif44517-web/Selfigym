@@ -89,14 +89,15 @@ section{padding:90px 4%}
 
 /* FEATURES */
 .fg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.fc{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:34px 28px;transition:.4s var(--ease);position:relative;overflow:hidden;cursor:default}
-.fc:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
-.fc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:.4s var(--ease)}
-.fc:hover::after{transform:scaleX(1)}
-.fi{width:50px;height:50px;border-radius:10px;background:var(--gold-g);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem}
+.fc{border-radius:12px;transition:.4s var(--ease);position:relative;overflow:hidden;cursor:default;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
+.fc:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(0,0,0,.5)}
+.fc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.4);transition:.4s var(--ease)}
+.fc:hover .fc-img{filter:brightness(.55)}
+.fc-content{position:relative;z-index:2;padding:28px}
+.fi{width:46px;height:46px;border-radius:10px;background:var(--gold-g);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;backdrop-filter:blur(4px)}
 .fi svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.fc h3{font-family:var(--hd);font-size:1.1rem;font-weight:800;letter-spacing:1px;margin-bottom:.5rem}
-.fc p{color:var(--lg);font-size:.88rem;line-height:1.7}
+.fc h3{font-family:var(--hd);font-size:1.1rem;font-weight:800;letter-spacing:1px;margin-bottom:.4rem;color:var(--white)}
+.fc p{color:rgba(255,255,255,.7);font-size:.85rem;line-height:1.6}
 
 /* HOW */
 #how{background:var(--char)}
@@ -298,34 +299,40 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <p class="sd rv">One platform replaces your trainer, nutritionist, and fitness tracker.</p>
  <div class="fg">
  <div class="fc rv" onclick="sp('exercises')" style="cursor:pointer">
- <div class="fi"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+ <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Workout" class="fc-img">
+ <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
  <h3>AI WORKOUT PLANS</h3>
- <p>Smart programs that adapt to your goals, equipment, and fitness level. Click to explore exercises →</p>
+ <p>Smart programs that adapt to your goals, equipment, and fitness level. Tap to explore →</p></div>
  </div>
  <div class="fc rv" onclick="sp('meals')" style="cursor:pointer">
- <div class="fi"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
+ <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Meals" class="fc-img">
+ <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
  <h3>CUSTOM MEAL PLANS</h3>
- <p>Personalized nutrition with Saudi and Gulf favorites. Click to explore meals →</p>
+ <p>Personalized nutrition with Saudi and Gulf favorites. Tap to explore →</p></div>
  </div>
  <div class="fc rv">
- <div class="fi"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+ <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&q=80" alt="Progress" class="fc-img">
+ <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
  <h3>PROGRESS TRACKING</h3>
- <p>Visual charts for weight, strength, and body measurements. See how far you've come.</p>
+ <p>Visual charts for weight, strength, and body measurements. See how far you've come.</p></div>
  </div>
  <div class="fc rv">
- <div class="fi"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+ <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80" alt="Exercise Library" class="fc-img">
+ <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
  <h3>HD EXERCISE LIBRARY</h3>
- <p>1,000+ exercises with video demonstrations showing perfect form for every movement.</p>
+ <p>1,000+ exercises with video demonstrations showing perfect form for every movement.</p></div>
  </div>
  <div class="fc rv">
- <div class="fi"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+ <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="Reminders" class="fc-img">
+ <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
  <h3>SMART REMINDERS</h3>
- <p>Intelligent notifications that keep you consistent. Never miss a workout again.</p>
+ <p>Intelligent notifications that keep you consistent. Never miss a workout again.</p></div>
  </div>
  <div class="fc rv">
- <div class="fi"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+ <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Coach" class="fc-img">
+ <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
  <h3>WHATSAPP COACH</h3>
- <p>Message your AI coach on WhatsApp anytime. Instant answers 24/7.</p>
+ <p>Message your AI coach on WhatsApp anytime. Instant answers 24/7.</p></div>
  </div>
  </div>
 </div></section>

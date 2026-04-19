@@ -1,14 +1,15 @@
-# Force no cache for HTML files
+# Force update index.html
+RewriteEngine On
+RewriteBase /
+
+# No cache for HTML
 <FilesMatch "\.html?$">
   Header set Cache-Control "no-cache, no-store, must-revalidate"
   Header set Pragma "no-cache"
   Header set Expires "0"
 </FilesMatch>
 
-# Redirect all traffic
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteCond %{HTTP_HOST} ^selfigym\.com$ [OR]
-  RewriteCond %{HTTP_HOST} ^www\.selfigym\.com$
-  RewriteRule ^(.*)$ index.html [QSA,L]
-</IfModule>
+# Redirect all to index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.html [QSA,L]

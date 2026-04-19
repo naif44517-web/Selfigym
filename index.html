@@ -1,1149 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
-    <title>SelfieGym — Your Fitness, Your Way</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #ffffff;
-            color: #1f2937;
-            line-height: 1.6;
-        }
-
-        /* LOGIN MODAL */
-        .login-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .login-modal.hidden {
-            display: none;
-        }
-
-        .login-container {
-            background: white;
-            border-radius: 12px;
-            padding: 50px 40px;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-
-        .login-container h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: #1f2937;
-            font-weight: 700;
-        }
-
-        .login-container p {
-            color: #6b7280;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .login-input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #e5e7eb;
-            background: #f9fafb;
-            border-radius: 8px;
-            font-size: 16px;
-            color: #1f2937;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-        }
-
-        .login-input:focus {
-            outline: none;
-            border-color: #2563EB;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background: #2563EB;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .login-btn:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-        }
-
-        .error-msg {
-            color: #dc2626;
-            font-size: 12px;
-            margin-bottom: 15px;
-            display: none;
-        }
-
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            padding: 1rem 2rem;
-            background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1f2937;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #6b7280;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #2563EB;
-        }
-
-        /* Pages */
-        .page {
-            display: none;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Home Page */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            padding: 80px 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            color: #1f2937;
-            font-weight: 700;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            color: #6b7280;
-            margin-bottom: 2rem;
-        }
-
-        .hero-btn {
-            display: inline-block;
-            background: #2563EB;
-            color: white;
-            padding: 12px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .hero-btn:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-        }
-
-        .hero-image {
-            height: 500px;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Section Title */
-        .section-title {
-            text-align: center;
-            padding: 60px 2rem 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #1f2937;
-            font-weight: 700;
-        }
-
-        .section-title p {
-            font-size: 1rem;
-            color: #6b7280;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 0 2rem 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border: 1px solid #e5e7eb;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-content h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #1f2937;
-            font-weight: 600;
-        }
-
-        .card-meta {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            color: #6b7280;
-        }
-
-        .card-description {
-            color: #6b7280;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .card-btn {
-            display: inline-block;
-            background: #2563EB;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .card-btn:hover {
-            background: #1d4ed8;
-        }
-
-        /* Meals Sections */
-        .meal-section {
-            padding: 40px 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .meal-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: #1f2937;
-            font-weight: 600;
-        }
-
-        .meal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .meal-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid #e5e7eb;
-            transition: all 0.3s;
-        }
-
-        .meal-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .meal-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .meal-content {
-            padding: 1.5rem;
-        }
-
-        .meal-content h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            color: #1f2937;
-            font-weight: 600;
-        }
-
-        .meal-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            color: #6b7280;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Progress Page */
-        .progress-container {
-            padding: 60px 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-box {
-            background: #f3f4f6;
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2563EB;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #6b7280;
-            font-size: 0.95rem;
-        }
-
-        /* Simple Chart */
-        .chart-container {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .chart-title {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: #1f2937;
-            font-weight: 600;
-        }
-
-        .bar-chart {
-            display: flex;
-            align-items: flex-end;
-            gap: 1rem;
-            height: 200px;
-            margin-bottom: 1rem;
-        }
-
-        .bar-item {
-            flex: 1;
-            text-align: center;
-        }
-
-        .bar {
-            background: #2563EB;
-            border-radius: 4px 4px 0 0;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .bar:hover {
-            background: #1d4ed8;
-        }
-
-        .bar-label {
-            font-size: 0.85rem;
-            color: #6b7280;
-        }
-
-        /* Measurements Table */
-        .measurements-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 2rem;
-        }
-
-        .measurements-table th,
-        .measurements-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .measurements-table th {
-            background: #f9fafb;
-            font-weight: 600;
-            color: #1f2937;
-        }
-
-        .measurements-table td {
-            color: #6b7280;
-        }
-
-        /* Pricing */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 0 2rem 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            border: 2px solid #2563EB;
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
-        }
-
-        .pricing-card:hover:not(.featured) {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #2563EB;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .pricing-name {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #1f2937;
-            font-weight: 600;
-        }
-
-        .pricing-price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2563EB;
-            margin-bottom: 0.5rem;
-        }
-
-        .pricing-period {
-            color: #6b7280;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .pricing-features {
-            text-align: left;
-            margin: 2rem 0;
-            list-style: none;
-        }
-
-        .pricing-features li {
-            padding: 0.75rem 0;
-            color: #6b7280;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 0.95rem;
-        }
-
-        .pricing-features li:before {
-            content: "✓ ";
-            color: #2563EB;
-            font-weight: 600;
-            margin-right: 0.5rem;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-columns: 1fr;
-                padding: 40px 1rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                font-size: 12px;
-            }
-
-            .cards-grid,
-            .meal-grid,
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SelfieGym — Your AI Personal Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+ --black:#0a0a0a;--charcoal:#141414;--dark-gray:#1c1c1c;--mid-gray:#2a2a2a;
+ --light-gray:#999;--off-white:#f2f0eb;--white:#fff;
+ --gold:#c9a84c;--gold-light:#e0c97f;--gold-glow:rgba(201,168,76,0.2);--gold-dark:#a88a3a;
+ --red-accent:#e74c3c;
+ --font-display:'Bebas Neue',sans-serif;--font-body:'DM Sans',sans-serif;
+ --ease:cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ========== LOGIN GATE ========== */
+#gate{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;align-items:center;justify-content:center;flex-direction:column}
+#gate.off{display:none}
+#gate::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=60') center/cover;opacity:.15}
+#gate>*{position:relative;z-index:1}
+.g-logo{font-family:var(--font-display);font-size:4.5rem;letter-spacing:4px;color:var(--white)}
+.g-logo b{color:var(--gold)}
+.g-sub{color:var(--light-gray);margin:0 0 2rem;font-size:.95rem;letter-spacing:1px}
+.g-input{width:280px;padding:16px;border:2px solid var(--mid-gray);border-radius:8px;background:transparent;color:var(--white);font-size:1.2rem;text-align:center;letter-spacing:6px;font-family:var(--font-body);outline:none;transition:.3s var(--ease)}
+.g-input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+.g-input::placeholder{color:#555;letter-spacing:2px}
+.g-btn{margin-top:1.2rem;padding:14px 56px;border:none;border-radius:8px;background:var(--gold);color:var(--black);font-weight:700;font-size:1rem;cursor:pointer;font-family:var(--font-body);letter-spacing:1px;transition:.3s var(--ease)}
+.g-btn:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 30px var(--gold-glow)}
+.g-err{color:var(--red-accent);margin-top:1rem;font-size:.85rem;min-height:1.2rem}
+
+/* ========== NAVBAR ========== */
+nav{position:fixed;top:0;left:0;right:0;z-index:5000;padding:0 4%;transition:.4s var(--ease)}
+nav.solid{background:rgba(10,10,10,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05)}
+.n-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:76px}
+.n-logo{font-family:var(--font-display);font-size:1.8rem;color:var(--white);text-decoration:none;letter-spacing:3px}
+.n-logo b{color:var(--gold)}
+.n-links{display:flex;gap:2.5rem;align-items:center;list-style:none}
+.n-links a{text-decoration:none;color:rgba(255,255,255,.6);font-size:.88rem;font-weight:500;transition:.3s var(--ease);letter-spacing:.5px}
+.n-links a:hover{color:var(--gold)}
+.n-cta{padding:10px 28px;background:var(--gold);color:var(--black);border-radius:6px;font-weight:700;font-size:.85rem;text-decoration:none;transition:.3s var(--ease);letter-spacing:.5px}
+.n-cta:hover{background:var(--gold-light);transform:translateY(-2px)}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.ham span{width:22px;height:2px;background:var(--white);display:block;transition:.3s var(--ease)}
+
+/* ========== HERO ========== */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.92) 0%,rgba(10,10,10,.7) 50%,rgba(10,10,10,.3) 100%)}
+.hero-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:140px 4% 100px;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border:1px solid var(--gold);border-radius:4px;color:var(--gold);font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:2rem}
+.hero h1{font-family:var(--font-display);font-size:6.5rem;line-height:.95;color:var(--white);max-width:700px;letter-spacing:2px}
+.hero h1 span{color:var(--gold)}
+.hero-p{color:rgba(255,255,255,.65);font-size:1.15rem;line-height:1.8;max-width:500px;margin:2rem 0 2.5rem}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn-gold{padding:16px 40px;background:var(--gold);color:var(--black);border:none;border-radius:6px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:var(--font-body);transition:.3s var(--ease);text-decoration:none;letter-spacing:.5px}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 10px 30px var(--gold-glow)}
+.btn-out{padding:16px 40px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:6px;font-weight:600;font-size:.95rem;cursor:pointer;font-family:var(--font-body);transition:.3s var(--ease);text-decoration:none}
+.btn-out:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Stats strip */
+.stats{background:var(--charcoal);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
+.stats-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);padding:0 4%}
+.st{text-align:center;padding:36px 20px;border-right:1px solid rgba(255,255,255,.05)}
+.st:last-child{border:none}
+.st-n{font-family:var(--font-display);font-size:3rem;color:var(--gold);letter-spacing:2px}
+.st-l{color:var(--light-gray);font-size:.82rem;margin-top:4px;letter-spacing:1px;text-transform:uppercase}
+
+/* ========== SECTION BASE ========== */
+section{padding:100px 4%}
+.sec-inner{max-width:1100px;margin:0 auto}
+.sec-tag{display:inline-block;padding:6px 14px;border:1px solid var(--gold);border-radius:4px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:1.2rem}
+.sec-title{font-family:var(--font-display);font-size:3.8rem;color:var(--white);letter-spacing:2px;line-height:1;margin-bottom:.8rem}
+.sec-desc{color:var(--light-gray);font-size:1.05rem;max-width:520px;margin-bottom:3.5rem;line-height:1.7}
+
+/* ========== FEATURES ========== */
+#features{background:var(--black)}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:36px 30px;transition:.4s var(--ease);position:relative;overflow:hidden}
+.feat:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.feat::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:.4s var(--ease)}
+.feat:hover::after{transform:scaleX(1)}
+.feat-ico{width:52px;height:52px;border-radius:10px;background:var(--gold-glow);display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem}
+.feat-ico svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feat h3{font-family:var(--font-display);font-size:1.5rem;letter-spacing:1px;margin-bottom:.5rem}
+.feat p{color:var(--light-gray);font-size:.9rem;line-height:1.7}
+
+/* ========== HOW IT WORKS ========== */
+#how{background:var(--charcoal)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.step{position:relative;border-radius:12px;overflow:hidden;transition:.4s var(--ease)}
+.step:hover{transform:translateY(-6px)}
+.step-img{width:100%;height:320px;object-fit:cover;display:block;filter:brightness(.7);transition:.4s var(--ease)}
+.step:hover .step-img{filter:brightness(.85)}
+.step-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;background:linear-gradient(to top,rgba(10,10,10,.9) 0%,transparent 60%)}
+.step-num{position:absolute;top:20px;left:20px;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--black);font-family:var(--font-display);font-size:1.5rem;display:flex;align-items:center;justify-content:center}
+.step h3{font-family:var(--font-display);font-size:1.6rem;letter-spacing:1px;margin-bottom:.3rem}
+.step p{color:rgba(255,255,255,.6);font-size:.88rem;line-height:1.6}
+
+/* ========== PRICING ========== */
+#pricing{background:var(--black)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+.pcard{background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:44px 32px;transition:.4s var(--ease)}
+.pcard:hover{border-color:rgba(255,255,255,.15);transform:translateY(-4px)}
+.pcard.pop{border-color:var(--gold);position:relative;box-shadow:0 0 60px var(--gold-glow);transform:scale(1.04)}
+.pcard.pop:hover{transform:scale(1.04) translateY(-4px)}
+.pop-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);padding:5px 20px;border-radius:4px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px}
+.pcard-name{font-family:var(--font-display);font-size:1.4rem;letter-spacing:2px;margin-bottom:.5rem;color:var(--light-gray)}
+.pcard-price{font-family:var(--font-display);font-size:3.8rem;color:var(--white);letter-spacing:1px}
+.pcard-price small{font-size:1rem;color:var(--light-gray);font-family:var(--font-body);letter-spacing:0}
+.pcard-note{color:var(--light-gray);font-size:.8rem;margin:.5rem 0 2rem;letter-spacing:.5px}
+.pcard ul{list-style:none;margin-bottom:2rem}
+.pcard li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px;font-size:.9rem;color:rgba(255,255,255,.75)}
+.pcard li::before{content:'✦';color:var(--gold);font-size:.7rem}
+.pcard-btn{display:block;width:100%;padding:14px;border-radius:6px;text-align:center;font-weight:700;font-size:.9rem;text-decoration:none;transition:.3s var(--ease);font-family:var(--font-body);border:none;cursor:pointer;letter-spacing:.5px}
+.pcard-btn.outline{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--white)}
+.pcard-btn.outline:hover{border-color:var(--gold);color:var(--gold)}
+.pcard-btn.fill{background:var(--gold);color:var(--black)}
+.pcard-btn.fill:hover{background:var(--gold-light);transform:translateY(-2px)}
+
+/* ========== TESTIMONIALS ========== */
+#social{background:var(--charcoal)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tcard{background:var(--dark-gray);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:32px;transition:.4s var(--ease)}
+.tcard:hover{border-color:var(--gold);transform:translateY(-4px)}
+.tcard-stars{color:var(--gold);font-size:1rem;letter-spacing:3px;margin-bottom:1rem}
+.tcard-text{color:rgba(255,255,255,.7);font-size:.92rem;line-height:1.8;margin-bottom:1.5rem;font-style:italic}
+.tcard-author{display:flex;align-items:center;gap:14px}
+.tcard-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.tcard-name{font-weight:700;font-size:.88rem}
+.tcard-role{font-size:.78rem;color:var(--gold)}
+
+/* ========== FAQ ========== */
+#faq{background:var(--black)}
+.faq-list{max-width:700px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.08)}
+.faq-q{padding:22px 0;cursor:pointer;font-weight:600;font-size:1rem;display:flex;justify-content:space-between;align-items:center;background:none;border:none;width:100%;text-align:left;font-family:var(--font-body);color:var(--white);transition:.3s var(--ease)}
+.faq-q:hover{color:var(--gold)}
+.faq-arrow{transition:.3s var(--ease);color:var(--light-gray);font-size:.9rem}
+.faq-item.open .faq-arrow{transform:rotate(180deg);color:var(--gold)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a-inner{padding:0 0 22px;color:var(--light-gray);font-size:.92rem;line-height:1.8}
+.faq-item.open .faq-a{max-height:250px}
+
+/* ========== CTA ========== */
+.cta{position:relative;padding:120px 4%;text-align:center;overflow:hidden}
+.cta-bg{position:absolute;inset:0}
+.cta-bg img{width:100%;height:100%;object-fit:cover}
+.cta-bg::after{content:'';position:absolute;inset:0;background:rgba(10,10,10,.85)}
+.cta>*{position:relative;z-index:1}
+.cta h2{font-family:var(--font-display);font-size:4.5rem;color:var(--white);letter-spacing:3px;margin-bottom:1rem}
+.cta h2 span{color:var(--gold)}
+.cta p{color:rgba(255,255,255,.6);font-size:1.1rem;margin-bottom:2.5rem;max-width:460px;margin-left:auto;margin-right:auto}
+
+/* ========== FOOTER ========== */
+footer{background:var(--charcoal);padding:60px 4% 30px;border-top:1px solid rgba(255,255,255,.05)}
+.f-inner{max-width:1100px;margin:0 auto}
+.f-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.f-brand{font-family:var(--font-display);font-size:1.8rem;color:var(--white);letter-spacing:3px;margin-bottom:1rem}
+.f-brand b{color:var(--gold)}
+.f-desc{color:var(--light-gray);font-size:.85rem;line-height:1.7;max-width:280px}
+.f-col h4{color:var(--gold);font-size:.75rem;font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:2px}
+.f-col a{display:block;color:var(--light-gray);text-decoration:none;font-size:.85rem;padding:4px 0;transition:.3s var(--ease)}
+.f-col a:hover{color:var(--white)}
+.f-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--light-gray)}
+
+/* ========== REVEAL ========== */
+.rv{opacity:0;transform:translateY(24px);transition:all .7s var(--ease)}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:768px){
+ .hero h1{font-size:3.5rem}
+ .hero-inner{padding:120px 5% 60px}
+ .stats-inner{grid-template-columns:repeat(2,1fr)}
+ .st{border-right:none;border-bottom:1px solid rgba(255,255,255,.05)}
+ .feat-grid,.steps,.price-grid,.tgrid{grid-template-columns:1fr}
+ .pcard.pop{transform:none}.pcard.pop:hover{transform:translateY(-4px)}
+ .sec-title{font-size:2.6rem}
+ .cta h2{font-size:2.8rem}
+ .f-top{grid-template-columns:1fr 1fr}
+ .n-links{display:none;position:fixed;top:76px;left:0;right:0;background:var(--charcoal);flex-direction:column;padding:2rem;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,.05)}
+ .n-links.open{display:flex}
+ .ham{display:flex}
+ .step-img{height:240px}
+}
+</style>
 </head>
 <body>
-    <!-- LOGIN MODAL -->
-    <div class="login-modal" id="loginModal">
-        <div class="login-container">
-            <h2>SelfieGym</h2>
-            <p>Access Code Required</p>
-            <div class="error-msg" id="errorMsg"></div>
-            <input type="password" id="codeInput" class="login-input" placeholder="Enter code" autocomplete="off">
-            <button class="login-btn" onclick="verifyCode()">Unlock</button>
-        </div>
-    </div>
 
-    <!-- Navigation -->
-    <nav>
-        <a href="#" class="logo" onclick="showPage('home'); return false;">SelfieGym</a>
-        <ul class="nav-links">
-            <li><a class="nav-link active" onclick="showPage('home'); return false;">Home</a></li>
-            <li><a class="nav-link" onclick="showPage('exercises'); return false;">Exercises</a></li>
-            <li><a class="nav-link" onclick="showPage('meals'); return false;">Meals</a></li>
-            <li><a class="nav-link" onclick="showPage('progress'); return false;">Progress</a></li>
-            <li><a class="nav-link" onclick="showPage('pricing'); return false;">Pricing</a></li>
-        </ul>
-    </nav>
+<!-- ========== LOGIN GATE ========== -->
+<div id="gate">
+ <div class="g-logo">SELFIE<b>GYM</b></div>
+ <p class="g-sub">Early Access Only</p>
+ <input type="text" class="g-input" id="gc" placeholder="CODE" maxlength="10" autocomplete="off">
+ <button class="g-btn" onclick="unlock()">ENTER</button>
+ <p class="g-err" id="ge"></p>
+</div>
 
-    <!-- HOME PAGE -->
-    <div id="home" class="page active">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Fitness that feels like you.</h1>
-                <p>A personal coach in your pocket. Real guidance, real results — on your schedule.</p>
-                <button class="hero-btn" onclick="showPage('exercises'); return false;">Start Your Journey</button>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=500&fit=crop&q=80" alt="Fitness">
-            </div>
-        </section>
+<!-- ========== NAVBAR ========== -->
+<nav id="nb">
+ <div class="n-inner">
+ <a href="#top" class="n-logo">SELFIE<b>GYM</b></a>
+ <button class="ham" onclick="document.getElementById('nl').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+ <ul class="n-links" id="nl">
+ <li><a href="#features" onclick="cm()">Features</a></li>
+ <li><a href="#how" onclick="cm()">How It Works</a></li>
+ <li><a href="#pricing" onclick="cm()">Pricing</a></li>
+ <li><a href="#faq" onclick="cm()">FAQ</a></li>
+ <li><a href="#pricing" class="n-cta" onclick="cm()">START FREE</a></li>
+ </ul>
+ </div>
+</nav>
 
-        <div class="section-title">
-            <h2>Why Choose SelfieGym</h2>
-            <p>Complete fitness solution with personalized coaching, nutrition plans, and progress tracking</p>
-        </div>
+<!-- ========== HERO ========== -->
+<section class="hero" id="top">
+ <div class="hero-bg">
+ <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80" alt="Gym">
+ </div>
+ <div class="hero-inner">
+ <div class="hero-tag">★ AI-Powered Fitness</div>
+ <h1>TRAIN<br>SMARTER.<br><span>NOT HARDER.</span></h1>
+ <p class="hero-p">Customized workout programs, personalized meal plans, and intelligent coaching — all from your phone. At 90% less than a real trainer.</p>
+ <div class="hero-btns">
+ <a href="#pricing" class="btn-gold">START FREE TRIAL</a>
+ <a href="#how" class="btn-out">HOW IT WORKS</a>
+ </div>
+ </div>
+</section>
 
-        <div class="cards-grid">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&q=80" alt="Coaching" class="card-image">
-                <div class="card-content">
-                    <h3>Personal Coaching</h3>
-                    <p class="card-description">Expert guidance tailored to your fitness level and goals.</p>
-                    <button class="card-btn" onclick="showPage('exercises'); return false;">View Programs</button>
-                </div>
-            </div>
+<!-- Stats -->
+<div class="stats">
+ <div class="stats-inner">
+ <div class="st rv"><div class="st-n">24/7</div><div class="st-l">Always Available</div></div>
+ <div class="st rv"><div class="st-n">90%</div><div class="st-l">Cost Savings</div></div>
+ <div class="st rv"><div class="st-n">1,000+</div><div class="st-l">Exercises</div></div>
+ <div class="st rv"><div class="st-n">100+</div><div class="st-l">Meal Plans</div></div>
+ </div>
+</div>
 
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=250&fit=crop&q=80" alt="Nutrition" class="card-image">
-                <div class="card-content">
-                    <h3>Nutrition Plans</h3>
-                    <p class="card-description">Customized meal plans that fit your lifestyle and preferences.</p>
-                    <button class="card-btn" onclick="showPage('meals'); return false;">View Meals</button>
-                </div>
-            </div>
+<!-- ========== FEATURES ========== -->
+<section id="features">
+ <div class="sec-inner">
+ <div class="sec-tag rv">Features</div>
+ <h2 class="sec-title rv">EVERYTHING YOU NEED.<br>NOTHING YOU DON'T.</h2>
+ <p class="sec-desc rv">One platform replaces your trainer, nutritionist, and fitness tracker.</p>
+ <div class="feat-grid">
+ <div class="feat rv">
+ <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+ <h3>AI WORKOUT PLANS</h3>
+ <p>Smart programs that adapt to your goals, equipment, and fitness level. Progressive overload built in automatically.</p>
+ </div>
+ <div class="feat rv">
+ <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
+ <h3>CUSTOM MEAL PLANS</h3>
+ <p>Personalized nutrition with local dishes including Saudi and Gulf favorites. Macros calculated for your exact goals.</p>
+ </div>
+ <div class="feat rv">
+ <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+ <h3>PROGRESS TRACKING</h3>
+ <p>Visual charts for weight, strength, and body measurements. See exactly how far you've come every week.</p>
+ </div>
+ <div class="feat rv">
+ <div class="feat-ico"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+ <h3>HD EXERCISE LIBRARY</h3>
+ <p>1,000+ exercises with video demonstrations showing perfect form for every single movement.</p>
+ </div>
+ <div class="feat rv">
+ <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+ <h3>SMART REMINDERS</h3>
+ <p>Intelligent notifications that keep you consistent. Never miss a workout or meal window again.</p>
+ </div>
+ <div class="feat rv">
+ <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+ <h3>WHATSAPP COACH</h3>
+ <p>Message your AI coach on WhatsApp anytime. Instant answers on form, nutrition, and programming 24/7.</p>
+ </div>
+ </div>
+ </div>
+</section>
 
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&h=250&fit=crop&q=80" alt="Progress" class="card-image">
-                <div class="card-content">
-                    <h3>Track Progress</h3>
-                    <p class="card-description">Monitor your improvements with detailed analytics and insights.</p>
-                    <button class="card-btn" onclick="showPage('progress'); return false;">View Dashboard</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- ========== HOW IT WORKS ========== -->
+<section id="how">
+ <div class="sec-inner">
+ <div class="sec-tag rv">How It Works</div>
+ <h2 class="sec-title rv">THREE STEPS.<br>ZERO CONFUSION.</h2>
+ <p class="sec-desc rv">No complicated setup. No confusing dashboards. Just results.</p>
+ <div class="steps">
+ <div class="step rv">
+ <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="Set Your Goals" class="step-img">
+ <div class="step-overlay">
+ <div class="step-num">1</div>
+ <h3>SET YOUR GOALS</h3>
+ <p>Tell us what you want — muscle gain, fat loss, strength — plus your equipment and schedule.</p>
+ </div>
+ </div>
+ <div class="step rv">
+ <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Get Your Plan" class="step-img">
+ <div class="step-overlay">
+ <div class="step-num">2</div>
+ <h3>GET YOUR AI PLAN</h3>
+ <p>Receive a personalized workout program and meal plan built specifically for you in seconds.</p>
+ </div>
+ </div>
+ <div class="step rv">
+ <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Train and Track" class="step-img">
+ <div class="step-overlay">
+ <div class="step-num">3</div>
+ <h3>TRAIN & EVOLVE</h3>
+ <p>Follow your program, log progress, and watch the AI adapt as you get stronger every week.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
 
-    <!-- EXERCISES PAGE -->
-    <div id="exercises" class="page">
-        <div class="section-title">
-            <h2>Workout Programs</h2>
-            <p>Choose your training focus and get started</p>
-        </div>
+<!-- ========== PRICING ========== -->
+<section id="pricing">
+ <div class="sec-inner">
+ <div class="sec-tag rv">Pricing</div>
+ <h2 class="sec-title rv">SIMPLE. HONEST.<br>NO HIDDEN FEES.</h2>
+ <p class="sec-desc rv">Start free for 7 days. Cancel anytime.</p>
+ <div class="price-grid">
+ <div class="pcard rv">
+ <div class="pcard-name">STARTER</div>
+ <div class="pcard-price">$14<small>.99/mo</small></div>
+ <div class="pcard-note">Save 20% with annual billing</div>
+ <ul>
+ <li>AI workout plans</li>
+ <li>Full exercise library</li>
+ <li>Basic macro calculator</li>
+ <li>Progress tracking</li>
+ <li>Workout logging</li>
+ </ul>
+ <button class="pcard-btn outline">GET STARTED</button>
+ </div>
+ <div class="pcard pop rv">
+ <div class="pop-badge">MOST POPULAR</div>
+ <div class="pcard-name">PRO</div>
+ <div class="pcard-price">$29<small>.99/mo</small></div>
+ <div class="pcard-note">Save 20% with annual billing</div>
+ <ul>
+ <li>Everything in Starter</li>
+ <li>Full weekly meal plans</li>
+ <li>Recipes & grocery lists</li>
+ <li>Community access</li>
+ <li>Weekly AI progress reports</li>
+ <li>Ramadan meal timing</li>
+ </ul>
+ <button class="pcard-btn fill">START FREE TRIAL</button>
+ </div>
+ <div class="pcard rv">
+ <div class="pcard-name">ELITE</div>
+ <div class="pcard-price">$59<small>.99/mo</small></div>
+ <div class="pcard-note">Save 20% with annual billing</div>
+ <ul>
+ <li>Everything in Pro</li>
+ <li>Monthly 1-on-1 coaching call</li>
+ <li>WhatsApp chat support</li>
+ <li>Custom program adjustments</li>
+ <li>Injury modifications</li>
+ <li>Advanced body analytics</li>
+ </ul>
+ <button class="pcard-btn outline">GET STARTED</button>
+ </div>
+ </div>
+ </div>
+</section>
 
-        <div class="cards-grid">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1597132846098-e7a61b84b78f?w=400&h=250&fit=crop&q=80" alt="Chest" class="card-image">
-                <div class="card-content">
-                    <h3>Chest Workouts</h3>
-                    <div class="card-meta">
-                        <span>💪 Strength</span>
-                        <span>⭐ Intermediate</span>
-                    </div>
-                    <p class="card-description">Build a stronger, more defined chest with targeted exercises.</p>
-                    <button class="card-btn">Start Workout</button>
-                </div>
-            </div>
+<!-- ========== TESTIMONIALS ========== -->
+<section id="social">
+ <div class="sec-inner">
+ <div class="sec-tag rv">Results</div>
+ <h2 class="sec-title rv">REAL PEOPLE.<br>REAL RESULTS.</h2>
+ <p class="sec-desc rv">Don't take our word for it.</p>
+ <div class="tgrid">
+ <div class="tcard rv">
+ <div class="tcard-stars">★★★★★</div>
+ <p class="tcard-text">"I trained for 3 years with zero progress. SelfieGym's AI adjusted my program and I saw results in the first month. The Saudi meal plans are a game changer."</p>
+ <div class="tcard-author">
+ <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed" class="tcard-avatar">
+ <div><div class="tcard-name">Ahmed K.</div><div class="tcard-role">Lost 12kg in 4 months</div></div>
+ </div>
+ </div>
+ <div class="tcard rv">
+ <div class="tcard-stars">★★★★★</div>
+ <p class="tcard-text">"As a working mom I have zero time to plan workouts and meals. This does everything. I just follow what it says and the results speak for themselves."</p>
+ <div class="tcard-author">
+ <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sara" class="tcard-avatar">
+ <div><div class="tcard-name">Sara M.</div><div class="tcard-role">Toned & energized</div></div>
+ </div>
+ </div>
+ <div class="tcard rv">
+ <div class="tcard-stars">★★★★★</div>
+ <p class="tcard-text">"I was paying 800 SAR/month for a trainer. SelfieGym gives me better programming for a fraction of the price. The WhatsApp coach is incredibly helpful."</p>
+ <div class="tcard-author">
+ <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Khalid" class="tcard-avatar">
+ <div><div class="tcard-name">Khalid R.</div><div class="tcard-role">Bench +30kg in 6 months</div></div>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
 
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&h=250&fit=crop&q=80" alt="Back" class="card-image">
-                <div class="card-content">
-                    <h3>Back Workouts</h3>
-                    <div class="card-meta">
-                        <span>💪 Strength</span>
-                        <span>⭐ Intermediate</span>
-                    </div>
-                    <p class="card-description">Develop a powerful back and improve posture with these exercises.</p>
-                    <button class="card-btn">Start Workout</button>
-                </div>
-            </div>
+<!-- ========== FAQ ========== -->
+<section id="faq">
+ <div class="sec-inner">
+ <div class="sec-tag rv">FAQ</div>
+ <h2 class="sec-title rv">GOT QUESTIONS?</h2>
+ <p class="sec-desc rv">Everything you need to know.</p>
+ <div class="faq-list">
+ <div class="faq-item rv">
+ <button class="faq-q" onclick="tf(this)">Do I need gym experience? <span class="faq-arrow">▾</span></button>
+ <div class="faq-a"><div class="faq-a-inner">Not at all. SelfieGym works for all levels — from complete beginners to advanced athletes. The AI adapts difficulty based on your experience and increases the challenge as you improve.</div></div>
+ </div>
+ <div class="faq-item rv">
+ <button class="faq-q" onclick="tf(this)">How does the AI create my plan? <span class="faq-arrow">▾</span></button>
+ <div class="faq-a"><div class="faq-a-inner">It analyzes your goals, equipment, fitness level, schedule, and preferences. Then it builds a periodized program with progressive overload. Each week it adjusts based on your performance — like a real trainer would.</div></div>
+ </div>
+ <div class="faq-item rv">
+ <button class="faq-q" onclick="tf(this)">Do you have Saudi / Gulf meal options? <span class="faq-arrow">▾</span></button>
+ <div class="faq-a"><div class="faq-a-inner">Yes! We have an extensive database of local dishes — kabsa, mandi, jareesh, saleeg, and more — all with accurate macros. We also support Ramadan scheduling with suhoor and iftar planning.</div></div>
+ </div>
+ <div class="faq-item rv">
+ <button class="faq-q" onclick="tf(this)">Can I cancel anytime? <span class="faq-arrow">▾</span></button>
+ <div class="faq-a"><div class="faq-a-inner">Absolutely. No contracts, no commitments. Cancel anytime and you won't be charged again. Your data stays for 30 days in case you return.</div></div>
+ </div>
+ <div class="faq-item rv">
+ <button class="faq-q" onclick="tf(this)">What makes SelfieGym different? <span class="faq-arrow">▾</span></button>
+ <div class="faq-a"><div class="faq-a-inner">Most apps offer workouts OR nutrition — never both done well. We combine AI training, personalized meals, progress tracking, and coaching in one platform. Plus we're the only app with Arabic support and Gulf food databases.</div></div>
+ </div>
+ <div class="faq-item rv">
+ <button class="faq-q" onclick="tf(this)">How does WhatsApp coaching work? <span class="faq-arrow">▾</span></button>
+ <div class="faq-a"><div class="faq-a-inner">Message your AI coach on WhatsApp anytime — ask about form, request meal swaps, get motivation, or adjust your program. Like having a personal trainer in your pocket 24/7.</div></div>
+ </div>
+ </div>
+ </div>
+</section>
 
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1566781214894-2d5fcbf51af1?w=400&h=250&fit=crop&q=80" alt="Legs" class="card-image">
-                <div class="card-content">
-                    <h3>Leg Workouts</h3>
-                    <div class="card-meta">
-                        <span>💪 Strength</span>
-                        <span>⭐ Beginner</span>
-                    </div>
-                    <p class="card-description">Strengthen your legs with proven compound movements.</p>
-                    <button class="card-btn">Start Workout</button>
-                </div>
-            </div>
+<!-- ========== CTA ========== -->
+<section class="cta">
+ <div class="cta-bg">
+ <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1400&q=80" alt="Training">
+ </div>
+ <h2 class="rv">READY TO <span>TRANSFORM?</span></h2>
+ <p class="rv">7 days free. No credit card. No excuses.</p>
+ <a href="#pricing" class="btn-gold rv">START YOUR FREE TRIAL</a>
+</section>
 
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=250&fit=crop&q=80" alt="Shoulders" class="card-image">
-                <div class="card-content">
-                    <h3>Shoulder Workouts</h3>
-                    <div class="card-meta">
-                        <span>💪 Strength</span>
-                        <span>⭐ Intermediate</span>
-                    </div>
-                    <p class="card-description">Build boulder shoulders with isolated and compound exercises.</p>
-                    <button class="card-btn">Start Workout</button>
-                </div>
-            </div>
+<!-- ========== FOOTER ========== -->
+<footer>
+ <div class="f-inner">
+ <div class="f-top">
+ <div>
+ <div class="f-brand">SELFIE<b>GYM</b></div>
+ <p class="f-desc">Your AI personal trainer. Customized workouts, meal plans, and coaching — available 24/7.</p>
+ </div>
+ <div class="f-col"><h4>Product</h4><a href="#features">Features</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+ <div class="f-col"><h4>Company</h4><a href="#">About</a><a href="#">Blog</a><a href="#">Contact</a></div>
+ <div class="f-col"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
+ </div>
+ <div class="f-bottom">
+ <span>&copy; 2026 SelfieGym. All rights reserved.</span>
+ <span>Built with ♥ in Saudi Arabia</span>
+ </div>
+ </div>
+</footer>
 
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=250&fit=crop&q=80" alt="Arms" class="card-image">
-                <div class="card-content">
-                    <h3>Arm Workouts</h3>
-                    <div class="card-meta">
-                        <span>💪 Strength</span>
-                        <span>⭐ Beginner</span>
-                    </div>
-                    <p class="card-description">Get bigger, stronger arms with focused bicep and tricep training.</p>
-                    <button class="card-btn">Start Workout</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1609899195640-3cfc2e0c33d9?w=400&h=250&fit=crop&q=80" alt="Core" class="card-image">
-                <div class="card-content">
-                    <h3>Core Workouts</h3>
-                    <div class="card-meta">
-                        <span>💪 Endurance</span>
-                        <span>⭐ Beginner</span>
-                    </div>
-                    <p class="card-description">Strengthen your core with functional and stable exercises.</p>
-                    <button class="card-btn">Start Workout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MEALS PAGE -->
-    <div id="meals" class="page">
-        <div class="section-title">
-            <h2>Nutrition Plans</h2>
-            <p>Delicious and healthy meals designed for your goals</p>
-        </div>
-
-        <!-- Breakfast -->
-        <div class="meal-section">
-            <h3>🌅 Breakfast</h3>
-            <div class="meal-grid">
-                <div class="meal-card">
-                    <img src="https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400&h=250&fit=crop&q=80" alt="Power Breakfast" class="meal-image">
-                    <div class="meal-content">
-                        <h4>Power Breakfast Bowl</h4>
-                        <div class="meal-stats">
-                            <div class="stat-item"><span>Calories:</span> <strong>450</strong></div>
-                            <div class="stat-item"><span>Protein:</span> <strong>25g</strong></div>
-                            <div class="stat-item"><span>Carbs:</span> <strong>55g</strong></div>
-                            <div class="stat-item"><span>Fat:</span> <strong>12g</strong></div>
-                        </div>
-                        <button class="card-btn">View Recipe</button>
-                    </div>
-                </div>
-
-                <div class="meal-card">
-                    <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=250&fit=crop&q=80" alt="Egg Sandwich" class="meal-image">
-                    <div class="meal-content">
-                        <h4>Protein-Packed Eggs</h4>
-                        <div class="meal-stats">
-                            <div class="stat-item"><span>Calories:</span> <strong>380</strong></div>
-                            <div class="stat-item"><span>Protein:</span> <strong>28g</strong></div>
-                            <div class="stat-item"><span>Carbs:</span> <strong>35g</strong></div>
-                            <div class="stat-item"><span>Fat:</span> <strong>14g</strong></div>
-                        </div>
-                        <button class="card-btn">View Recipe</button>
-                    </div>
-                </div>
-
-                <div class="meal-card">
-                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop&q=80" alt="Smoothie" class="meal-image">
-                    <div class="meal-content">
-                        <h4>Greek Yogurt Parfait</h4>
-                        <div class="meal-stats">
-                            <div class="stat-item"><span>Calories:</span> <strong>320</strong></div>
-                            <div class="stat-item"><span>Protein:</span> <strong>20g</strong></div>
-                            <div class="stat-item"><span>Carbs:</span> <strong>42g</strong></div>
-                            <div class="stat-item"><span>Fat:</span> <strong>8g</strong></div>
-                        </div>
-                        <button class="card-btn">View Recipe</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Lunch -->
-        <div class="meal-section">
-            <h3>🥗 Lunch</h3>
-            <div class="meal-grid">
-                <div class="meal-card">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop&q=80" alt="Grilled Chicken" class="meal-image">
-                    <div class="meal-content">
-                        <h4>Grilled Chicken & Quinoa</h4>
-                        <div class="meal-stats">
-                            <div class="stat-item"><span>Calories:</span> <strong>520</strong></div>
-                            <div class="stat-item"><span>Protein:</span> <strong>42g</strong></div>
-                            <div class="stat-item"><span>Carbs:</span> <strong>52g</strong></div>
-                            <div class="stat-item"><span>Fat:</span> <strong>12g</strong></div>
-                        </div>
-                        <button class="card-btn">View Recipe</button>
-                    </div>
-                </div>
-
-                <div class="meal-card">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop&q=80" alt="Tuna Bowl" class="meal-image">
-                    <div class="meal-content">
-                        <h4>Tuna Buddha Bowl</h4>
-                        <div class="meal-stats">
-                            <div class="stat-item"><span>Calories:</span> <strong>480</strong></div>
-                            <div class="stat-item"><span>Protein:</span> <strong>38g</strong></div>
-                            <div class="stat-item"><span>Carbs:</span> <strong>48g</strong></div>
-                            <div class="stat-item"><span>Fat:</span> <strong>10g</strong></div>
-                        </div>
-                        <button class="card-btn">View Recipe</button>
-                    </div>
-                </div>
-
-                <div class="meal-card">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop&q=80" alt="Beef Salad" class="meal-image">
-                    <div class="meal-content">
-                        <h4>Lean Beef Salad</h4>
-                        <div class="meal-stats">
-                            <div class="stat-item"><span>Calories:</span> <strong>450</strong></div>
-                            <div class="stat-item"><span>Protein:</span> <strong>40g</strong></div>
-                            <div class="stat-item"><span>Carbs:</span> <strong>35g</strong></div>
-                            <div class="stat-item"><span>Fat:</span> <strong>13g</strong></div>
-                        </div>
-                        <button class="card-btn">View Recipe</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Dinner -->
-        <div class="meal-section">
-            <h3>🍽️ Dinner</h3>
-            <div class="meal-grid">
-                <div class="meal-card">
-                    <img src="https://images.unsplash.com/photo-1580959375944-abd7e991a971?w=400&h=250&fit=crop&q=80" alt="Salmon" class="meal-image">
-                    <div class="meal-content">
-                        <h4>Salmon & Sweet Potato</h4>
-                        <div class="meal-stats">
-                            <div class="stat-item"><span>Calories:</span> <strong>580</strong></div>
-                            <div class="stat-item"><span>Protein:</span> <strong>38g</strong></div>
-                            <div class="stat-item"><span>Carbs:</span> <strong>58g</strong></div>
-                            <div class="stat-item"><span>Fat:</span> <strong>15g</strong></div>
-                        </div>
-                        <button class="card-btn">View Recipe</button>
-                    </div>
-                </div>
-
-                <div class="meal-card">
-                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=250&fit=crop&q=80" alt="Chicken Rice" class="meal-image">
-                    <div class="meal-content">
-                        <h4>Chicken & Brown Rice</h4>
-                        <div class="meal-stats">
-                            <div class="stat-item"><span>Calories:</span> <strong>550</strong></div>
-                            <div class="stat-item"><span>Protein:</span> <strong>40g</strong></div>
-                            <div class="stat-item"><span>Carbs:</span> <strong>60g</strong></div>
-                            <div class="stat-item"><span>Fat:</span> <strong>10g</strong></div>
-                        </div>
-                        <button class="card-btn">View Recipe</button>
-                    </div>
-                </div>
-
-                <div class="meal-card">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop&q=80" alt="Turkey" class="meal-image">
-                    <div class="meal-content">
-                        <h4>Turkey & Vegetables</h4>
-                        <div class="meal-stats">
-                            <div class="stat-item"><span>Calories:</span> <strong>420</strong></div>
-                            <div class="stat-item"><span>Protein:</span> <strong>42g</strong></div>
-                            <div class="stat-item"><span>Carbs:</span> <strong>30g</strong></div>
-                            <div class="stat-item"><span>Fat:</span> <strong>9g</strong></div>
-                        </div>
-                        <button class="card-btn">View Recipe</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PROGRESS PAGE -->
-    <div id="progress" class="page">
-        <div class="section-title">
-            <h2>Your Progress</h2>
-            <p>Track your fitness journey and celebrate wins</p>
-        </div>
-
-        <div class="progress-container">
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-value">24</div>
-                    <div class="stat-label">Workouts Completed</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value">8,420</div>
-                    <div class="stat-label">Calories Burned</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">Days Streak</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value">87%</div>
-                    <div class="stat-label">Goal Progress</div>
-                </div>
-            </div>
-
-            <div class="chart-container">
-                <div class="chart-title">Weekly Activity</div>
-                <div class="bar-chart">
-                    <div class="bar-item">
-                        <div class="bar" style="height: 70%;"></div>
-                        <div class="bar-label">Mon</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 85%;"></div>
-                        <div class="bar-label">Tue</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 60%;"></div>
-                        <div class="bar-label">Wed</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 90%;"></div>
-                        <div class="bar-label">Thu</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 75%;"></div>
-                        <div class="bar-label">Fri</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 95%;"></div>
-                        <div class="bar-label">Sat</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 50%;"></div>
-                        <div class="bar-label">Sun</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="chart-container">
-                <div class="chart-title">Body Measurements</div>
-                <table class="measurements-table">
-                    <thead>
-                        <tr>
-                            <th>Measurement</th>
-                            <th>Week 1</th>
-                            <th>Week 4</th>
-                            <th>Week 8</th>
-                            <th>Change</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Weight (lbs)</td>
-                            <td>185</td>
-                            <td>182</td>
-                            <td>178</td>
-                            <td style="color: #10b981;">-7 lbs ↓</td>
-                        </tr>
-                        <tr>
-                            <td>Chest (in)</td>
-                            <td>38.5</td>
-                            <td>39.2</td>
-                            <td>40.1</td>
-                            <td style="color: #10b981;">+1.6 in ↑</td>
-                        </tr>
-                        <tr>
-                            <td>Waist (in)</td>
-                            <td>34.2</td>
-                            <td>33.8</td>
-                            <td>33.1</td>
-                            <td style="color: #10b981;">-1.1 in ↓</td>
-                        </tr>
-                        <tr>
-                            <td>Arm (in)</td>
-                            <td>14.2</td>
-                            <td>14.6</td>
-                            <td>15.1</td>
-                            <td style="color: #10b981;">+0.9 in ↑</td>
-                        </tr>
-                        <tr>
-                            <td>Body Fat %</td>
-                            <td>22.5%</td>
-                            <td>21.8%</td>
-                            <td>20.2%</td>
-                            <td style="color: #10b981;">-2.3% ↓</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- PRICING PAGE -->
-    <div id="pricing" class="page">
-        <div class="section-title">
-            <h2>Choose Your Plan</h2>
-            <p>Start your fitness journey with the perfect plan for you</p>
-        </div>
-
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="pricing-name">Starter</div>
-                <div class="pricing-price">$14.99</div>
-                <div class="pricing-period">/month</div>
-                <ul class="pricing-features">
-                    <li>Basic workout programs</li>
-                    <li>Exercise library access</li>
-                    <li>Progress tracking</li>
-                    <li>Community support</li>
-                    <li>Mobile app access</li>
-                </ul>
-                <button class="card-btn" style="width: 100%;">Start Free Trial</button>
-            </div>
-
-            <div class="pricing-card featured">
-                <div class="pricing-badge">Most Popular</div>
-                <div class="pricing-name">Pro</div>
-                <div class="pricing-price">$29.99</div>
-                <div class="pricing-period">/month</div>
-                <ul class="pricing-features">
-                    <li>All Starter features</li>
-                    <li>Personalized coaching</li>
-                    <li>Custom meal plans</li>
-                    <li>Priority support</li>
-                    <li>Advanced analytics</li>
-                    <li>Video form checks</li>
-                </ul>
-                <button class="card-btn" style="width: 100%;">Start Free Trial</button>
-            </div>
-
-            <div class="pricing-card">
-                <div class="pricing-name">Elite</div>
-                <div class="pricing-price">$59.99</div>
-                <div class="pricing-period">/month</div>
-                <ul class="pricing-features">
-                    <li>All Pro features</li>
-                    <li>1-on-1 coaching calls</li>
-                    <li>Custom supplement guide</li>
-                    <li>Weekly check-ins</li>
-                    <li>VIP community access</li>
-                    <li>Lifetime program updates</li>
-                </ul>
-                <button class="card-btn" style="width: 100%;">Start Free Trial</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const CORRECT_CODE = "NA88";
-
-        // Check if already logged in
-        if (sessionStorage.getItem('selfieGymAccess') === 'true') {
-            document.getElementById('loginModal').classList.add('hidden');
-        }
-
-        function verifyCode() {
-            const code = document.getElementById('codeInput').value.toUpperCase();
-            const errorMsg = document.getElementById('errorMsg');
-
-            if (code === CORRECT_CODE) {
-                document.getElementById('loginModal').classList.add('hidden');
-                sessionStorage.setItem('selfieGymAccess', 'true');
-                errorMsg.style.display = 'none';
-            } else {
-                errorMsg.textContent = 'Invalid code. Try again.';
-                errorMsg.style.display = 'block';
-                document.getElementById('codeInput').value = '';
-            }
-        }
-
-        document.getElementById('codeInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') verifyCode();
-        });
-
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-
-            // Update nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-
-            // Mark current nav link as active
-            const pageNameMap = {
-                'home': 'Home',
-                'exercises': 'Exercises',
-                'meals': 'Meals',
-                'progress': 'Progress',
-                'pricing': 'Pricing'
-            };
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-                if (link.textContent === pageNameMap[pageId]) {
-                    link.classList.add('active');
-                }
-            });
-
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-    </script>
+<script>
+function unlock(){const c=document.getElementById('gc').value.trim().toUpperCase();if(c==='NA88'){document.getElementById('gate').classList.add('off');sessionStorage.setItem('sg','1')}else{document.getElementById('ge').textContent='Invalid code.';document.getElementById('gc').value='';document.getElementById('gc').focus()}}
+document.getElementById('gc').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+if(sessionStorage.getItem('sg')==='1')document.getElementById('gate').classList.add('off');
+window.addEventListener('scroll',()=>{document.getElementById('nb').classList.toggle('solid',scrollY>60)});
+function cm(){document.getElementById('nl').classList.remove('open')}
+function tf(b){b.parentElement.classList.toggle('open')}
+const ob=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);ob.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ob.observe(el));
+</script>
 </body>
 </html>

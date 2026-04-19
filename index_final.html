@@ -5,18 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
     <title>SelfieGym — Your Fitness, Your Way</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --coral: #E07A5F;
-            --coral-light: #F2A391;
-            --cream: #FAF7F2;
-            --warm-white: #FFFDF9;
-            --charcoal: #2D2A26;
-            --brown: #5C534A;
-            --sand: #D4C5B5;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -24,15 +14,10 @@
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--cream);
-            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1f2937;
             line-height: 1.6;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 500;
         }
 
         /* LOGIN MODAL */
@@ -42,7 +27,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(45, 42, 38, 0.95);
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -54,23 +39,24 @@
         }
 
         .login-container {
-            background: var(--warm-white);
-            border-radius: 20px;
+            background: white;
+            border-radius: 12px;
             padding: 50px 40px;
             max-width: 400px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             text-align: center;
         }
 
         .login-container h2 {
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 10px;
-            color: var(--charcoal);
+            color: #1f2937;
+            font-weight: 700;
         }
 
         .login-container p {
-            color: var(--brown);
+            color: #6b7280;
             margin-bottom: 30px;
             font-size: 14px;
         }
@@ -78,41 +64,42 @@
         .login-input {
             width: 100%;
             padding: 12px 16px;
-            border: 1px solid #E0E0E0;
-            background: var(--cream);
-            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+            border-radius: 8px;
             font-size: 16px;
-            color: var(--charcoal);
+            color: #1f2937;
             margin-bottom: 20px;
             transition: all 0.3s;
         }
 
         .login-input:focus {
             outline: none;
-            border-color: var(--coral);
-            background: var(--warm-white);
+            border-color: #2563EB;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .login-btn {
             width: 100%;
             padding: 12px;
-            background: var(--coral);
+            background: #2563EB;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 15px;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .login-btn:hover {
+            background: #1d4ed8;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(224, 122, 95, 0.3);
         }
 
         .error-msg {
-            color: #DC2626;
+            color: #dc2626;
             font-size: 12px;
             margin-bottom: 15px;
             display: none;
@@ -120,112 +107,111 @@
 
         /* Navigation */
         nav {
-            position: fixed;
+            position: sticky;
             top: 0;
             width: 100%;
-            padding: 1.5rem 4rem;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            background: transparent;
-            transition: background 0.3s;
-        }
-
-        nav.scrolled {
-            background: var(--warm-white);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--charcoal);
+            font-weight: 700;
+            color: #1f2937;
             text-decoration: none;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--brown);
-            font-size: 0.95rem;
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
-        .nav-links a:hover {
-            color: var(--coral);
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2563EB;
         }
 
-        .nav-cta {
-            background: var(--charcoal);
-            color: var(--cream) !important;
-            padding: 0.75rem 1.75rem;
-            border-radius: 50px;
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
         }
 
-        /* Hero */
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Home Page */
         .hero {
-            min-height: 100vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 3rem;
             align-items: center;
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .hero-content {
-            padding: 0 4rem 0 8rem;
-        }
-
-        .hero-tag {
-            display: inline-block;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--coral);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
+        .hero-content h1 {
+            font-size: 3.5rem;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            color: var(--charcoal);
+            color: #1f2937;
+            font-weight: 700;
         }
 
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--brown);
-            margin-bottom: 2.5rem;
-            max-width: 400px;
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
         }
 
-        .btn-primary {
+        .hero-btn {
             display: inline-block;
-            background: var(--coral);
+            background: #2563EB;
             color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
+            padding: 12px 32px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s;
-            border: none;
             cursor: pointer;
-            font-family: 'DM Sans', sans-serif;
+            border: none;
+            font-family: 'Inter', sans-serif;
         }
 
-        .btn-primary:hover {
-            background: var(--charcoal);
+        .hero-btn:hover {
+            background: #1d4ed8;
             transform: translateY(-2px);
         }
 
         .hero-image {
-            height: 100vh;
-            position: relative;
+            height: 500px;
+            border-radius: 12px;
             overflow: hidden;
         }
 
@@ -235,370 +221,385 @@
             object-fit: cover;
         }
 
-        .hero-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, var(--cream) 0%, transparent 15%);
-        }
-
-        /* Philosophy Section */
-        .philosophy {
-            padding: 120px 8rem;
+        /* Section Title */
+        .section-title {
             text-align: center;
-            background: var(--warm-white);
+            padding: 60px 2rem 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .philosophy h2 {
+        .section-title h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            color: #1f2937;
+            font-weight: 700;
         }
 
-        .philosophy p {
-            font-size: 1.2rem;
-            color: var(--brown);
+        .section-title p {
+            font-size: 1rem;
+            color: #6b7280;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Features - Visual Grid */
-        .features {
-            padding: 100px 4rem;
+        /* Cards Grid */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            padding: 0 2rem 80px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .feature-card {
-            position: relative;
-            height: 450px;
-            border-radius: 20px;
+        .card {
+            background: white;
+            border-radius: 12px;
             overflow: hidden;
-            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 1px solid #e5e7eb;
         }
 
-        .feature-card img {
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-image {
             width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
-            transition: transform 0.5s;
         }
 
-        .feature-card:hover img {
-            transform: scale(1.05);
+        .card-content {
+            padding: 1.5rem;
         }
 
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-        }
-
-        .feature-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem;
-            z-index: 1;
-            color: white;
-        }
-
-        .feature-content h3 {
-            font-size: 1.5rem;
+        .card-content h3 {
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
-        }
-
-        .feature-content p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        /* Testimonial */
-        .testimonial {
-            padding: 120px 8rem;
-            background: var(--charcoal);
-            color: var(--cream);
-            text-align: center;
-        }
-
-        .testimonial-quote {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-style: italic;
-            line-height: 1.4;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .testimonial-author img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .testimonial-author-info {
-            text-align: left;
-        }
-
-        .testimonial-name {
+            color: #1f2937;
             font-weight: 600;
         }
 
-        .testimonial-meta {
+        .card-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .card-description {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .card-btn {
+            display: inline-block;
+            background: #2563EB;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 0.9rem;
-            opacity: 0.7;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
         }
 
-        /* Journey Section */
-        .journey {
-            padding: 120px 8rem;
+        .card-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Meals Sections */
+        .meal-section {
+            padding: 40px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .meal-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .meal-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .journey-image {
-            border-radius: 20px;
+        .meal-card {
+            background: white;
+            border-radius: 12px;
             overflow: hidden;
-            height: 500px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s;
         }
 
-        .journey-image img {
+        .meal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .meal-image {
             width: 100%;
-            height: 100%;
+            height: 180px;
             object-fit: cover;
         }
 
-        .journey-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+        .meal-content {
+            padding: 1.5rem;
         }
 
-        .journey-content p {
-            color: var(--brown);
-            margin-bottom: 2rem;
+        .meal-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: #1f2937;
+            font-weight: 600;
         }
 
-        .journey-stats {
+        .meal-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .stat-item {
             display: flex;
-            gap: 3rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--sand);
+            justify-content: space-between;
         }
 
-        .stat h3 {
-            font-size: 2.5rem;
-            color: var(--coral);
+        /* Progress Page */
+        .progress-container {
+            padding: 60px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .stat p {
-            font-size: 0.9rem;
-            color: var(--brown);
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        /* Pricing */
-        .pricing {
-            padding: 120px 8rem;
-            background: var(--warm-white);
+        .stat-box {
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 2rem;
             text-align: center;
         }
 
-        .pricing h2 {
+        .stat-value {
             font-size: 2.5rem;
+            font-weight: 700;
+            color: #2563EB;
             margin-bottom: 0.5rem;
         }
 
-        .pricing > p {
-            color: var(--brown);
-            margin-bottom: 4rem;
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.95rem;
         }
 
-        .pricing-cards {
+        /* Simple Chart */
+        .chart-container {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            height: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .bar-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .bar {
+            background: #2563EB;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .bar:hover {
+            background: #1d4ed8;
+        }
+
+        .bar-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* Measurements Table */
+        .measurements-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .measurements-table th,
+        .measurements-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .measurements-table th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .measurements-table td {
+            color: #6b7280;
+        }
+
+        /* Pricing */
+        .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            max-width: 1000px;
+            padding: 0 2rem 80px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .pricing-card {
             background: white;
-            border-radius: 20px;
-            padding: 3rem 2rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
             transition: all 0.3s;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
         }
 
         .pricing-card.featured {
-            background: var(--charcoal);
-            color: var(--cream);
+            border: 2px solid #2563EB;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
         }
 
-        .pricing-card h3 {
+        .pricing-card:hover:not(.featured) {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #2563EB;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .pricing-name {
             font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2563EB;
             margin-bottom: 0.5rem;
         }
 
-        .pricing-card .price {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin: 1rem 0;
+        .pricing-period {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
         }
 
-        .pricing-card .price span {
-            font-size: 1rem;
-            opacity: 0.6;
-        }
-
-        .pricing-card ul {
-            list-style: none;
+        .pricing-features {
             text-align: left;
             margin: 2rem 0;
-        }
-
-        .pricing-card li {
-            padding: 0.5rem 0;
-            font-size: 0.95rem;
-            opacity: 0.8;
-        }
-
-        .pricing-card li::before {
-            content: '✓ ';
-            color: var(--coral);
-        }
-
-        .pricing-card.featured li::before {
-            color: var(--coral-light);
-        }
-
-        .pricing-btn {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .pricing-card:not(.featured) .pricing-btn {
-            background: var(--charcoal);
-            color: white;
-        }
-
-        .pricing-card.featured .pricing-btn {
-            background: var(--coral);
-            color: white;
-        }
-
-        /* CTA */
-        .cta {
-            padding: 150px 8rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--coral) 0%, var(--coral-light) 100%);
-            color: white;
-        }
-
-        .cta h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-        }
-
-        .cta .btn-primary {
-            background: white;
-            color: var(--coral);
-        }
-
-        .cta .btn-primary:hover {
-            background: var(--charcoal);
-            color: white;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--charcoal);
-            color: var(--cream);
-            padding: 60px 8rem 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-brand p {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        .footer-links h4 {
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .footer-links ul {
             list-style: none;
         }
 
-        .footer-links a {
-            color: var(--cream);
-            opacity: 0.7;
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: block;
-            padding: 0.3rem 0;
+        .pricing-features li {
+            padding: 0.75rem 0;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.95rem;
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            opacity: 0.5;
-            font-size: 0.9rem;
+        .pricing-features li:before {
+            content: "✓ ";
+            color: #2563EB;
+            font-weight: 600;
+            margin-right: 0.5rem;
         }
 
         /* Mobile */
-        @media (max-width: 1024px) {
-            nav { padding: 1rem 2rem; }
-            .hero { grid-template-columns: 1fr; }
-            .hero-content { padding: 120px 2rem 60px; text-align: center; }
-            .hero-content p { margin: 0 auto 2rem; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero-image { height: 50vh; }
-            .hero-image::after { background: linear-gradient(to top, var(--cream) 0%, transparent 15%); }
-            .philosophy, .journey, .pricing, .cta { padding: 80px 2rem; }
-            .features { grid-template-columns: 1fr; padding: 60px 2rem; }
-            .feature-card { height: 350px; }
-            .journey { grid-template-columns: 1fr; gap: 2rem; }
-            .pricing-cards { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr 1fr; }
-            .nav-links { display: none; }
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 40px 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 12px;
+            }
+
+            .cards-grid,
+            .meal-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -614,173 +615,480 @@
         </div>
     </div>
 
-    <nav id="navbar">
-        <a href="#" class="logo">SelfieGym</a>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo" onclick="showPage('home'); return false;">SelfieGym</a>
         <ul class="nav-links">
-            <li><a href="#philosophy">Philosophy</a></li>
-            <li><a href="#journey">Your Journey</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#" class="nav-cta">Get Started</a></li>
+            <li><a class="nav-link active" onclick="showPage('home'); return false;">Home</a></li>
+            <li><a class="nav-link" onclick="showPage('exercises'); return false;">Exercises</a></li>
+            <li><a class="nav-link" onclick="showPage('meals'); return false;">Meals</a></li>
+            <li><a class="nav-link" onclick="showPage('progress'); return false;">Progress</a></li>
+            <li><a class="nav-link" onclick="showPage('pricing'); return false;">Pricing</a></li>
         </ul>
     </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <span class="hero-tag">Your body. Your rules.</span>
-            <h1>Fitness that feels like you.</h1>
-            <p>A personal coach in your pocket. Real guidance, real results — on your schedule.</p>
-            <a href="#" class="btn-primary">Start Your Journey</a>
-        </div>
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&h=1400&fit=crop&q=80" alt="Fitness Journey">
-        </div>
-    </section>
-
-    <section class="philosophy" id="philosophy">
-        <h2>We believe fitness should feel good.</h2>
-        <p>No judgment. No pressure. Just a coach who understands your life, your goals, and meets you where you are.</p>
-    </section>
-
-    <section class="features">
-        <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=900&fit=crop&q=80" alt="Personal Coaching">
-            <div class="feature-content">
-                <h3>Personal Coaching</h3>
-                <p>Guidance that adapts to your life</p>
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Fitness that feels like you.</h1>
+                <p>A personal coach in your pocket. Real guidance, real results — on your schedule.</p>
+                <button class="hero-btn" onclick="showPage('exercises'); return false;">Start Your Journey</button>
             </div>
-        </div>
-        <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=900&fit=crop&q=80" alt="Nutrition">
-            <div class="feature-content">
-                <h3>Nutrition Made Simple</h3>
-                <p>Eat well without the stress</p>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=500&fit=crop&q=80" alt="Fitness">
             </div>
-        </div>
-        <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&h=900&fit=crop&q=80" alt="Progress">
-            <div class="feature-content">
-                <h3>See Your Progress</h3>
-                <p>Celebrate every milestone</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="testimonial">
-        <p class="testimonial-quote">"For the first time, I actually look forward to working out. It doesn't feel like a chore anymore — it feels like me time."</p>
-        <div class="testimonial-author">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face&q=80" alt="Sarah">
-            <div class="testimonial-author-info">
-                <div class="testimonial-name">Sarah K.</div>
-                <div class="testimonial-meta">Lost 30 lbs in 5 months</div>
-            </div>
+        <div class="section-title">
+            <h2>Why Choose SelfieGym</h2>
+            <p>Complete fitness solution with personalized coaching, nutrition plans, and progress tracking</p>
         </div>
-    </section>
 
-    <section class="journey" id="journey">
-        <div class="journey-image">
-            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=1000&fit=crop&q=80" alt="Your Journey">
-        </div>
-        <div class="journey-content">
-            <h2>Your journey, your pace.</h2>
-            <p>We're not here to push you into someone else's routine. We're here to help you build your own — one that fits your schedule, your body, and your goals.</p>
-            <p>Whether you train at home or at the gym, morning or night, we adapt to you.</p>
-            <a href="#" class="btn-primary">Learn More</a>
-            <div class="journey-stats">
-                <div class="stat">
-                    <h3>24/7</h3>
-                    <p>Always there</p>
+        <div class="cards-grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop&q=80" alt="Coaching" class="card-image">
+                <div class="card-content">
+                    <h3>Personal Coaching</h3>
+                    <p class="card-description">Expert guidance tailored to your fitness level and goals.</p>
+                    <button class="card-btn" onclick="showPage('exercises'); return false;">View Programs</button>
                 </div>
-                <div class="stat">
-                    <h3>100%</h3>
-                    <p>Personalized</p>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=250&fit=crop&q=80" alt="Nutrition" class="card-image">
+                <div class="card-content">
+                    <h3>Nutrition Plans</h3>
+                    <p class="card-description">Customized meal plans that fit your lifestyle and preferences.</p>
+                    <button class="card-btn" onclick="showPage('meals'); return false;">View Meals</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=400&h=250&fit=crop&q=80" alt="Progress" class="card-image">
+                <div class="card-content">
+                    <h3>Track Progress</h3>
+                    <p class="card-description">Monitor your improvements with detailed analytics and insights.</p>
+                    <button class="card-btn" onclick="showPage('progress'); return false;">View Dashboard</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="pricing" id="pricing">
-        <h2>Simple, honest pricing.</h2>
-        <p>No hidden fees. No contracts. Cancel anytime.</p>
-        <div class="pricing-cards">
+    <!-- EXERCISES PAGE -->
+    <div id="exercises" class="page">
+        <div class="section-title">
+            <h2>Workout Programs</h2>
+            <p>Choose your training focus and get started</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1597132846098-e7a61b84b78f?w=400&h=250&fit=crop&q=80" alt="Chest" class="card-image">
+                <div class="card-content">
+                    <h3>Chest Workouts</h3>
+                    <div class="card-meta">
+                        <span>💪 Strength</span>
+                        <span>⭐ Intermediate</span>
+                    </div>
+                    <p class="card-description">Build a stronger, more defined chest with targeted exercises.</p>
+                    <button class="card-btn">Start Workout</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=400&h=250&fit=crop&q=80" alt="Back" class="card-image">
+                <div class="card-content">
+                    <h3>Back Workouts</h3>
+                    <div class="card-meta">
+                        <span>💪 Strength</span>
+                        <span>⭐ Intermediate</span>
+                    </div>
+                    <p class="card-description">Develop a powerful back and improve posture with these exercises.</p>
+                    <button class="card-btn">Start Workout</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1566781214894-2d5fcbf51af1?w=400&h=250&fit=crop&q=80" alt="Legs" class="card-image">
+                <div class="card-content">
+                    <h3>Leg Workouts</h3>
+                    <div class="card-meta">
+                        <span>💪 Strength</span>
+                        <span>⭐ Beginner</span>
+                    </div>
+                    <p class="card-description">Strengthen your legs with proven compound movements.</p>
+                    <button class="card-btn">Start Workout</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=250&fit=crop&q=80" alt="Shoulders" class="card-image">
+                <div class="card-content">
+                    <h3>Shoulder Workouts</h3>
+                    <div class="card-meta">
+                        <span>💪 Strength</span>
+                        <span>⭐ Intermediate</span>
+                    </div>
+                    <p class="card-description">Build boulder shoulders with isolated and compound exercises.</p>
+                    <button class="card-btn">Start Workout</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=250&fit=crop&q=80" alt="Arms" class="card-image">
+                <div class="card-content">
+                    <h3>Arm Workouts</h3>
+                    <div class="card-meta">
+                        <span>💪 Strength</span>
+                        <span>⭐ Beginner</span>
+                    </div>
+                    <p class="card-description">Get bigger, stronger arms with focused bicep and tricep training.</p>
+                    <button class="card-btn">Start Workout</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1609899195640-3cfc2e0c33d9?w=400&h=250&fit=crop&q=80" alt="Core" class="card-image">
+                <div class="card-content">
+                    <h3>Core Workouts</h3>
+                    <div class="card-meta">
+                        <span>💪 Endurance</span>
+                        <span>⭐ Beginner</span>
+                    </div>
+                    <p class="card-description">Strengthen your core with functional and stable exercises.</p>
+                    <button class="card-btn">Start Workout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MEALS PAGE -->
+    <div id="meals" class="page">
+        <div class="section-title">
+            <h2>Nutrition Plans</h2>
+            <p>Delicious and healthy meals designed for your goals</p>
+        </div>
+
+        <!-- Breakfast -->
+        <div class="meal-section">
+            <h3>🌅 Breakfast</h3>
+            <div class="meal-grid">
+                <div class="meal-card">
+                    <img src="https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=400&h=250&fit=crop&q=80" alt="Power Breakfast" class="meal-image">
+                    <div class="meal-content">
+                        <h4>Power Breakfast Bowl</h4>
+                        <div class="meal-stats">
+                            <div class="stat-item"><span>Calories:</span> <strong>450</strong></div>
+                            <div class="stat-item"><span>Protein:</span> <strong>25g</strong></div>
+                            <div class="stat-item"><span>Carbs:</span> <strong>55g</strong></div>
+                            <div class="stat-item"><span>Fat:</span> <strong>12g</strong></div>
+                        </div>
+                        <button class="card-btn">View Recipe</button>
+                    </div>
+                </div>
+
+                <div class="meal-card">
+                    <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=400&h=250&fit=crop&q=80" alt="Egg Sandwich" class="meal-image">
+                    <div class="meal-content">
+                        <h4>Protein-Packed Eggs</h4>
+                        <div class="meal-stats">
+                            <div class="stat-item"><span>Calories:</span> <strong>380</strong></div>
+                            <div class="stat-item"><span>Protein:</span> <strong>28g</strong></div>
+                            <div class="stat-item"><span>Carbs:</span> <strong>35g</strong></div>
+                            <div class="stat-item"><span>Fat:</span> <strong>14g</strong></div>
+                        </div>
+                        <button class="card-btn">View Recipe</button>
+                    </div>
+                </div>
+
+                <div class="meal-card">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop&q=80" alt="Smoothie" class="meal-image">
+                    <div class="meal-content">
+                        <h4>Greek Yogurt Parfait</h4>
+                        <div class="meal-stats">
+                            <div class="stat-item"><span>Calories:</span> <strong>320</strong></div>
+                            <div class="stat-item"><span>Protein:</span> <strong>20g</strong></div>
+                            <div class="stat-item"><span>Carbs:</span> <strong>42g</strong></div>
+                            <div class="stat-item"><span>Fat:</span> <strong>8g</strong></div>
+                        </div>
+                        <button class="card-btn">View Recipe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lunch -->
+        <div class="meal-section">
+            <h3>🥗 Lunch</h3>
+            <div class="meal-grid">
+                <div class="meal-card">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop&q=80" alt="Grilled Chicken" class="meal-image">
+                    <div class="meal-content">
+                        <h4>Grilled Chicken & Quinoa</h4>
+                        <div class="meal-stats">
+                            <div class="stat-item"><span>Calories:</span> <strong>520</strong></div>
+                            <div class="stat-item"><span>Protein:</span> <strong>42g</strong></div>
+                            <div class="stat-item"><span>Carbs:</span> <strong>52g</strong></div>
+                            <div class="stat-item"><span>Fat:</span> <strong>12g</strong></div>
+                        </div>
+                        <button class="card-btn">View Recipe</button>
+                    </div>
+                </div>
+
+                <div class="meal-card">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop&q=80" alt="Tuna Bowl" class="meal-image">
+                    <div class="meal-content">
+                        <h4>Tuna Buddha Bowl</h4>
+                        <div class="meal-stats">
+                            <div class="stat-item"><span>Calories:</span> <strong>480</strong></div>
+                            <div class="stat-item"><span>Protein:</span> <strong>38g</strong></div>
+                            <div class="stat-item"><span>Carbs:</span> <strong>48g</strong></div>
+                            <div class="stat-item"><span>Fat:</span> <strong>10g</strong></div>
+                        </div>
+                        <button class="card-btn">View Recipe</button>
+                    </div>
+                </div>
+
+                <div class="meal-card">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop&q=80" alt="Beef Salad" class="meal-image">
+                    <div class="meal-content">
+                        <h4>Lean Beef Salad</h4>
+                        <div class="meal-stats">
+                            <div class="stat-item"><span>Calories:</span> <strong>450</strong></div>
+                            <div class="stat-item"><span>Protein:</span> <strong>40g</strong></div>
+                            <div class="stat-item"><span>Carbs:</span> <strong>35g</strong></div>
+                            <div class="stat-item"><span>Fat:</span> <strong>13g</strong></div>
+                        </div>
+                        <button class="card-btn">View Recipe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dinner -->
+        <div class="meal-section">
+            <h3>🍽️ Dinner</h3>
+            <div class="meal-grid">
+                <div class="meal-card">
+                    <img src="https://images.unsplash.com/photo-1580959375944-abd7e991a971?w=400&h=250&fit=crop&q=80" alt="Salmon" class="meal-image">
+                    <div class="meal-content">
+                        <h4>Salmon & Sweet Potato</h4>
+                        <div class="meal-stats">
+                            <div class="stat-item"><span>Calories:</span> <strong>580</strong></div>
+                            <div class="stat-item"><span>Protein:</span> <strong>38g</strong></div>
+                            <div class="stat-item"><span>Carbs:</span> <strong>58g</strong></div>
+                            <div class="stat-item"><span>Fat:</span> <strong>15g</strong></div>
+                        </div>
+                        <button class="card-btn">View Recipe</button>
+                    </div>
+                </div>
+
+                <div class="meal-card">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=250&fit=crop&q=80" alt="Chicken Rice" class="meal-image">
+                    <div class="meal-content">
+                        <h4>Chicken & Brown Rice</h4>
+                        <div class="meal-stats">
+                            <div class="stat-item"><span>Calories:</span> <strong>550</strong></div>
+                            <div class="stat-item"><span>Protein:</span> <strong>40g</strong></div>
+                            <div class="stat-item"><span>Carbs:</span> <strong>60g</strong></div>
+                            <div class="stat-item"><span>Fat:</span> <strong>10g</strong></div>
+                        </div>
+                        <button class="card-btn">View Recipe</button>
+                    </div>
+                </div>
+
+                <div class="meal-card">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=250&fit=crop&q=80" alt="Turkey" class="meal-image">
+                    <div class="meal-content">
+                        <h4>Turkey & Vegetables</h4>
+                        <div class="meal-stats">
+                            <div class="stat-item"><span>Calories:</span> <strong>420</strong></div>
+                            <div class="stat-item"><span>Protein:</span> <strong>42g</strong></div>
+                            <div class="stat-item"><span>Carbs:</span> <strong>30g</strong></div>
+                            <div class="stat-item"><span>Fat:</span> <strong>9g</strong></div>
+                        </div>
+                        <button class="card-btn">View Recipe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROGRESS PAGE -->
+    <div id="progress" class="page">
+        <div class="section-title">
+            <h2>Your Progress</h2>
+            <p>Track your fitness journey and celebrate wins</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Workouts Completed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">8,420</div>
+                    <div class="stat-label">Calories Burned</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Days Streak</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">87%</div>
+                    <div class="stat-label">Goal Progress</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Weekly Activity</div>
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <div class="bar" style="height: 70%;"></div>
+                        <div class="bar-label">Mon</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 85%;"></div>
+                        <div class="bar-label">Tue</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 60%;"></div>
+                        <div class="bar-label">Wed</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 90%;"></div>
+                        <div class="bar-label">Thu</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 75%;"></div>
+                        <div class="bar-label">Fri</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 95%;"></div>
+                        <div class="bar-label">Sat</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 50%;"></div>
+                        <div class="bar-label">Sun</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Body Measurements</div>
+                <table class="measurements-table">
+                    <thead>
+                        <tr>
+                            <th>Measurement</th>
+                            <th>Week 1</th>
+                            <th>Week 4</th>
+                            <th>Week 8</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Weight (lbs)</td>
+                            <td>185</td>
+                            <td>182</td>
+                            <td>178</td>
+                            <td style="color: #10b981;">-7 lbs ↓</td>
+                        </tr>
+                        <tr>
+                            <td>Chest (in)</td>
+                            <td>38.5</td>
+                            <td>39.2</td>
+                            <td>40.1</td>
+                            <td style="color: #10b981;">+1.6 in ↑</td>
+                        </tr>
+                        <tr>
+                            <td>Waist (in)</td>
+                            <td>34.2</td>
+                            <td>33.8</td>
+                            <td>33.1</td>
+                            <td style="color: #10b981;">-1.1 in ↓</td>
+                        </tr>
+                        <tr>
+                            <td>Arm (in)</td>
+                            <td>14.2</td>
+                            <td>14.6</td>
+                            <td>15.1</td>
+                            <td style="color: #10b981;">+0.9 in ↑</td>
+                        </tr>
+                        <tr>
+                            <td>Body Fat %</td>
+                            <td>22.5%</td>
+                            <td>21.8%</td>
+                            <td>20.2%</td>
+                            <td style="color: #10b981;">-2.3% ↓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING PAGE -->
+    <div id="pricing" class="page">
+        <div class="section-title">
+            <h2>Choose Your Plan</h2>
+            <p>Start your fitness journey with the perfect plan for you</p>
+        </div>
+
+        <div class="pricing-grid">
             <div class="pricing-card">
-                <h3>Starter</h3>
-                <div class="price">Free</div>
-                <ul>
-                    <li>Basic workout plans</li>
-                    <li>Exercise library</li>
+                <div class="pricing-name">Starter</div>
+                <div class="pricing-price">$14.99</div>
+                <div class="pricing-period">/month</div>
+                <ul class="pricing-features">
+                    <li>Basic workout programs</li>
+                    <li>Exercise library access</li>
                     <li>Progress tracking</li>
+                    <li>Community support</li>
+                    <li>Mobile app access</li>
                 </ul>
-                <button class="pricing-btn">Get Started</button>
+                <button class="card-btn" style="width: 100%;">Start Free Trial</button>
             </div>
+
             <div class="pricing-card featured">
-                <h3>Pro</h3>
-                <div class="price">$9.99<span>/mo</span></div>
-                <ul>
-                    <li>Unlimited coaching</li>
-                    <li>Custom programs</li>
-                    <li>Nutrition guidance</li>
+                <div class="pricing-badge">Most Popular</div>
+                <div class="pricing-name">Pro</div>
+                <div class="pricing-price">$29.99</div>
+                <div class="pricing-period">/month</div>
+                <ul class="pricing-features">
+                    <li>All Starter features</li>
+                    <li>Personalized coaching</li>
+                    <li>Custom meal plans</li>
                     <li>Priority support</li>
+                    <li>Advanced analytics</li>
+                    <li>Video form checks</li>
                 </ul>
-                <button class="pricing-btn">Start Free Trial</button>
+                <button class="card-btn" style="width: 100%;">Start Free Trial</button>
             </div>
+
             <div class="pricing-card">
-                <h3>Premium</h3>
-                <div class="price">$19.99<span>/mo</span></div>
-                <ul>
-                    <li>Everything in Pro</li>
-                    <li>Detailed meal plans</li>
-                    <li>Video analysis</li>
-                    <li>1-on-1 check-ins</li>
+                <div class="pricing-name">Elite</div>
+                <div class="pricing-price">$59.99</div>
+                <div class="pricing-period">/month</div>
+                <ul class="pricing-features">
+                    <li>All Pro features</li>
+                    <li>1-on-1 coaching calls</li>
+                    <li>Custom supplement guide</li>
+                    <li>Weekly check-ins</li>
+                    <li>VIP community access</li>
+                    <li>Lifetime program updates</li>
                 </ul>
-                <button class="pricing-btn">Start Free Trial</button>
+                <button class="card-btn" style="width: 100%;">Start Free Trial</button>
             </div>
         </div>
-    </section>
-
-    <section class="cta">
-        <h2>Ready to feel good?</h2>
-        <p>Start your free trial today. No credit card required.</p>
-        <a href="#" class="btn-primary">Begin Your Journey</a>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="#" class="logo" style="color: var(--cream);">SelfieGym</a>
-                <p>Fitness that feels like you. Personal coaching for your unique journey.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#">How It Works</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Terms</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 SelfieGym. All rights reserved.</p>
-        </div>
-    </footer>
+    </div>
 
     <script>
         const CORRECT_CODE = "NA88";
 
+        // Check if already logged in
         if (sessionStorage.getItem('selfieGymAccess') === 'true') {
             document.getElementById('loginModal').classList.add('hidden');
         }
@@ -794,7 +1102,7 @@
                 sessionStorage.setItem('selfieGymAccess', 'true');
                 errorMsg.style.display = 'none';
             } else {
-                errorMsg.textContent = 'Invalid code';
+                errorMsg.textContent = 'Invalid code. Try again.';
                 errorMsg.style.display = 'block';
                 document.getElementById('codeInput').value = '';
             }
@@ -804,15 +1112,38 @@
             if (e.key === 'Enter') verifyCode();
         });
 
-        // Nav scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Mark current nav link as active
+            const pageNameMap = {
+                'home': 'Home',
+                'exercises': 'Exercises',
+                'meals': 'Meals',
+                'progress': 'Progress',
+                'pricing': 'Pricing'
+            };
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.textContent === pageNameMap[pageId]) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
     </script>
 </body>
 </html>

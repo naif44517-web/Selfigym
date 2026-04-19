@@ -277,6 +277,9 @@
             cursor: pointer;
             text-decoration: none;
             display: block;
+            background: none;
+            border: none;
+            padding: 0;
         }
 
         .feature-card img {
@@ -284,10 +287,15 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
+            pointer-events: none;
         }
 
         .feature-card:hover img {
             transform: scale(1.05);
+        }
+
+        .feature-card:active {
+            opacity: 0.9;
         }
 
         .feature-card::after {

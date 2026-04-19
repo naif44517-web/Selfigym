@@ -452,32 +452,89 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
 </div>
 
 <script>
-// Gate
-function unlock(){const c=document.getElementById('gc').value.trim().toUpperCase();if(c==='NA88'){document.getElementById('gate').classList.add('off');sessionStorage.setItem('sg','1')}else{document.getElementById('ge').textContent='Invalid code.';document.getElementById('gc').value='';document.getElementById('gc').focus()}}
-document.getElementById('gc').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
-if(sessionStorage.getItem('sg')==='1')document.getElementById('gate').classList.add('off');
+// === Element References ===
+const gc = document.getElementById('gc');
+const gate = document.getElementById('gate');
+const ge = document.getElementById('ge');
+const nb = document.getElementById('nb');
+const nml = document.getElementById('nml');
 
-// Nav scroll
-window.addEventListener('scroll',()=>{document.getElementById('nb').classList.toggle('solid',scrollY>60)});
-
-// Mobile menu
-function cm(){document.getElementById('nml').classList.remove('open')}
-
-// Page system
-function sp(id){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById('page-'+id).classList.add('active');
- window.scrollTo(0,0);
- // Re-observe reveals on new page
- document.querySelectorAll('.rv:not(.vis)').forEach(el=>ob.observe(el));
+// === Login Gate ===
+function unlock() {
+ if (!gc || !gate || !ge) return;
+ const c = gc.value.trim().toUpperCase();
+ if (c === 'NA88') {
+ gate.classList.add('off');
+ sessionStorage.setItem('sg', '1');
+ ge.textContent = '';
+ } else {
+ ge.textContent = 'Invalid code.';
+ gc.value = '';
+ gc.focus();
+ }
 }
 
-// FAQ
-function tf(b){b.parentElement.classList.toggle('open')}
+if (gc) {
+ gc.addEventListener('keydown', e => {
+ if (e.key === 'Enter') unlock();
+ });
+ gc.addEventListener('input', () => {
+ if (ge) ge.textContent = '';
+ });
+}
 
-// Reveal
-const ob=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*60);ob.unobserve(e.target)}})},{threshold:.1});
-document.querySelectorAll('.rv').forEach(el=>ob.observe(el));
+if (gate && sessionStorage.getItem('sg') === '1') {
+ gate.classList.add('off');
+}
+
+// === Nav Scroll ===
+if (nb) {
+ window.addEventListener('scroll', () => {
+ nb.classList.toggle('solid', window.scrollY > 60);
+ });
+}
+
+// === Mobile Menu ===
+function closeMenu() {
+ if (nml) nml.classList.remove('open');
+}
+// Keep cm() as alias for inline onclick handlers
+function cm() { closeMenu(); }
+
+// === Page Navigation ===
+function showPage(id) {
+ document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+ const target = document.getElementById('page-' + id);
+ if (!target) return;
+ target.classList.add('active');
+ window.scrollTo({ top: 0, behavior: 'smooth' });
+ if (typeof revealObserver !== 'undefined') {
+ document.querySelectorAll('.rv:not(.vis)').forEach(el => revealObserver.observe(el));
+ }
+}
+// Keep sp() as alias for inline onclick handlers
+function sp(id) { showPage(id); }
+
+// === FAQ Toggle ===
+function toggleFaq(btn) {
+ if (btn && btn.parentElement) {
+ btn.parentElement.classList.toggle('open');
+ }
+}
+// Keep tf() as alias for inline onclick handlers
+function tf(b) { toggleFaq(b); }
+
+// === Scroll Reveal Animation ===
+const revealObserver = new IntersectionObserver(entries => {
+ entries.forEach((entry, i) => {
+ if (entry.isIntersecting) {
+ setTimeout(() => entry.target.classList.add('vis'), i * 60);
+ revealObserver.unobserve(entry.target);
+ }
+ });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
 </script>
 </body>
 </html>

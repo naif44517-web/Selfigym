@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <title>SelfieGym - Your Fitness, Your Way</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #E07A5F;
+            --primary-light: #F2A391;
+            --accent: #00a884;
+            --bg-light: #FAF7F2;
+            --bg-white: #FFFDF9;
+            --text-dark: #2D2A26;
+            --text-brown: #5C534A;
+            --text-light: #8A8A8A;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* LOGIN MODAL */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(45, 42, 38, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .login-modal.hidden {
+            display: none;
+        }
+
+        .login-container {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 50px 40px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: var(--shadow-hover);
+            text-align: center;
+        }
+
+        .login-container h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .login-container p {
+            color: var(--text-light);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E0E0E0;
+            background: var(--bg-light);
+            border-radius: 10px;
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--bg-white);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: var(--bg-white);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(224, 122, 95, 0.3);
+        }
+
+        .error-msg {
+            color: #DC2626;
+            font-size: 12px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 18px 40px;
+            background: var(--bg-white);
+            z-index: 100;
+            border-bottom: 1px solid #F0F0F0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        nav.scrolled {
+            background: var(--bg-white);
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-brown);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--text-dark);
+            color: var(--bg-white) !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding: 140px 40px 100px;
+            margin-top: 60px;
+            background: linear-gradient(135deg, #FAF7F2 0%, #FFFDF9 100%);
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-content h1 .accent {
+            color: var(--primary);
+        }
+
+        .hero-content > p {
+            font-size: 18px;
+            color: var(--text-brown);
+            margin-bottom: 35px;
+            line-height: 1.7;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--bg-white);
+            box-shadow: 0 8px 20px rgba(224, 122, 95, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(224, 122, 95, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--text-dark);
+            color: var(--bg-white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 60px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 16px;
+            display: block;
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            padding: 120px 40px;
+            background: var(--bg-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .section-header h2 .accent {
+            color: var(--primary);
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--text-brown);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-brown);
+            line-height: 1.7;
+        }
+
+        .features-image {
+            width: 100%;
+            border-radius: 16px;
+            margin-top: 60px;
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            padding: 120px 40px;
+            background: var(--bg-light);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--bg-white);
+            font-size: 32px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 20px rgba(224, 122, 95, 0.2);
+        }
+
+        .step h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            font-size: 14px;
+            color: var(--text-brown);
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            padding: 120px 40px;
+            background: var(--bg-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .testimonial-stars {
+            color: var(--primary);
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: var(--text-brown);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: var(--bg-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .testimonial-title {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* PRICING */
+        .pricing {
+            padding: 120px 40px;
+            background: var(--bg-light);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: var(--bg-white);
+            border: 1px solid #E0E0E0;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(224, 122, 95, 0.15);
+        }
+
+        .pricing-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: var(--bg-white);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .pricing-name {
+            font-size: 22px;
+            margin-bottom: 12px;
+            margin-top: 8px;
+        }
+
+        .pricing-price {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 18px 0;
+        }
+
+        .pricing-period {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            font-size: 14px;
+            color: var(--text-brown);
+            border-bottom: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:not(.featured) .pricing-btn {
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .pricing-card:not(.featured) .pricing-btn:hover {
+            background: var(--primary);
+            color: var(--bg-white);
+        }
+
+        .pricing-card.featured .pricing-btn {
+            background: var(--primary);
+            color: var(--bg-white);
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 120px 40px;
+            background: var(--bg-white);
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #E0E0E0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item.open {
+            border-color: var(--primary);
+            background: rgba(224, 122, 95, 0.02);
+        }
+
+        .faq-question {
+            padding: 18px;
+            background: var(--bg-white);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+
+        .faq-toggle {
+            color: var(--primary);
+            font-size: 22px;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: var(--text-brown);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .faq-item.open .faq-answer {
+            padding: 18px;
+            max-height: 500px;
+        }
+
+        /* CTA */
+        .final-cta {
+            padding: 100px 40px;
+            background: var(--primary);
+            color: var(--bg-white);
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .final-cta p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--text-dark);
+            color: var(--text-light);
+            padding: 50px 40px 25px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-brand h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--bg-white);
+        }
+
+        .footer-brand p {
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            font-size: 13px;
+            margin-bottom: 15px;
+            color: var(--bg-white);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 100px 20px 60px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-image {
+                display: none;
+            }
+
+            .features, .how-it-works, .testimonials, .pricing, .faq, .final-cta {
+                padding: 80px 20px;
+            }
+
+            .features-grid, .testimonials-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LOGIN MODAL -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-container">
+            <h2>SelfieGym</h2>
+            <p>Access Code Required</p>
+            <div class="error-msg" id="errorMsg"></div>
+            <input type="password" id="codeInput" class="login-input" placeholder="Enter code" autocomplete="off">
+            <button class="login-btn" onclick="verifyCode()">Unlock</button>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <a href="#" class="logo">SelfieGym</a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#" class="nav-cta">Start Free</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your <span class="accent">Fitness, Your Way</span></h1>
+            <p>Transform your body with personalized workout plans and nutrition guidance powered by artificial intelligence. No gym required.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Start Your Journey</button>
+                <button class="btn btn-secondary">See How It Works</button>
+            </div>
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-value">50K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div>
+                    <div class="stat-value">4.9★</div>
+                    <div class="stat-label">App Rating</div>
+                </div>
+                <div>
+                    <div class="stat-value">95%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=700&fit=crop&q=80" alt="Fitness">
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything You Need <span class="accent">for Success</span></h2>
+                <p>Complete tools to transform your fitness journey</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Smart Workouts</h3>
+                    <p>AI-designed programs that adapt to your fitness level and goals in real-time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥗</div>
+                    <h3>Meal Plans</h3>
+                    <p>Custom nutrition strategies tailored to your lifestyle and dietary preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Progress Tracking</h3>
+                    <p>Real-time analytics with detailed metrics and visual feedback on your journey.</p>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1000&h=400&fit=crop&q=80" alt="Features" class="features-image">
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works" id="how">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It <span class="accent">Works</span></h2>
+                <p>Three simple steps to transform your fitness</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Tell Your Goals</h3>
+                    <p>Share your objectives, fitness level, and available time.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get Your Plan</h3>
+                    <p>Personalized workouts and meals tailored just for you.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Train & Transform</h3>
+                    <p>Follow your plan and watch the results with 24/7 support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Real People, <span class="accent">Real Results</span></h2>
+                <p>Join thousands who've transformed their lives</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"SelfieGym changed my fitness completely. I'm seeing real results and staying consistent!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JM</div>
+                        <div>
+                            <div class="testimonial-name">James Mitchell</div>
+                            <div class="testimonial-title">CEO, San Francisco</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Lost 18 pounds in 3 months without feeling deprived. The meal plans actually work!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SR</div>
+                        <div>
+                            <div class="testimonial-name">Sarah Rodriguez</div>
+                            <div class="testimonial-title">Marketing Manager</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Finally a trainer that adapts to MY life. The AI understands me perfectly."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AK</div>
+                        <div>
+                            <div class="testimonial-name">Ahmed Khan</div>
+                            <div class="testimonial-title">Software Engineer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple <span class="accent">Transparent</span> Pricing</h2>
+                <p>Start free. Upgrade when you're ready. Cancel anytime.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">Starter</div>
+                    <div class="pricing-price">$14.99</div>
+                    <div class="pricing-period">/month</div>
+                    <ul class="pricing-features">
+                        <li>3 AI workouts/week</li>
+                        <li>Basic meal suggestions</li>
+                        <li>Progress tracking</li>
+                        <li>Email support</li>
+                    </ul>
+                    <button class="pricing-btn">Start Free</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-name">Pro</div>
+                    <div class="pricing-price">$29.99</div>
+                    <div class="pricing-period">/month</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited AI workouts</li>
+                        <li>Custom meal plans</li>
+                        <li>Advanced analytics</li>
+                        <li>Priority chat support</li>
+                        <li>Full exercise library</li>
+                    </ul>
+                    <button class="pricing-btn">Get Started</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-name">Elite</div>
+                    <div class="pricing-price">$59.99</div>
+                    <div class="pricing-period">/month</div>
+                    <ul class="pricing-features">
+                        <li>All Pro features</li>
+                        <li>1-on-1 weekly calls</li>
+                        <li>Video form analysis</li>
+                        <li>Supplement recommendations</li>
+                        <li>24/7 VIP support</li>
+                    </ul>
+                    <button class="pricing-btn">Become Elite</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked <span class="accent">Questions</span></h2>
+                <p>Got questions? We have answers.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Do I need gym experience?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        No! SelfieGym works for all levels. Our AI adapts to your experience, from complete beginner to advanced. Every exercise includes video tutorials.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does the AI coaching work?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Our AI learns from your performance, recovery, and feedback. It continuously adapts your workouts, adjusting intensity and exercises based on your progress.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Can I cancel anytime?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! No contracts, no hidden fees. Cancel anytime from your account settings. We're confident you'll love it.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>What's included in the free trial?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Your 14-day free trial includes: 3 AI workouts per week, basic meal suggestions, progress tracking, and full exercise library. No credit card required.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is there a money-back guarantee?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! If you're not satisfied within 30 days, we'll give you a full refund. We're that confident in our product.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Transform?</h2>
+            <p>Join thousands achieving their fitness goals. Start your free trial today.</p>
+            <button class="btn btn-primary">Start Your Free Trial</button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>SelfieGym</h3>
+                <p>Your AI personal trainer available 24/7. Personalized workouts, meal plans, and coaching. No commitment, cancel anytime.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#how">How It Works</a></li>
+                    <li><a href="#">Download App</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Refunds</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 SelfieGym. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const CORRECT_CODE = "NA88";
+
+        if (sessionStorage.getItem('selfieGymAccess') === 'true') {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        function verifyCode() {
+            const code = document.getElementById('codeInput').value.toUpperCase();
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (code === CORRECT_CODE) {
+                document.getElementById('loginModal').classList.add('hidden');
+                sessionStorage.setItem('selfieGymAccess', 'true');
+                errorMsg.style.display = 'none';
+            } else {
+                errorMsg.textContent = 'Invalid code';
+                errorMsg.style.display = 'block';
+                document.getElementById('codeInput').value = '';
+            }
+        }
+
+        document.getElementById('codeInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verifyCode();
+        });
+
+        function toggleFaq(el) {
+            el.parentElement.classList.toggle('open');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

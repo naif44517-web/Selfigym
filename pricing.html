@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing — SelfieGym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">SelfieGym</a>
+        <ul class="nav-links">
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="nutrition.html">Nutrition</a></li>
+            <li><a href="pricing.html" style="color: var(--primary)">Pricing</a></li>
+            <li><a href="dashboard.html" class="nav-cta">Member Login</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>Simple Pricing</h1>
+        <p>No hidden fees. No contracts. Cancel anytime.</p>
+    </header>
+
+    <section class="pricing-section">
+        <div class="pricing-grid">
+            <!-- Free -->
+            <div class="pricing-card">
+                <h3>Free</h3>
+                <div class="pricing-price">$0<span>/mo</span></div>
+                <ul class="pricing-features">
+                    <li>5 workouts per month</li>
+                    <li>Basic exercise library</li>
+                    <li>Limited progress tracking</li>
+                    <li>Community access</li>
+                </ul>
+                <button class="pricing-btn" onclick="location.href='dashboard.html'">Get Started</button>
+            </div>
+
+            <!-- Pro (Featured) -->
+            <div class="pricing-card featured">
+                <h3>⭐ Pro</h3>
+                <div class="pricing-price">$9.99<span>/mo</span></div>
+                <ul class="pricing-features">
+                    <li>Unlimited workouts</li>
+                    <li>Full exercise library (500+)</li>
+                    <li>All workout programs</li>
+                    <li>Coach chat support</li>
+                    <li>Progress analytics</li>
+                    <li>Smart reminders</li>
+                </ul>
+                <button class="pricing-btn" onclick="location.href='dashboard.html'">Start Free Trial</button>
+            </div>
+
+            <!-- Premium -->
+            <div class="pricing-card">
+                <h3>Premium</h3>
+                <div class="pricing-price">$19.99<span>/mo</span></div>
+                <ul class="pricing-features">
+                    <li>Everything in Pro</li>
+                    <li>Custom nutrition plans</li>
+                    <li>Detailed meal planning</li>
+                    <li>Priority coach support</li>
+                    <li>Video form analysis</li>
+                    <li>Google Sheets export</li>
+                </ul>
+                <button class="pricing-btn" onclick="location.href='dashboard.html'">Start Free Trial</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" style="background: white;">
+        <div class="section-header">
+            <h2>Compare Plans</h2>
+        </div>
+        <div style="max-width: 900px; margin: 0 auto; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--light-gray);">
+                        <th style="padding: 1rem; font-weight: 500;">Feature</th>
+                        <th style="padding: 1rem; text-align: center;">Free</th>
+                        <th style="padding: 1rem; text-align: center; background: #FFF3E0;">Pro</th>
+                        <th style="padding: 1rem; text-align: center;">Premium</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--light-gray);">
+                        <td style="padding: 1rem;">Monthly Workouts</td>
+                        <td style="padding: 1rem; text-align: center;">5</td>
+                        <td style="padding: 1rem; text-align: center; background: #FFF3E0;">Unlimited</td>
+                        <td style="padding: 1rem; text-align: center;">Unlimited</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--light-gray);">
+                        <td style="padding: 1rem;">Exercise Library</td>
+                        <td style="padding: 1rem; text-align: center;">50</td>
+                        <td style="padding: 1rem; text-align: center; background: #FFF3E0;">500+</td>
+                        <td style="padding: 1rem; text-align: center;">500+</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--light-gray);">
+                        <td style="padding: 1rem;">Workout Programs</td>
+                        <td style="padding: 1rem; text-align: center;">1</td>
+                        <td style="padding: 1rem; text-align: center; background: #FFF3E0;">All</td>
+                        <td style="padding: 1rem; text-align: center;">All</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--light-gray);">
+                        <td style="padding: 1rem;">Coach Chat</td>
+                        <td style="padding: 1rem; text-align: center;">❌</td>
+                        <td style="padding: 1rem; text-align: center; background: #FFF3E0;">✅</td>
+                        <td style="padding: 1rem; text-align: center;">✅ Priority</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--light-gray);">
+                        <td style="padding: 1rem;">Progress Tracking</td>
+                        <td style="padding: 1rem; text-align: center;">Basic</td>
+                        <td style="padding: 1rem; text-align: center; background: #FFF3E0;">Full</td>
+                        <td style="padding: 1rem; text-align: center;">Full + Export</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--light-gray);">
+                        <td style="padding: 1rem;">Nutrition Plans</td>
+                        <td style="padding: 1rem; text-align: center;">❌</td>
+                        <td style="padding: 1rem; text-align: center; background: #FFF3E0;">Basic</td>
+                        <td style="padding: 1rem; text-align: center;">Custom</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--light-gray);">
+                        <td style="padding: 1rem;">Video Form Analysis</td>
+                        <td style="padding: 1rem; text-align: center;">❌</td>
+                        <td style="padding: 1rem; text-align: center; background: #FFF3E0;">❌</td>
+                        <td style="padding: 1rem; text-align: center;">✅</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div style="max-width: 700px; margin: 0 auto;">
+            <details style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; cursor: pointer;">
+                <summary style="font-weight: 600; list-style: none; display: flex; justify-content: space-between;">
+                    Can I cancel anytime?
+                    <span>+</span>
+                </summary>
+                <p style="margin-top: 1rem; color: var(--gray);">Yes! You can cancel your subscription at any time. There are no contracts or cancellation fees. Your access continues until the end of your billing period.</p>
+            </details>
+            <details style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; cursor: pointer;">
+                <summary style="font-weight: 600; list-style: none; display: flex; justify-content: space-between;">
+                    How long is the free trial?
+                    <span>+</span>
+                </summary>
+                <p style="margin-top: 1rem; color: var(--gray);">Our free trial is 7 days with full access to all Pro features. No credit card required to start.</p>
+            </details>
+            <details style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; cursor: pointer;">
+                <summary style="font-weight: 600; list-style: none; display: flex; justify-content: space-between;">
+                    Can I switch plans later?
+                    <span>+</span>
+                </summary>
+                <p style="margin-top: 1rem; color: var(--gray);">Absolutely. You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle.</p>
+            </details>
+            <details style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; cursor: pointer;">
+                <summary style="font-weight: 600; list-style: none; display: flex; justify-content: space-between;">
+                    Do I need equipment?
+                    <span>+</span>
+                </summary>
+                <p style="margin-top: 1rem; color: var(--gray);">Not necessarily! We have many programs designed for home workouts with no equipment. You can filter exercises and programs by equipment availability.</p>
+            </details>
+            <details style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; cursor: pointer;">
+                <summary style="font-weight: 600; list-style: none; display: flex; justify-content: space-between;">
+                    What payment methods do you accept?
+                    <span>+</span>
+                </summary>
+                <p style="margin-top: 1rem; color: var(--gray);">We accept all major credit cards (Visa, Mastercard, Amex), Apple Pay, Google Pay, and PayPal.</p>
+            </details>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to transform?</h2>
+        <p>Start your free trial today. No credit card required.</p>
+        <a href="dashboard.html" class="btn-primary">Start Free Trial</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">SelfieGym</a>
+                <p>Fitness that fits your life.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Product</h4>
+                <a href="programs.html">Programs</a>
+                <a href="exercises.html">Exercises</a>
+                <a href="nutrition.html">Nutrition</a>
+            </div>
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SelfieGym. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

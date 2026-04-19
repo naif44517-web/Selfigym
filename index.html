@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>SelfieGym - Admin Access</title>
+    <meta name="description" content="Your Personal AI Fitness Coach. Admin Portal.">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PFTZM59K5H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PFTZM59K5H');
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .login-container {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid #6366f1;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3);
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #6366f1, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #334155;
+            background: rgba(15, 23, 42, 0.8);
+            color: #ffffff;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        input[type="text"]::placeholder {
+            color: #64748b;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #6366f1, #06b6d4);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        .error {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+            padding: 10px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 6px;
+        }
+        #adminPanel {
+            display: none;
+            width: 100%;
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #334155;
+        }
+        .admin-header h2 {
+            font-size: 28px;
+            background: linear-gradient(135deg, #6366f1, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logout-btn {
+            padding: 8px 16px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+        .section {
+            background: rgba(30, 58, 138, 0.3);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            color: #6366f1;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .section-content {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        .section-content li {
+            margin-bottom: 8px;
+            margin-left: 20px;
+        }
+        .section-content strong {
+            color: #06b6d4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Panel -->
+    <div id="loginPanel" class="login-container">
+        <h1>SelfieGym</h1>
+        <p class="subtitle">Admin Access Portal</p>
+        <div class="form-group">
+            <label for="codeInput">Access Code (NA88)</label>
+            <input type="text" id="codeInput" placeholder="Enter access code" onkeypress="handleKeyPress(event)">
+        </div>
+        <button class="login-btn" onclick="login()">Access Portal</button>
+        <div class="error" id="errorMsg"></div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel">
+        <div style="max-width: 900px; width: 100%; padding: 40px 20px;">
+            <div class="admin-header">
+                <h2>SelfieGym - Admin Portal</h2>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+
+            <!-- Website Sections -->
+            <div class="section">
+                <h3>📄 Current Website Sections</h3>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>Header:</strong> SelfieGym Logo + Title</li>
+                        <li><strong>Description:</strong> "Your Personal AI Fitness Coach is Coming Soon"</li>
+                        <li><strong>Email Subscription:</strong> Input field + "Notify Me" button</li>
+                        <li><strong>Countdown Message:</strong> "We're launching very soon"</li>
+                        <li><strong>Social Links:</strong> Twitter, Instagram, LinkedIn</li>
+                        <li><strong>Analytics:</strong> Google Analytics (G-PFTZM59K5H)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Planned Sections -->
+            <div class="section">
+                <h3>🎯 Sections to Build</h3>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>About SelfieGym:</strong> Mission, vision, team info</li>
+                        <li><strong>Features:</strong> AI form correction, adaptive training, nutrition guidance</li>
+                        <li><strong>Pricing Tiers:</strong> Starter, Pro, Plus, Elite (show comparison)</li>
+                        <li><strong>Blog/Resources:</strong> Fitness tips, training guides, success stories</li>
+                        <li><strong>FAQ:</strong> Common questions about the platform</li>
+                        <li><strong>Contact/Support:</strong> Email form, social media</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Pricing Strategy -->
+            <div class="section">
+                <h3>💰 Recommended Pricing</h3>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>Starter:</strong> $0-15/month - Basic AI training</li>
+                        <li><strong>Pro:</strong> $25-35/month - Full training + nutrition</li>
+                        <li><strong>Plus:</strong> $50-75/month - All features + nutrition coach</li>
+                        <li><strong>Elite:</strong> $100-150/month - Personal trainer + 1-on-1 calls</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Competitive Advantage -->
+            <div class="section">
+                <h3>🏆 Market Differentiation</h3>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>AI Form Correction:</strong> Real-time video analysis (competitors don't offer this)</li>
+                        <li><strong>Adaptive Programming:</strong> Learns from your performance</li>
+                        <li><strong>Price Point:</strong> 2-3x cheaper than Future ($150-250)</li>
+                        <li><strong>Full Integration:</strong> Workouts + Nutrition + Form (most competitors separate these)</li>
+                        <li><strong>Community:</strong> Built-in social features for accountability</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Research Results -->
+            <div class="section">
+                <h3>📊 Competitor Analysis</h3>
+                <div class="section-content">
+                    <strong>Full research saved at:</strong><br>
+                    <code style="background: rgba(0,0,0,0.2); padding: 8px; border-radius: 4px; display: inline-block; margin-top: 10px;">
+                        /Users/naif/.openclaw/workspace/competitors_research.md
+                    </code>
+                    <p style="margin-top: 15px;">Competitors analyzed: Trainerize, Future, Caliber, MyFitnessPal, MacroFactor, Noom, Ladder, JEFIT, RP Strength, TrainHeroic</p>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="section">
+                <h3>✅ Next Action Items</h3>
+                <div class="section-content">
+                    <ul>
+                        <li>Decide: Expand to full landing page or keep Coming Soon?</li>
+                        <li>Design About, Features, Pricing pages</li>
+                        <li>Set up backend infrastructure (user auth, payments)</li>
+                        <li>Create waitlist management system</li>
+                        <li>Plan marketing & launch timeline</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CORRECT_CODE = "NA88";
+
+        function login() {
+            const code = document.getElementById('codeInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            console.log('Code entered:', code);
+            console.log('Correct code:', CORRECT_CODE);
+            console.log('Match:', code === CORRECT_CODE);
+            
+            if (code === CORRECT_CODE) {
+                document.getElementById('loginPanel').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                sessionStorage.setItem('selfieGymAdmin', 'true');
+            } else {
+                errorMsg.textContent = 'Invalid access code. Try again.';
+                errorMsg.style.display = 'block';
+                document.getElementById('codeInput').value = '';
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('selfieGymAdmin');
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('loginPanel').style.display = 'block';
+            document.getElementById('codeInput').value = '';
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                login();
+            }
+        }
+
+        // Check if user is already logged in
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem('selfieGymAdmin') === 'true') {
+                document.getElementById('loginPanel').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

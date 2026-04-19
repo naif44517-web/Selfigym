@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfieGym - Your AI Personal Trainer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4A9B8C;
+            --primary-dark: #3D8577;
+            --secondary: #7CB798;
+            --accent: #F4A261;
+            --accent-coral: #E07A5F;
+            --bg-light: #F8FAFA;
+            --bg-white: #FFFFFF;
+            --text-dark: #2D3E40;
+            --text-light: #5A6C6E;
+            --text-muted: #8A9A9C;
+            --shadow: 0 4px 20px rgba(74, 155, 140, 0.12);
+            --shadow-hover: 0 8px 30px rgba(74, 155, 140, 0.2);
+            --radius: 20px;
+            --radius-sm: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        nav {
+            background: var(--bg-white);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 80px;
+            background: linear-gradient(135deg, #E8F5F3 0%, #F0F7F4 50%, #FFF9F5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 70%;
+            height: 150%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234A9B8C' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            transform: rotate(15deg);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(74, 155, 140, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 155, 140, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image-container {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 30px;
+            padding: 1rem;
+            position: relative;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hero-image-main {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .floating-card-1 {
+            top: 10%;
+            left: -20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card-2 {
+            bottom: 15%;
+            right: -20px;
+            animation: float 3s ease-in-out infinite 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .floating-icon.green { background: #E8F5E9; }
+        .floating-icon.orange { background: #FFF3E0; }
+
+        .features {
+            padding: 100px 2rem;
+            background: var(--bg-white);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: var(--radius);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon.teal { background: linear-gradient(135deg, #E0F2F1, #B2DFDB); }
+        .feature-icon.green { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); }
+        .feature-icon.orange { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+        .feature-icon.pink { background: linear-gradient(135deg, #FCE4EC, #F8BBD9); }
+        .feature-icon.purple { background: linear-gradient(135deg, #EDE7F6, #D1C4E9); }
+        .feature-icon.blue { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .how-it-works {
+            padding: 100px 2rem;
+            background: linear-gradient(180deg, var(--bg-light) 0%, #E8F5F3 100%);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -1.5rem;
+            top: 40px;
+            font-size: 2rem;
+            color: var(--primary);
+            opacity: 0.5;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 4px 20px rgba(74, 155, 140, 0.3);
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step p {
+            color: var(--text-light);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 2rem;
+            background: var(--bg-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: var(--radius);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 4rem;
+            font-family: Georgia, serif;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .testimonial-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .pricing {
+            padding: 100px 2rem;
+            background: linear-gradient(180deg, #E8F5F3 0%, var(--bg-light) 100%);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .pricing-card.featured .pricing-price,
+        .pricing-card.featured .pricing-features li {
+            color: white;
+        }
+
+        .pricing-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: right;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .pricing-card.featured .pricing-features li::before {
+            color: white;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:not(.featured) .pricing-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .pricing-card.featured .pricing-btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        .cta {
+            padding: 100px 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .cta .btn-primary:hover {
+            background: var(--bg-light);
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 2rem 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-image {
+                display: none;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .step:not(:last-child)::after {
+                display: none;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🏋️</div>
+                SelfieGym
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">المميزات</a></li>
+                <li><a href="#how">كيف يعمل</a></li>
+                <li><a href="#pricing">الأسعار</a></li>
+                <li><a href="#" class="nav-cta">ابدأ مجاناً</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    ✨ أذكى مدرب شخصي بالذكاء الاصطناعي
+                </div>
+                <h1>مدربك الشخصي <span>الذكي</span> متاح 24/7</h1>
+                <p>احصل على برامج تمارين مخصصة، نظام غذائي متكامل، ومتابعة يومية - كل هذا بتكلفة أقل بـ 90% من المدرب التقليدي.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">
+                        ابدأ مجاناً 🚀
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        شاهد كيف يعمل ▶
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">متاح دائماً</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">90%</div>
+                        <div class="stat-label">توفير بالتكلفة</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">∞</div>
+                        <div class="stat-label">تخصيص كامل</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-container">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=450&fit=crop" alt="Woman exercising with weights" class="hero-image-main">
+                    <div class="floating-card floating-card-1">
+                        <div class="floating-icon green">✓</div>
+                        <div>
+                            <strong>تمرين اليوم</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">مكتمل!</div>
+                        </div>
+                    </div>
+                    <div class="floating-card floating-card-2">
+                        <div class="floating-icon orange">🔥</div>
+                        <div>
+                            <strong>450</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">سعرة محروقة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>كل ما تحتاجه للياقتك 💪</h2>
+                <p>أدوات متكاملة تساعدك على تحقيق أهدافك الصحية بطريقة ذكية ومستدامة</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon teal">🤖</div>
+                    <h3>مدرب ذكي</h3>
+                    <p>تحدث مع مدربك الشخصي في أي وقت. احصل على إجابات فورية وتحفيز مستمر.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon green">📋</div>
+                    <h3>برامج تمارين مخصصة</h3>
+                    <p>جداول تمارين مصممة لأهدافك - سواء في البيت أو النادي.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon orange">🥗</div>
+                    <h3>نظام غذائي متكامل</h3>
+                    <p>خطط وجبات ونصائح غذائية تناسب أهدافك ونمط حياتك.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon pink">📊</div>
+                    <h3>تتبع التقدم</h3>
+                    <p>شاهد تطورك مع تحليلات مفصلة. صدّر بياناتك لـ Google Sheets.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon purple">📚</div>
+                    <h3>مكتبة تمارين</h3>
+                    <p>+1000 تمرين مع صور وفيديوهات. أداء صحيح في كل مرة.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon blue">⏰</div>
+                    <h3>تذكيرات ذكية</h3>
+                    <p>لا تفوت أي تمرين مع تذكيرات مخصصة حسب جدولك.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>كيف يعمل؟ 🎯</h2>
+                <p>ثلاث خطوات بسيطة لبداية رحلتك نحو حياة صحية</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>أخبرنا عن أهدافك</h3>
+                    <p>بناء عضلات، خسارة وزن، أو لياقة عامة - أنت تقرر.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>احصل على خطتك</h3>
+                    <p>الذكاء الاصطناعي يصمم برنامج تمارين وغذاء خاص بك.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>تمرن وتطور</h3>
+                    <p>اتبع خطتك، تحدث مع مدربك، وشاهد النتائج.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>ماذا يقول عملاؤنا؟ ⭐</h2>
+                <p>آراء حقيقية من أشخاص غيروا حياتهم مع SelfieGym</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">أفضل استثمار لصحتي! المدرب الذكي يفهم احتياجاتي ويعطيني برنامج يناسب جدولي المزدحم.</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="أحمد" class="testimonial-avatar">
+                        <div>
+                            <div class="testimonial-name">أحمد السالم</div>
+                            <div class="testimonial-title">رجل أعمال</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">خسرت 15 كيلو في 4 شهور! النظام الغذائي المخصص كان مفتاح النجاح.</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="سارة" class="testimonial-avatar">
+                        <div>
+                            <div class="testimonial-name">سارة العمري</div>
+                            <div class="testimonial-title">مهندسة برمجيات</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">بنيت عضلات ما كنت أحلم فيها! التمارين المخصصة والمتابعة اليومية فرقت معي كثير.</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="خالد" class="testimonial-avatar">
+                        <div>
+                            <div class="testimonial-name">خالد الدوسري</div>
+                            <div class="testimonial-title">طالب جامعي</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>أسعار بسيطة وشفافة 💰</h2>
+                <p>ابدأ مجاناً، ثم اختر الخطة المناسبة لك</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">مجاني</div>
+                    <div class="pricing-price">$0<span>/شهر</span></div>
+                    <ul class="pricing-features">
+                        <li>محادثة محدودة مع المدرب</li>
+                        <li>3 تمارين أسبوعياً</li>
+                        <li>مكتبة التمارين الأساسية</li>
+                        <li>تتبع محدود</li>
+                    </ul>
+                    <button class="pricing-btn">ابدأ مجاناً</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-name">⭐ برو</div>
+                    <div class="pricing-price">$9.99<span>/شهر</span></div>
+                    <ul class="pricing-features">
+                        <li>محادثة غير محدودة</li>
+                        <li>برامج تمارين مخصصة</li>
+                        <li>مكتبة التمارين الكاملة</li>
+                        <li>تحليلات التقدم</li>
+                        <li>تذكيرات ذكية</li>
+                    </ul>
+                    <button class="pricing-btn">اشترك الآن</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-name">بريميوم</div>
+                    <div class="pricing-price">$19.99<span>/شهر</span></div>
+                    <ul class="pricing-features">
+                        <li>كل مميزات برو</li>
+                        <li>خطط غذائية مفصلة</li>
+                        <li>تصدير لـ Google Sheets</li>
+                        <li>دعم أولوية</li>
+                        <li>تحليل فيديو للأداء</li>
+                    </ul>
+                    <button class="pricing-btn">اشترك الآن</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="section-container">
+            <h2>جاهز تبدأ رحلتك؟ 🚀</h2>
+            <p>انضم لآلاف المستخدمين اللي غيروا حياتهم مع SelfieGym</p>
+            <a href="#" class="btn btn-primary">ابدأ مجاناً الحين</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">🏋️</div>
+                    SelfieGym
+                </a>
+                <p>مدربك الشخصي الذكي - متاح 24/7 لمساعدتك في تحقيق أهدافك الصحية.</p>
+            </div>
+            <div class="footer-links">
+                <h4>المنتج</h4>
+                <ul>
+                    <li><a href="#">المميزات</a></li>
+                    <li><a href="#">الأسعار</a></li>
+                    <li><a href="#">التطبيق</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>الشركة</h4>
+                <ul>
+                    <li><a href="#">عن SelfieGym</a></li>
+                    <li><a href="#">المدونة</a></li>
+                    <li><a href="#">تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>قانوني</h4>
+                <ul>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="#">شروط الاستخدام</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SelfieGym. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+</body>
+</html>

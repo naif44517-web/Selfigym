@@ -1,0 +1,9 @@
+{
+  "name": "selfigym",
+  "version": "1.0.0",
+  "description": "SelfieGym - Your AI Personal Trainer",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  }
+}

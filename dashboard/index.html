@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <title>Dashboard - SelfieGym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #E07A5F;
+            --coral-light: #F2A391;
+            --cream: #FAF7F2;
+            --warm-white: #FFFDF9;
+            --charcoal: #2D2A26;
+            --brown: #5C534A;
+            --sand: #D4C5B5;
+            --green: #4CAF50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: var(--warm-white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--brown);
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--coral);
+        }
+
+        .nav-cta {
+            background: var(--charcoal);
+            color: var(--cream) !important;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 4rem 80px;
+        }
+
+        .header {
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--brown);
+            font-size: 1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--coral);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--brown);
+            font-size: 0.95rem;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+        }
+
+        .progress-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-item {
+            margin-bottom: 2rem;
+        }
+
+        .progress-item h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--sand);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--coral), var(--coral-light));
+            border-radius: 4px;
+        }
+
+        /* Weekly Activity */
+        .activity-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .activity-card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--sand);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item.completed {
+            color: var(--green);
+        }
+
+        .activity-item.pending {
+            opacity: 0.6;
+        }
+
+        .activity-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .activity-status.completed {
+            background: #E8F5E9;
+            color: var(--green);
+        }
+
+        .activity-status.pending {
+            background: #FFF3E0;
+            color: #FF9800;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--coral);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--charcoal);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 60px 8rem 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            opacity: 0.7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.3rem 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            nav { padding: 1rem 2rem; }
+            .container { padding: 100px 2rem 60px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .activity-section { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">SelfieGym</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meals/index.html">Meal Plans</a></li>
+            <li><a href="../exercises/index.html">Exercises</a></li>
+            <li><a href="index.html">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Welcome back, Sarah! 👋</h1>
+            <p>Track your progress and stay on top of your fitness goals</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">7</div>
+                <div class="stat-label">Workouts This Week</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">2,450</div>
+                <div class="stat-label">Calories Burned</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">15 km</div>
+                <div class="stat-label">Distance Covered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">92%</div>
+                <div class="stat-label">Goal Progress</div>
+            </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-section">
+            <h2>Weekly Progress</h2>
+            
+            <div class="progress-item">
+                <h3>Workouts Completed (7/7)</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="progress-item">
+                <h3>Nutrition Goals (5/7 days)</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 71%;"></div>
+                </div>
+            </div>
+
+            <div class="progress-item">
+                <h3>Water Intake (8/8 daily)</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="progress-item">
+                <h3>Sleep (7/7 nights)</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity -->
+        <div class="activity-section">
+            <div class="activity-card">
+                <h2>Today's Tasks</h2>
+                
+                <div class="activity-item completed">
+                    <span>✅ Morning Cardio (6:00 AM)</span>
+                    <span class="activity-status completed">Completed</span>
+                </div>
+
+                <div class="activity-item completed">
+                    <span>✅ Breakfast Prep</span>
+                    <span class="activity-status completed">Completed</span>
+                </div>
+
+                <div class="activity-item pending">
+                    <span>⏳ Strength Training (4:00 PM)</span>
+                    <span class="activity-status pending">Pending</span>
+                </div>
+
+                <div class="activity-item pending">
+                    <span>⏳ Evening Meal Prep</span>
+                    <span class="activity-status pending">Pending</span>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <h2>This Week Recap</h2>
+                
+                <div class="activity-item">
+                    <span>Monday</span>
+                    <span>45 min | 320 cal</span>
+                </div>
+
+                <div class="activity-item">
+                    <span>Tuesday</span>
+                    <span>60 min | 480 cal</span>
+                </div>
+
+                <div class="activity-item">
+                    <span>Wednesday</span>
+                    <span>50 min | 380 cal</span>
+                </div>
+
+                <div class="activity-item">
+                    <span>Thursday</span>
+                    <span>45 min | 340 cal</span>
+                </div>
+
+                <div class="activity-item">
+                    <span>Friday</span>
+                    <span>55 min | 420 cal</span>
+                </div>
+
+                <div class="activity-item">
+                    <span>Saturday</span>
+                    <span>70 min | 550 cal</span>
+                </div>
+
+                <div class="activity-item">
+                    <span>Sunday</span>
+                    <span>Rest Day</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <a href="../index.html" class="logo" style="color: var(--cream);">SelfieGym</a>
+                <p style="margin-top: 1rem; opacity: 0.7;">Track your progress, achieve your goals.</p>
+            </div>
+            <div>
+                <h4>Product</h4>
+                <a href="#">Meal Plans</a>
+                <a href="#">Exercises</a>
+                <a href="#">Dashboard</a>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SelfieGym. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

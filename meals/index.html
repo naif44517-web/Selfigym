@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <title>Meal Plans - SelfieGym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #E07A5F;
+            --coral-light: #F2A391;
+            --cream: #FAF7F2;
+            --warm-white: #FFFDF9;
+            --charcoal: #2D2A26;
+            --brown: #5C534A;
+            --sand: #D4C5B5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: var(--warm-white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--brown);
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--coral);
+        }
+
+        .nav-cta {
+            background: var(--charcoal);
+            color: var(--cream) !important;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+        }
+
+        /* Header */
+        .header {
+            margin-top: 80px;
+            padding: 60px 8rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 100%);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--brown);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 4rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-tabs button {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--sand);
+            background: transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            color: var(--brown);
+        }
+
+        .filter-tabs button.active {
+            background: var(--coral);
+            color: white;
+            border-color: var(--coral);
+        }
+
+        .meals-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .meal-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .meal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        .meal-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .meal-content {
+            padding: 2rem;
+        }
+
+        .meal-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meal-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--brown);
+        }
+
+        .meal-content p {
+            color: var(--brown);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .ingredients {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--sand);
+        }
+
+        .ingredients h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            color: var(--charcoal);
+        }
+
+        .ingredients ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--brown);
+        }
+
+        .ingredients li::before {
+            content: '• ';
+            color: var(--coral);
+            margin-right: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--coral);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--charcoal);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 60px 8rem 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            opacity: 0.7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.3rem 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            nav { padding: 1rem 2rem; }
+            .header { padding: 40px 2rem; }
+            .container { padding: 60px 2rem; }
+            .meals-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">SelfieGym</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="index.html">Meal Plans</a></li>
+            <li><a href="../exercises/index.html">Exercises</a></li>
+            <li><a href="../dashboard/index.html">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <section class="header">
+        <h1>Meal Plans</h1>
+        <p>Customized nutrition plans designed to fuel your fitness journey. Every meal, every macro, perfectly balanced for your goals.</p>
+    </section>
+
+    <div class="container">
+        <div class="filter-tabs">
+            <button class="active" onclick="filterMeals('all')">All Meals</button>
+            <button onclick="filterMeals('breakfast')">Breakfast</button>
+            <button onclick="filterMeals('lunch')">Lunch</button>
+            <button onclick="filterMeals('dinner')">Dinner</button>
+            <button onclick="filterMeals('snacks')">Snacks</button>
+        </div>
+
+        <div class="meals-grid" id="mealsGrid">
+            <!-- Breakfast -->
+            <div class="meal-card" data-category="breakfast">
+                <img src="https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=600&h=400&fit=crop&q=80" alt="Power Breakfast">
+                <div class="meal-content">
+                    <h3>Power Breakfast Bowl</h3>
+                    <div class="meal-meta">
+                        <span>⏱️ 10 min</span>
+                        <span>🔥 450 cal</span>
+                        <span>💪 25g protein</span>
+                    </div>
+                    <p>High-protein breakfast to kickstart your metabolism and fuel your morning workout.</p>
+                    <div class="ingredients">
+                        <h4>Ingredients:</h4>
+                        <ul>
+                            <li>Oats (50g)</li>
+                            <li>Eggs (2)</li>
+                            <li>Banana (1)</li>
+                            <li>Honey (1 tsp)</li>
+                            <li>Almonds (20g)</li>
+                        </ul>
+                    </div>
+                    <button class="btn">View Recipe</button>
+                </div>
+            </div>
+
+            <!-- Lunch -->
+            <div class="meal-card" data-category="lunch">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=400&fit=crop&q=80" alt="Grilled Chicken">
+                <div class="meal-content">
+                    <h3>Grilled Chicken & Quinoa</h3>
+                    <div class="meal-meta">
+                        <span>⏱️ 25 min</span>
+                        <span>🔥 520 cal</span>
+                        <span>💪 42g protein</span>
+                    </div>
+                    <p>Lean protein with complete carbs for sustained energy throughout your day.</p>
+                    <div class="ingredients">
+                        <h4>Ingredients:</h4>
+                        <ul>
+                            <li>Chicken breast (150g)</li>
+                            <li>Quinoa (100g)</li>
+                            <li>Broccoli (150g)</li>
+                            <li>Olive oil (1 tbsp)</li>
+                            <li>Lemon juice</li>
+                        </ul>
+                    </div>
+                    <button class="btn">View Recipe</button>
+                </div>
+            </div>
+
+            <!-- Dinner -->
+            <div class="meal-card" data-category="dinner">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=400&fit=crop&q=80" alt="Salmon Bowl">
+                <div class="meal-content">
+                    <h3>Salmon & Sweet Potato</h3>
+                    <div class="meal-meta">
+                        <span>⏱️ 30 min</span>
+                        <span>🔥 580 cal</span>
+                        <span>💪 38g protein</span>
+                    </div>
+                    <p>Omega-3 rich salmon paired with complex carbs for optimal recovery.</p>
+                    <div class="ingredients">
+                        <h4>Ingredients:</h4>
+                        <ul>
+                            <li>Salmon fillet (180g)</li>
+                            <li>Sweet potato (200g)</li>
+                            <li>Asparagus (150g)</li>
+                            <li>Olive oil</li>
+                            <li>Garlic & herbs</li>
+                        </ul>
+                    </div>
+                    <button class="btn">View Recipe</button>
+                </div>
+            </div>
+
+            <!-- Snack -->
+            <div class="meal-card" data-category="snacks">
+                <img src="https://images.unsplash.com/photo-1585518419759-1c92b76f847c?w=600&h=400&fit=crop&q=80" alt="Protein Smoothie">
+                <div class="meal-content">
+                    <h3>Protein Smoothie</h3>
+                    <div class="meal-meta">
+                        <span>⏱️ 5 min</span>
+                        <span>🔥 280 cal</span>
+                        <span>💪 30g protein</span>
+                    </div>
+                    <p>Quick, delicious protein boost between meals.</p>
+                    <div class="ingredients">
+                        <h4>Ingredients:</h4>
+                        <ul>
+                            <li>Protein powder (1 scoop)</li>
+                            <li>Greek yogurt (100g)</li>
+                            <li>Berries (100g)</li>
+                            <li>Almond milk (200ml)</li>
+                        </ul>
+                    </div>
+                    <button class="btn">View Recipe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <a href="../index.html" class="logo" style="color: var(--cream);">SelfieGym</a>
+                <p style="margin-top: 1rem; opacity: 0.7;">Personalized nutrition for your fitness goals.</p>
+            </div>
+            <div>
+                <h4>Product</h4>
+                <a href="#">Meal Plans</a>
+                <a href="#">Exercises</a>
+                <a href="#">Dashboard</a>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SelfieGym. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function filterMeals(category) {
+            const meals = document.querySelectorAll('.meal-card');
+            const buttons = document.querySelectorAll('.filter-tabs button');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            meals.forEach(meal => {
+                if (category === 'all' || meal.dataset.category === category) {
+                    meal.style.display = 'block';
+                } else {
+                    meal.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

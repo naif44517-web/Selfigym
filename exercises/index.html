@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <title>Exercise Library - SelfieGym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #E07A5F;
+            --coral-light: #F2A391;
+            --cream: #FAF7F2;
+            --warm-white: #FFFDF9;
+            --charcoal: #2D2A26;
+            --brown: #5C534A;
+            --sand: #D4C5B5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: var(--warm-white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--brown);
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--coral);
+        }
+
+        .header {
+            margin-top: 80px;
+            padding: 60px 8rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 100%);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--brown);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 4rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-tabs button {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--sand);
+            background: transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            color: var(--brown);
+        }
+
+        .filter-tabs button.active {
+            background: var(--coral);
+            color: white;
+            border-color: var(--coral);
+        }
+
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, var(--coral) 0%, var(--coral-light) 100%);
+        }
+
+        .exercise-content {
+            padding: 1.5rem;
+        }
+
+        .exercise-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .exercise-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--brown);
+        }
+
+        .exercise-content p {
+            color: var(--brown);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: var(--coral);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: var(--charcoal);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 60px 8rem 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            opacity: 0.7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.3rem 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            nav { padding: 1rem 2rem; }
+            .header { padding: 40px 2rem; }
+            .container { padding: 60px 2rem; }
+            .exercises-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">SelfieGym</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../meals/index.html">Meal Plans</a></li>
+            <li><a href="index.html">Exercises</a></li>
+            <li><a href="../dashboard/index.html">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <section class="header">
+        <h1>Exercise Library</h1>
+        <p>1000+ high-definition exercises with proper form guidance. Perfect for beginners to advanced athletes.</p>
+    </section>
+
+    <div class="container">
+        <div class="filter-tabs">
+            <button class="active" onclick="filterExercises('all')">All</button>
+            <button onclick="filterExercises('chest')">Chest</button>
+            <button onclick="filterExercises('back')">Back</button>
+            <button onclick="filterExercises('legs')">Legs</button>
+            <button onclick="filterExercises('arms')">Arms</button>
+            <button onclick="filterExercises('core')">Core</button>
+        </div>
+
+        <div class="exercises-grid" id="exercisesGrid">
+            <!-- Chest Exercises -->
+            <div class="exercise-card" data-category="chest">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Bench Press</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Chest</span>
+                        <span>🎯 Strength</span>
+                    </div>
+                    <p>Classic compound movement for chest development. Perfect form guide included.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="chest">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Push Ups</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Chest</span>
+                        <span>🎯 Calisthenics</span>
+                    </div>
+                    <p>Bodyweight chest exercise that can be modified for any level.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="chest">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Dumbbell Flyes</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Chest</span>
+                        <span>🎯 Isolation</span>
+                    </div>
+                    <p>Isolation exercise for maximum chest muscle engagement.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <!-- Back Exercises -->
+            <div class="exercise-card" data-category="back">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Deadlift</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Back</span>
+                        <span>🎯 Strength</span>
+                    </div>
+                    <p>Ultimate back and full-body strength builder.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="back">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Pull Ups</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Back</span>
+                        <span>🎯 Calisthenics</span>
+                    </div>
+                    <p>Best bodyweight exercise for lat and back development.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="back">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Barbell Rows</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Back</span>
+                        <span>🎯 Compound</span>
+                    </div>
+                    <p>Heavy compound movement for thick back development.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <!-- Leg Exercises -->
+            <div class="exercise-card" data-category="legs">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Squats</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Legs</span>
+                        <span>🎯 Strength</span>
+                    </div>
+                    <p>The king of leg exercises for complete lower body development.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="legs">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Leg Press</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Legs</span>
+                        <span>🎯 Machine</span>
+                    </div>
+                    <p>Safe machine exercise for quad and glute activation.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="legs">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Lunges</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Legs</span>
+                        <span>🎯 Unilateral</span>
+                    </div>
+                    <p>Single-leg exercise for balanced quad and glute development.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <!-- Arm Exercises -->
+            <div class="exercise-card" data-category="arms">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Barbell Curls</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Arms</span>
+                        <span>🎯 Biceps</span>
+                    </div>
+                    <p>Classic bicep exercise for arm size and strength.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="arms">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Tricep Dips</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Arms</span>
+                        <span>🎯 Triceps</span>
+                    </div>
+                    <p>Bodyweight tricep exercise for arm development.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="arms">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Overhead Press</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Arms</span>
+                        <span>🎯 Shoulders</span>
+                    </div>
+                    <p>Compound shoulder and arm exercise for upper body strength.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <!-- Core Exercises -->
+            <div class="exercise-card" data-category="core">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Planks</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Core</span>
+                        <span>🎯 Isometric</span>
+                    </div>
+                    <p>Static core strengthening exercise with multiple variations.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="core">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Crunches</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Core</span>
+                        <span>🎯 Abs</span>
+                    </div>
+                    <p>Targeted abdominal exercise for core definition.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+
+            <div class="exercise-card" data-category="core">
+                <div class="exercise-image"></div>
+                <div class="exercise-content">
+                    <h3>Leg Raises</h3>
+                    <div class="exercise-meta">
+                        <span>💪 Core</span>
+                        <span>🎯 Lower Abs</span>
+                    </div>
+                    <p>Effective lower abdominal strengthening exercise.</p>
+                    <button class="btn">Watch Guide</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <a href="../index.html" class="logo" style="color: var(--cream);">SelfieGym</a>
+                <p style="margin-top: 1rem; opacity: 0.7;">1000+ HD exercises with perfect form guidance.</p>
+            </div>
+            <div>
+                <h4>Product</h4>
+                <a href="#">Meal Plans</a>
+                <a href="#">Exercises</a>
+                <a href="#">Dashboard</a>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SelfieGym. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function filterExercises(category) {
+            const exercises = document.querySelectorAll('.exercise-card');
+            const buttons = document.querySelectorAll('.filter-tabs button');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            exercises.forEach(exercise => {
+                if (category === 'all' || exercise.dataset.category === category) {
+                    exercise.style.display = 'block';
+                } else {
+                    exercise.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

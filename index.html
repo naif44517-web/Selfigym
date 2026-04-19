@@ -5,481 +5,478 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SelfieGym — Your AI Personal Trainer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
- --black:#0a0a0a;--charcoal:#141414;--dark-gray:#1c1c1c;--mid-gray:#2a2a2a;
- --light-gray:#999;--off-white:#f2f0eb;--white:#fff;
- --gold:#c9a84c;--gold-light:#e0c97f;--gold-glow:rgba(201,168,76,0.2);--gold-dark:#a88a3a;
- --red-accent:#e74c3c;
- --font-display:'Bebas Neue',sans-serif;--font-body:'DM Sans',sans-serif;
+ --black:#0a0a0a;--char:#131313;--dg:#1c1c1c;--mg:#2a2a2a;
+ --lg:#888;--off:#f2f0eb;--white:#fff;
+ --gold:#c9a84c;--gold-l:#e0c97f;--gold-g:rgba(201,168,76,.18);--gold-d:#a88a3a;
+ --red:#e74c3c;
+ --hd:'Montserrat',sans-serif;--bd:'Poppins',sans-serif;
  --ease:cubic-bezier(.4,0,.2,1);
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font-body);background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:var(--bd);background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* ========== LOGIN GATE ========== */
+/* GATE */
 #gate{position:fixed;inset:0;z-index:9999;background:var(--black);display:flex;align-items:center;justify-content:center;flex-direction:column}
 #gate.off{display:none}
-#gate::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=60') center/cover;opacity:.15}
+#gate::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=60') center/cover;opacity:.12}
 #gate>*{position:relative;z-index:1}
-.g-logo{font-family:var(--font-display);font-size:4.5rem;letter-spacing:4px;color:var(--white)}
-.g-logo b{color:var(--gold)}
-.g-sub{color:var(--light-gray);margin:0 0 2rem;font-size:.95rem;letter-spacing:1px}
-.g-input{width:280px;padding:16px;border:2px solid var(--mid-gray);border-radius:8px;background:transparent;color:var(--white);font-size:1.2rem;text-align:center;letter-spacing:6px;font-family:var(--font-body);outline:none;transition:.3s var(--ease)}
-.g-input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-.g-input::placeholder{color:#555;letter-spacing:2px}
-.g-btn{margin-top:1.2rem;padding:14px 56px;border:none;border-radius:8px;background:var(--gold);color:var(--black);font-weight:700;font-size:1rem;cursor:pointer;font-family:var(--font-body);letter-spacing:1px;transition:.3s var(--ease)}
-.g-btn:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 30px var(--gold-glow)}
-.g-err{color:var(--red-accent);margin-top:1rem;font-size:.85rem;min-height:1.2rem}
+.g-logo-wrap{display:flex;align-items:center;gap:14px;margin-bottom:.5rem}
+.g-logo-wrap svg{width:44px;height:44px}
+.g-title{font-family:var(--hd);font-size:2.8rem;font-weight:900;letter-spacing:3px;color:var(--white)}
+.g-title b{color:var(--gold)}
+.g-sub{color:var(--lg);margin:0 0 2rem;font-size:.9rem;letter-spacing:1px}
+.g-input{width:280px;padding:16px;border:2px solid var(--mg);border-radius:8px;background:transparent;color:var(--white);font-size:1.2rem;text-align:center;letter-spacing:6px;font-family:var(--bd);outline:none;transition:.3s var(--ease)}
+.g-input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-g)}
+.g-input::placeholder{color:#444;letter-spacing:2px;font-size:.9rem}
+.g-btn{margin-top:1.2rem;padding:14px 56px;border:none;border-radius:8px;background:var(--gold);color:var(--black);font-weight:700;font-size:.95rem;cursor:pointer;font-family:var(--bd);letter-spacing:1px;transition:.3s var(--ease)}
+.g-btn:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 8px 30px var(--gold-g)}
+.g-err{color:var(--red);margin-top:1rem;font-size:.85rem;min-height:1.2rem}
 
-/* ========== NAVBAR ========== */
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:5000;padding:0 4%;transition:.4s var(--ease)}
-nav.solid{background:rgba(10,10,10,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05)}
-.n-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:76px}
-.n-logo{font-family:var(--font-display);font-size:1.8rem;color:var(--white);text-decoration:none;letter-spacing:3px}
-.n-logo b{color:var(--gold)}
-.n-links{display:flex;gap:2.5rem;align-items:center;list-style:none}
-.n-links a{text-decoration:none;color:rgba(255,255,255,.6);font-size:.88rem;font-weight:500;transition:.3s var(--ease);letter-spacing:.5px}
-.n-links a:hover{color:var(--gold)}
-.n-cta{padding:10px 28px;background:var(--gold);color:var(--black);border-radius:6px;font-weight:700;font-size:.85rem;text-decoration:none;transition:.3s var(--ease);letter-spacing:.5px}
-.n-cta:hover{background:var(--gold-light);transform:translateY(-2px)}
+nav.solid{background:rgba(10,10,10,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.04)}
+.ni{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}
+.nl{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nl svg{width:32px;height:32px}
+.nl span{font-family:var(--hd);font-size:1.4rem;font-weight:800;color:var(--white);letter-spacing:2px}
+.nl b{color:var(--gold)}
+.nm{display:flex;gap:2.2rem;align-items:center;list-style:none}
+.nm a{text-decoration:none;color:rgba(255,255,255,.55);font-size:.85rem;font-weight:500;transition:.3s var(--ease);letter-spacing:.3px}
+.nm a:hover{color:var(--gold)}
+.nc{padding:10px 26px;background:var(--gold);color:var(--black);border-radius:6px;font-weight:700;font-size:.82rem;text-decoration:none;transition:.3s var(--ease);letter-spacing:.5px}
+.nc:hover{background:var(--gold-l);transform:translateY(-2px)}
 .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.ham span{width:22px;height:2px;background:var(--white);display:block;transition:.3s var(--ease)}
+.ham span{width:22px;height:2px;background:var(--white);display:block}
 
-/* ========== HERO ========== */
+/* PAGE SYSTEM */
+.page{display:none}
+.page.active{display:block}
+
+/* HERO */
 .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
 .hero-bg{position:absolute;inset:0}
 .hero-bg img{width:100%;height:100%;object-fit:cover}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.92) 0%,rgba(10,10,10,.7) 50%,rgba(10,10,10,.3) 100%)}
-.hero-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:140px 4% 100px;width:100%}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border:1px solid var(--gold);border-radius:4px;color:var(--gold);font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:2rem}
-.hero h1{font-family:var(--font-display);font-size:6.5rem;line-height:.95;color:var(--white);max-width:700px;letter-spacing:2px}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.93) 0%,rgba(10,10,10,.7) 45%,rgba(10,10,10,.2) 100%)}
+.hero-in{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:140px 4% 100px;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border:1px solid var(--gold);border-radius:4px;color:var(--gold);font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:2rem}
+.hero h1{font-family:var(--hd);font-size:5.5rem;line-height:1;font-weight:900;max-width:650px;letter-spacing:1px}
 .hero h1 span{color:var(--gold)}
-.hero-p{color:rgba(255,255,255,.65);font-size:1.15rem;line-height:1.8;max-width:500px;margin:2rem 0 2.5rem}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
-.btn-gold{padding:16px 40px;background:var(--gold);color:var(--black);border:none;border-radius:6px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:var(--font-body);transition:.3s var(--ease);text-decoration:none;letter-spacing:.5px}
-.btn-gold:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 10px 30px var(--gold-glow)}
-.btn-out{padding:16px 40px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.25);border-radius:6px;font-weight:600;font-size:.95rem;cursor:pointer;font-family:var(--font-body);transition:.3s var(--ease);text-decoration:none}
-.btn-out:hover{border-color:var(--gold);color:var(--gold)}
+.hero-p{color:rgba(255,255,255,.6);font-size:1.05rem;line-height:1.8;max-width:480px;margin:2rem 0 2.5rem}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.bg{padding:15px 38px;background:var(--gold);color:var(--black);border:none;border-radius:6px;font-weight:700;font-size:.9rem;cursor:pointer;font-family:var(--bd);transition:.3s var(--ease);text-decoration:none;letter-spacing:.5px}
+.bg:hover{background:var(--gold-l);transform:translateY(-3px);box-shadow:0 10px 30px var(--gold-g)}
+.bo{padding:15px 38px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.2);border-radius:6px;font-weight:600;font-size:.9rem;cursor:pointer;font-family:var(--bd);transition:.3s var(--ease);text-decoration:none}
+.bo:hover{border-color:var(--gold);color:var(--gold)}
 
-/* Stats strip */
-.stats{background:var(--charcoal);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
-.stats-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);padding:0 4%}
-.st{text-align:center;padding:36px 20px;border-right:1px solid rgba(255,255,255,.05)}
+/* STATS */
+.stats{background:var(--char);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.stats-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);padding:0 4%}
+.st{text-align:center;padding:34px 20px;border-right:1px solid rgba(255,255,255,.04)}
 .st:last-child{border:none}
-.st-n{font-family:var(--font-display);font-size:3rem;color:var(--gold);letter-spacing:2px}
-.st-l{color:var(--light-gray);font-size:.82rem;margin-top:4px;letter-spacing:1px;text-transform:uppercase}
+.st-n{font-family:var(--hd);font-size:2.6rem;font-weight:900;color:var(--gold)}
+.st-l{color:var(--lg);font-size:.78rem;margin-top:4px;letter-spacing:1px;text-transform:uppercase}
 
-/* ========== SECTION BASE ========== */
-section{padding:100px 4%}
-.sec-inner{max-width:1100px;margin:0 auto}
-.sec-tag{display:inline-block;padding:6px 14px;border:1px solid var(--gold);border-radius:4px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:1.2rem}
-.sec-title{font-family:var(--font-display);font-size:3.8rem;color:var(--white);letter-spacing:2px;line-height:1;margin-bottom:.8rem}
-.sec-desc{color:var(--light-gray);font-size:1.05rem;max-width:520px;margin-bottom:3.5rem;line-height:1.7}
+/* SECTIONS */
+section{padding:90px 4%}
+.si{max-width:1100px;margin:0 auto}
+.stag{display:inline-block;padding:6px 14px;border:1px solid var(--gold);border-radius:4px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:1.2rem}
+.sh{font-family:var(--hd);font-size:3.2rem;font-weight:900;color:var(--white);line-height:1.1;margin-bottom:.8rem}
+.sd{color:var(--lg);font-size:1rem;max-width:500px;margin-bottom:3rem;line-height:1.7}
 
-/* ========== FEATURES ========== */
-#features{background:var(--black)}
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.feat{background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:36px 30px;transition:.4s var(--ease);position:relative;overflow:hidden}
-.feat:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
-.feat::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:.4s var(--ease)}
-.feat:hover::after{transform:scaleX(1)}
-.feat-ico{width:52px;height:52px;border-radius:10px;background:var(--gold-glow);display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem}
-.feat-ico svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.feat h3{font-family:var(--font-display);font-size:1.5rem;letter-spacing:1px;margin-bottom:.5rem}
-.feat p{color:var(--light-gray);font-size:.9rem;line-height:1.7}
+/* FEATURES */
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.fc{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:34px 28px;transition:.4s var(--ease);position:relative;overflow:hidden;cursor:default}
+.fc:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.fc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:.4s var(--ease)}
+.fc:hover::after{transform:scaleX(1)}
+.fi{width:50px;height:50px;border-radius:10px;background:var(--gold-g);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem}
+.fi svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fc h3{font-family:var(--hd);font-size:1.1rem;font-weight:800;letter-spacing:1px;margin-bottom:.5rem}
+.fc p{color:var(--lg);font-size:.88rem;line-height:1.7}
 
-/* ========== HOW IT WORKS ========== */
-#how{background:var(--charcoal)}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.step{position:relative;border-radius:12px;overflow:hidden;transition:.4s var(--ease)}
+/* HOW */
+#how{background:var(--char)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.step{position:relative;border-radius:12px;overflow:hidden;transition:.4s var(--ease);cursor:pointer}
 .step:hover{transform:translateY(-6px)}
-.step-img{width:100%;height:320px;object-fit:cover;display:block;filter:brightness(.7);transition:.4s var(--ease)}
-.step:hover .step-img{filter:brightness(.85)}
-.step-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;background:linear-gradient(to top,rgba(10,10,10,.9) 0%,transparent 60%)}
-.step-num{position:absolute;top:20px;left:20px;width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--black);font-family:var(--font-display);font-size:1.5rem;display:flex;align-items:center;justify-content:center}
-.step h3{font-family:var(--font-display);font-size:1.6rem;letter-spacing:1px;margin-bottom:.3rem}
-.step p{color:rgba(255,255,255,.6);font-size:.88rem;line-height:1.6}
+.step-img{width:100%;height:300px;object-fit:cover;display:block;filter:brightness(.65);transition:.4s var(--ease)}
+.step:hover .step-img{filter:brightness(.8)}
+.step-ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;background:linear-gradient(to top,rgba(10,10,10,.9) 0%,transparent 55%)}
+.step-n{position:absolute;top:18px;left:18px;width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--black);font-family:var(--hd);font-size:1.3rem;font-weight:900;display:flex;align-items:center;justify-content:center}
+.step h3{font-family:var(--hd);font-size:1.3rem;font-weight:800;letter-spacing:1px;margin-bottom:.3rem}
+.step p{color:rgba(255,255,255,.55);font-size:.85rem;line-height:1.6}
 
-/* ========== PRICING ========== */
-#pricing{background:var(--black)}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
-.pcard{background:var(--charcoal);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:44px 32px;transition:.4s var(--ease)}
-.pcard:hover{border-color:rgba(255,255,255,.15);transform:translateY(-4px)}
-.pcard.pop{border-color:var(--gold);position:relative;box-shadow:0 0 60px var(--gold-glow);transform:scale(1.04)}
-.pcard.pop:hover{transform:scale(1.04) translateY(-4px)}
-.pop-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);padding:5px 20px;border-radius:4px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px}
-.pcard-name{font-family:var(--font-display);font-size:1.4rem;letter-spacing:2px;margin-bottom:.5rem;color:var(--light-gray)}
-.pcard-price{font-family:var(--font-display);font-size:3.8rem;color:var(--white);letter-spacing:1px}
-.pcard-price small{font-size:1rem;color:var(--light-gray);font-family:var(--font-body);letter-spacing:0}
-.pcard-note{color:var(--light-gray);font-size:.8rem;margin:.5rem 0 2rem;letter-spacing:.5px}
-.pcard ul{list-style:none;margin-bottom:2rem}
-.pcard li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px;font-size:.9rem;color:rgba(255,255,255,.75)}
-.pcard li::before{content:'✦';color:var(--gold);font-size:.7rem}
-.pcard-btn{display:block;width:100%;padding:14px;border-radius:6px;text-align:center;font-weight:700;font-size:.9rem;text-decoration:none;transition:.3s var(--ease);font-family:var(--font-body);border:none;cursor:pointer;letter-spacing:.5px}
-.pcard-btn.outline{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--white)}
-.pcard-btn.outline:hover{border-color:var(--gold);color:var(--gold)}
-.pcard-btn.fill{background:var(--gold);color:var(--black)}
-.pcard-btn.fill:hover{background:var(--gold-light);transform:translateY(-2px)}
+/* PRICING */
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.pc{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:40px 30px;transition:.4s var(--ease)}
+.pc:hover{border-color:rgba(255,255,255,.12);transform:translateY(-4px)}
+.pc.pop{border-color:var(--gold);position:relative;box-shadow:0 0 50px var(--gold-g);transform:scale(1.03)}
+.pc.pop:hover{transform:scale(1.03) translateY(-4px)}
+.pop-b{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--black);padding:5px 18px;border-radius:4px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px}
+.pc-name{font-family:var(--hd);font-size:1.1rem;font-weight:800;letter-spacing:2px;margin-bottom:.4rem;color:var(--lg)}
+.pc-price{font-family:var(--hd);font-size:3.4rem;font-weight:900;color:var(--white)}
+.pc-price small{font-size:.9rem;color:var(--lg);font-family:var(--bd);letter-spacing:0;font-weight:400}
+.pc-note{color:var(--lg);font-size:.78rem;margin:.4rem 0 1.8rem;letter-spacing:.3px}
+.pc ul{list-style:none;margin-bottom:1.8rem}
+.pc li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:10px;font-size:.87rem;color:rgba(255,255,255,.7)}
+.pc li::before{content:'✦';color:var(--gold);font-size:.65rem}
+.pb{display:block;width:100%;padding:13px;border-radius:6px;text-align:center;font-weight:700;font-size:.88rem;text-decoration:none;transition:.3s var(--ease);font-family:var(--bd);border:none;cursor:pointer;letter-spacing:.5px}
+.pb.ol{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--white)}
+.pb.ol:hover{border-color:var(--gold);color:var(--gold)}
+.pb.fl{background:var(--gold);color:var(--black)}
+.pb.fl:hover{background:var(--gold-l);transform:translateY(-2px)}
 
-/* ========== TESTIMONIALS ========== */
-#social{background:var(--charcoal)}
-.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.tcard{background:var(--dark-gray);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:32px;transition:.4s var(--ease)}
-.tcard:hover{border-color:var(--gold);transform:translateY(-4px)}
-.tcard-stars{color:var(--gold);font-size:1rem;letter-spacing:3px;margin-bottom:1rem}
-.tcard-text{color:rgba(255,255,255,.7);font-size:.92rem;line-height:1.8;margin-bottom:1.5rem;font-style:italic}
-.tcard-author{display:flex;align-items:center;gap:14px}
-.tcard-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
-.tcard-name{font-weight:700;font-size:.88rem}
-.tcard-role{font-size:.78rem;color:var(--gold)}
+/* TESTIMONIALS */
+#social{background:var(--char)}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tc{background:var(--dg);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:30px;transition:.4s var(--ease)}
+.tc:hover{border-color:var(--gold);transform:translateY(-4px)}
+.tc-s{color:var(--gold);font-size:.95rem;letter-spacing:3px;margin-bottom:1rem}
+.tc-t{color:rgba(255,255,255,.65);font-size:.9rem;line-height:1.8;margin-bottom:1.4rem;font-style:italic}
+.tc-a{display:flex;align-items:center;gap:12px}
+.tc-av{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.tc-n{font-weight:700;font-size:.85rem}
+.tc-r{font-size:.75rem;color:var(--gold)}
 
-/* ========== FAQ ========== */
-#faq{background:var(--black)}
-.faq-list{max-width:700px;margin:0 auto}
-.faq-item{border-bottom:1px solid rgba(255,255,255,.08)}
-.faq-q{padding:22px 0;cursor:pointer;font-weight:600;font-size:1rem;display:flex;justify-content:space-between;align-items:center;background:none;border:none;width:100%;text-align:left;font-family:var(--font-body);color:var(--white);transition:.3s var(--ease)}
-.faq-q:hover{color:var(--gold)}
-.faq-arrow{transition:.3s var(--ease);color:var(--light-gray);font-size:.9rem}
-.faq-item.open .faq-arrow{transform:rotate(180deg);color:var(--gold)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.faq-a-inner{padding:0 0 22px;color:var(--light-gray);font-size:.92rem;line-height:1.8}
-.faq-item.open .faq-a{max-height:250px}
+/* FAQ */
+.fl{max-width:680px;margin:0 auto}
+.fq-i{border-bottom:1px solid rgba(255,255,255,.07)}
+.fq-q{padding:20px 0;cursor:pointer;font-weight:600;font-size:.95rem;display:flex;justify-content:space-between;align-items:center;background:none;border:none;width:100%;text-align:left;font-family:var(--bd);color:var(--white);transition:.3s var(--ease)}
+.fq-q:hover{color:var(--gold)}
+.fq-ar{transition:.3s var(--ease);color:var(--lg);font-size:.85rem}
+.fq-i.open .fq-ar{transform:rotate(180deg);color:var(--gold)}
+.fq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.fq-a-in{padding:0 0 20px;color:var(--lg);font-size:.88rem;line-height:1.8}
+.fq-i.open .fq-a{max-height:250px}
 
-/* ========== CTA ========== */
-.cta{position:relative;padding:120px 4%;text-align:center;overflow:hidden}
+/* CTA */
+.cta{position:relative;padding:110px 4%;text-align:center;overflow:hidden}
 .cta-bg{position:absolute;inset:0}
 .cta-bg img{width:100%;height:100%;object-fit:cover}
 .cta-bg::after{content:'';position:absolute;inset:0;background:rgba(10,10,10,.85)}
 .cta>*{position:relative;z-index:1}
-.cta h2{font-family:var(--font-display);font-size:4.5rem;color:var(--white);letter-spacing:3px;margin-bottom:1rem}
+.cta h2{font-family:var(--hd);font-size:3.8rem;font-weight:900;margin-bottom:1rem}
 .cta h2 span{color:var(--gold)}
-.cta p{color:rgba(255,255,255,.6);font-size:1.1rem;margin-bottom:2.5rem;max-width:460px;margin-left:auto;margin-right:auto}
+.cta p{color:rgba(255,255,255,.55);font-size:1.05rem;margin-bottom:2.5rem;max-width:440px;margin-left:auto;margin-right:auto}
 
-/* ========== FOOTER ========== */
-footer{background:var(--charcoal);padding:60px 4% 30px;border-top:1px solid rgba(255,255,255,.05)}
-.f-inner{max-width:1100px;margin:0 auto}
-.f-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.f-brand{font-family:var(--font-display);font-size:1.8rem;color:var(--white);letter-spacing:3px;margin-bottom:1rem}
-.f-brand b{color:var(--gold)}
-.f-desc{color:var(--light-gray);font-size:.85rem;line-height:1.7;max-width:280px}
-.f-col h4{color:var(--gold);font-size:.75rem;font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:2px}
-.f-col a{display:block;color:var(--light-gray);text-decoration:none;font-size:.85rem;padding:4px 0;transition:.3s var(--ease)}
-.f-col a:hover{color:var(--white)}
-.f-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--light-gray)}
+/* FOOTER */
+footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255,255,255,.04)}
+.ft{max-width:1100px;margin:0 auto}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.ft-b{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.ft-b svg{width:28px;height:28px}
+.ft-b span{font-family:var(--hd);font-size:1.3rem;font-weight:800;letter-spacing:2px}
+.ft-b b{color:var(--gold)}
+.ft-d{color:var(--lg);font-size:.82rem;line-height:1.7;max-width:260px}
+.ft-c h4{color:var(--gold);font-size:.72rem;font-weight:700;margin-bottom:.8rem;text-transform:uppercase;letter-spacing:2px}
+.ft-c a{display:block;color:var(--lg);text-decoration:none;font-size:.82rem;padding:3px 0;transition:.3s var(--ease)}
+.ft-c a:hover{color:var(--white)}
+.ft-bt{border-top:1px solid rgba(255,255,255,.05);padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--lg)}
 
-/* ========== REVEAL ========== */
-.rv{opacity:0;transform:translateY(24px);transition:all .7s var(--ease)}
+/* ====== INNER PAGES ====== */
+.ip-hero{padding:120px 4% 60px;text-align:center;background:linear-gradient(135deg,var(--black) 0%,var(--char) 100%)}
+.ip-hero h1{font-family:var(--hd);font-size:3.5rem;font-weight:900;margin-bottom:.5rem}
+.ip-hero h1 span{color:var(--gold)}
+.ip-hero p{color:var(--lg);font-size:1rem;max-width:500px;margin:0 auto}
+.ip-back{display:inline-flex;align-items:center;gap:8px;color:var(--gold);text-decoration:none;font-size:.85rem;font-weight:600;margin-bottom:2rem;transition:.3s var(--ease)}
+.ip-back:hover{color:var(--gold-l)}
+
+/* Exercise Cards */
+.ex-grid{max-width:1100px;margin:0 auto;padding:40px 4% 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ex-card{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;overflow:hidden;transition:.4s var(--ease)}
+.ex-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.ex-img{width:100%;height:200px;object-fit:cover;filter:brightness(.8);transition:.4s var(--ease)}
+.ex-card:hover .ex-img{filter:brightness(1)}
+.ex-body{padding:22px}
+.ex-muscle{font-size:.7rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem}
+.ex-card h3{font-family:var(--hd);font-size:1.05rem;font-weight:800;margin-bottom:.4rem;letter-spacing:.5px}
+.ex-card p{color:var(--lg);font-size:.82rem;line-height:1.6;margin-bottom:.8rem}
+.ex-meta{display:flex;gap:12px;flex-wrap:wrap}
+.ex-tag{padding:4px 10px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold);font-size:.7rem;font-weight:600}
+
+/* Meal Cards */
+.ml-grid{max-width:1100px;margin:0 auto;padding:40px 4% 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ml-card{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;overflow:hidden;transition:.4s var(--ease)}
+.ml-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.ml-img{width:100%;height:200px;object-fit:cover;filter:brightness(.85);transition:.4s var(--ease)}
+.ml-card:hover .ml-img{filter:brightness(1)}
+.ml-body{padding:22px}
+.ml-type{font-size:.7rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem}
+.ml-card h3{font-family:var(--hd);font-size:1.05rem;font-weight:800;margin-bottom:.4rem;letter-spacing:.5px}
+.ml-card p{color:var(--lg);font-size:.82rem;line-height:1.6;margin-bottom:.8rem}
+.ml-macros{display:flex;gap:8px;flex-wrap:wrap}
+.ml-m{padding:5px 12px;border-radius:4px;background:var(--dg);font-size:.72rem;color:rgba(255,255,255,.7);display:flex;flex-direction:column;align-items:center;min-width:60px}
+.ml-m strong{color:var(--gold);font-size:.85rem;font-weight:700}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(22px);transition:all .7s var(--ease)}
 .rv.vis{opacity:1;transform:translateY(0)}
 
-/* ========== RESPONSIVE ========== */
+/* RESPONSIVE */
 @media(max-width:768px){
- .hero h1{font-size:3.5rem}
- .hero-inner{padding:120px 5% 60px}
- .stats-inner{grid-template-columns:repeat(2,1fr)}
- .st{border-right:none;border-bottom:1px solid rgba(255,255,255,.05)}
- .feat-grid,.steps,.price-grid,.tgrid{grid-template-columns:1fr}
- .pcard.pop{transform:none}.pcard.pop:hover{transform:translateY(-4px)}
- .sec-title{font-size:2.6rem}
- .cta h2{font-size:2.8rem}
- .f-top{grid-template-columns:1fr 1fr}
- .n-links{display:none;position:fixed;top:76px;left:0;right:0;background:var(--charcoal);flex-direction:column;padding:2rem;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,.05)}
- .n-links.open{display:flex}
+ .hero h1{font-size:3rem}
+ .stats-in{grid-template-columns:repeat(2,1fr)}
+ .st{border-right:none}
+ .fg,.steps,.pg,.tg,.ex-grid,.ml-grid{grid-template-columns:1fr}
+ .pc.pop{transform:none}.pc.pop:hover{transform:translateY(-4px)}
+ .sh{font-size:2.2rem}
+ .cta h2{font-size:2.4rem}
+ .ft-top{grid-template-columns:1fr 1fr}
+ .nm{display:none;position:fixed;top:72px;left:0;right:0;background:var(--char);flex-direction:column;padding:2rem;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,.04)}
+ .nm.open{display:flex}
  .ham{display:flex}
- .step-img{height:240px}
+ .ip-hero h1{font-size:2.4rem}
 }
 </style>
 </head>
 <body>
 
-<!-- ========== LOGIN GATE ========== -->
+<!-- GATE -->
 <div id="gate">
- <div class="g-logo">SELFIE<b>GYM</b></div>
+ <div class="g-logo-wrap">
+ <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="2.5"/><path d="M16 32V20l8-6 8 6v12" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#c9a84c" stroke-width="2"/><path d="M24 20v-2M24 30v-2M18 24h-2M30 24h2" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/></svg>
+ <div class="g-title">SELFIE<b>GYM</b></div>
+ </div>
  <p class="g-sub">Early Access Only</p>
  <input type="text" class="g-input" id="gc" placeholder="CODE" maxlength="10" autocomplete="off">
  <button class="g-btn" onclick="unlock()">ENTER</button>
  <p class="g-err" id="ge"></p>
 </div>
 
-<!-- ========== NAVBAR ========== -->
+<!-- NAV -->
 <nav id="nb">
- <div class="n-inner">
- <a href="#top" class="n-logo">SELFIE<b>GYM</b></a>
- <button class="ham" onclick="document.getElementById('nl').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
- <ul class="n-links" id="nl">
- <li><a href="#features" onclick="cm()">Features</a></li>
- <li><a href="#how" onclick="cm()">How It Works</a></li>
- <li><a href="#pricing" onclick="cm()">Pricing</a></li>
- <li><a href="#faq" onclick="cm()">FAQ</a></li>
- <li><a href="#pricing" class="n-cta" onclick="cm()">START FREE</a></li>
+ <div class="ni">
+ <a href="#" onclick="sp('home');return false" class="nl">
+ <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="2.5"/><path d="M16 32V20l8-6 8 6v12" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#c9a84c" stroke-width="2"/></svg>
+ <span>SELFIE<b>GYM</b></span>
+ </a>
+ <button class="ham" onclick="document.getElementById('nml').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+ <ul class="nm" id="nml">
+ <li><a href="#" onclick="sp('home');cm();return false">Home</a></li>
+ <li><a href="#" onclick="sp('exercises');cm();return false">Exercises</a></li>
+ <li><a href="#" onclick="sp('meals');cm();return false">Meals</a></li>
+ <li><a href="#features" onclick="sp('home');cm()">Features</a></li>
+ <li><a href="#pricing" onclick="sp('home');cm()">Pricing</a></li>
+ <li><a href="#" onclick="sp('home');cm();return false" class="nc">START FREE</a></li>
  </ul>
  </div>
 </nav>
 
-<!-- ========== HERO ========== -->
+<!-- ========== HOME PAGE ========== -->
+<div id="page-home" class="page active">
+
+<!-- HERO -->
 <section class="hero" id="top">
- <div class="hero-bg">
- <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80" alt="Gym">
- </div>
- <div class="hero-inner">
+ <div class="hero-bg"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80" alt="Gym"></div>
+ <div class="hero-in">
  <div class="hero-tag">★ AI-Powered Fitness</div>
  <h1>TRAIN<br>SMARTER.<br><span>NOT HARDER.</span></h1>
  <p class="hero-p">Customized workout programs, personalized meal plans, and intelligent coaching — all from your phone. At 90% less than a real trainer.</p>
  <div class="hero-btns">
- <a href="#pricing" class="btn-gold">START FREE TRIAL</a>
- <a href="#how" class="btn-out">HOW IT WORKS</a>
+ <a href="#pricing" class="bg">START FREE TRIAL</a>
+ <a href="#how" class="bo">HOW IT WORKS</a>
  </div>
  </div>
 </section>
 
-<!-- Stats -->
-<div class="stats">
- <div class="stats-inner">
+<!-- STATS -->
+<div class="stats"><div class="stats-in">
  <div class="st rv"><div class="st-n">24/7</div><div class="st-l">Always Available</div></div>
  <div class="st rv"><div class="st-n">90%</div><div class="st-l">Cost Savings</div></div>
  <div class="st rv"><div class="st-n">1,000+</div><div class="st-l">Exercises</div></div>
  <div class="st rv"><div class="st-n">100+</div><div class="st-l">Meal Plans</div></div>
+</div></div>
+
+<!-- FEATURES -->
+<section id="features"><div class="si">
+ <div class="stag rv">Features</div>
+ <h2 class="sh rv">EVERYTHING YOU NEED.<br>NOTHING YOU DON'T.</h2>
+ <p class="sd rv">One platform replaces your trainer, nutritionist, and fitness tracker.</p>
+ <div class="fg">
+ <div class="fc rv" onclick="sp('exercises')" style="cursor:pointer">
+ <div class="fi"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+ <h3>AI WORKOUT PLANS</h3>
+ <p>Smart programs that adapt to your goals, equipment, and fitness level. Click to explore exercises →</p>
+ </div>
+ <div class="fc rv" onclick="sp('meals')" style="cursor:pointer">
+ <div class="fi"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
+ <h3>CUSTOM MEAL PLANS</h3>
+ <p>Personalized nutrition with Saudi and Gulf favorites. Click to explore meals →</p>
+ </div>
+ <div class="fc rv">
+ <div class="fi"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+ <h3>PROGRESS TRACKING</h3>
+ <p>Visual charts for weight, strength, and body measurements. See how far you've come.</p>
+ </div>
+ <div class="fc rv">
+ <div class="fi"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+ <h3>HD EXERCISE LIBRARY</h3>
+ <p>1,000+ exercises with video demonstrations showing perfect form for every movement.</p>
+ </div>
+ <div class="fc rv">
+ <div class="fi"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+ <h3>SMART REMINDERS</h3>
+ <p>Intelligent notifications that keep you consistent. Never miss a workout again.</p>
+ </div>
+ <div class="fc rv">
+ <div class="fi"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+ <h3>WHATSAPP COACH</h3>
+ <p>Message your AI coach on WhatsApp anytime. Instant answers 24/7.</p>
+ </div>
+ </div>
+</div></section>
+
+<!-- HOW IT WORKS -->
+<section id="how"><div class="si">
+ <div class="stag rv">How It Works</div>
+ <h2 class="sh rv">THREE STEPS.<br>ZERO CONFUSION.</h2>
+ <p class="sd rv">No complicated setup. No confusing dashboards. Just results.</p>
+ <div class="steps">
+ <div class="step rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="Goals" class="step-img"><div class="step-ov"><div class="step-n">1</div><h3>SET YOUR GOALS</h3><p>Tell us what you want — muscle gain, fat loss, strength — plus your equipment and schedule.</p></div></div>
+ <div class="step rv"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Plan" class="step-img"><div class="step-ov"><div class="step-n">2</div><h3>GET YOUR AI PLAN</h3><p>Receive a personalized workout program and meal plan built specifically for you in seconds.</p></div></div>
+ <div class="step rv"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Train" class="step-img"><div class="step-ov"><div class="step-n">3</div><h3>TRAIN & EVOLVE</h3><p>Follow your program, log progress, and watch the AI adapt as you get stronger.</p></div></div>
+ </div>
+</div></section>
+
+<!-- PRICING -->
+<section id="pricing"><div class="si">
+ <div class="stag rv">Pricing</div>
+ <h2 class="sh rv">SIMPLE. HONEST.<br>NO HIDDEN FEES.</h2>
+ <p class="sd rv">Start free for 7 days. Cancel anytime.</p>
+ <div class="pg">
+ <div class="pc rv"><div class="pc-name">STARTER</div><div class="pc-price">$14<small>.99/mo</small></div><div class="pc-note">Save 20% with annual billing</div><ul><li>AI workout plans</li><li>Full exercise library</li><li>Basic macro calculator</li><li>Progress tracking</li><li>Workout logging</li></ul><button class="pb ol">GET STARTED</button></div>
+ <div class="pc pop rv"><div class="pop-b">MOST POPULAR</div><div class="pc-name">PRO</div><div class="pc-price">$29<small>.99/mo</small></div><div class="pc-note">Save 20% with annual billing</div><ul><li>Everything in Starter</li><li>Full weekly meal plans</li><li>Recipes & grocery lists</li><li>Community access</li><li>Weekly AI reports</li><li>Ramadan meal timing</li></ul><button class="pb fl">START FREE TRIAL</button></div>
+ <div class="pc rv"><div class="pc-name">ELITE</div><div class="pc-price">$59<small>.99/mo</small></div><div class="pc-note">Save 20% with annual billing</div><ul><li>Everything in Pro</li><li>Monthly coaching call</li><li>WhatsApp chat support</li><li>Custom adjustments</li><li>Injury modifications</li><li>Advanced analytics</li></ul><button class="pb ol">GET STARTED</button></div>
+ </div>
+</div></section>
+
+<!-- TESTIMONIALS -->
+<section id="social"><div class="si">
+ <div class="stag rv">Results</div>
+ <h2 class="sh rv">REAL PEOPLE.<br>REAL RESULTS.</h2>
+ <p class="sd rv">Don't take our word for it.</p>
+ <div class="tg">
+ <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"I trained for 3 years with zero progress. SelfieGym's AI adjusted my program and I saw results in the first month. The Saudi meal plans are a game changer."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed" class="tc-av"><div><div class="tc-n">Ahmed K.</div><div class="tc-r">Lost 12kg in 4 months</div></div></div></div>
+ <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"As a working mom I have zero time to plan. This does everything. I just follow what it says and the results speak for themselves."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sara" class="tc-av"><div><div class="tc-n">Sara M.</div><div class="tc-r">Toned & energized</div></div></div></div>
+ <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"I was paying 800 SAR/month for a trainer. SelfieGym gives me better programming for a fraction of the price."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Khalid" class="tc-av"><div><div class="tc-n">Khalid R.</div><div class="tc-r">Bench +30kg in 6 months</div></div></div></div>
+ </div>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="si">
+ <div class="stag rv">FAQ</div>
+ <h2 class="sh rv">GOT QUESTIONS?</h2>
+ <p class="sd rv">Everything you need to know.</p>
+ <div class="fl">
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Do I need gym experience? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Not at all. SelfieGym works for all levels — from complete beginners to advanced athletes. The AI adapts difficulty based on your experience.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">How does the AI create my plan? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">It analyzes your goals, equipment, fitness level, and schedule. Then builds a periodized program with progressive overload — adjusting each week based on your performance.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Do you have Saudi / Gulf meals? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Yes! We have kabsa, mandi, jareesh, saleeg, and more — all with accurate macros. We also support Ramadan scheduling with suhoor and iftar planning.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Can I cancel anytime? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Absolutely. No contracts. Cancel anytime and you won't be charged again.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">What makes SelfieGym different? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">We combine AI training, personalized meals, progress tracking, and coaching in one platform. Plus we're the only app with Arabic support and Gulf food databases.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">How does WhatsApp coaching work? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Message your AI coach on WhatsApp anytime — ask about form, request meal swaps, or adjust your program. Like a trainer in your pocket 24/7.</div></div></div>
+ </div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta">
+ <div class="cta-bg"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1400&q=80" alt="Training"></div>
+ <h2 class="rv">READY TO <span>TRANSFORM?</span></h2>
+ <p class="rv">7 days free. No credit card. No excuses.</p>
+ <a href="#pricing" class="bg rv">START YOUR FREE TRIAL</a>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="ft">
+ <div class="ft-top">
+ <div>
+ <div class="ft-b"><svg viewBox="0 0 48 48" fill="none" width="28" height="28"><circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="2.5"/><path d="M16 32V20l8-6 8 6v12" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#c9a84c" stroke-width="2"/></svg><span>SELFIE<b>GYM</b></span></div>
+ <p class="ft-d">Your AI personal trainer. Customized workouts, meal plans, and coaching — available 24/7.</p>
+ </div>
+ <div class="ft-c"><h4>Product</h4><a href="#features">Features</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
+ <div class="ft-c"><h4>Explore</h4><a href="#" onclick="sp('exercises');return false">Exercises</a><a href="#" onclick="sp('meals');return false">Meal Plans</a><a href="#">Blog</a></div>
+ <div class="ft-c"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
+ </div>
+ <div class="ft-bt"><span>&copy; 2026 SelfieGym. All rights reserved.</span><span>Built with ♥ in Saudi Arabia</span></div>
+</div></footer>
+
+</div><!-- end home -->
+
+<!-- ========== EXERCISES PAGE ========== -->
+<div id="page-exercises" class="page">
+ <div class="ip-hero">
+ <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
+ <h1>WORKOUT <span>PROGRAMS</span></h1>
+ <p>Explore our exercise library. Every movement demonstrated with perfect form.</p>
+ </div>
+ <div class="ex-grid">
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&q=80" alt="Bench Press" class="ex-img"><div class="ex-body"><div class="ex-muscle">Chest</div><h3>BARBELL BENCH PRESS</h3><p>The king of chest exercises. Builds overall chest mass, front delts, and triceps.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×8-12</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=500&q=80" alt="Incline Dumbbell" class="ex-img"><div class="ex-body"><div class="ex-muscle">Chest</div><h3>INCLINE DUMBBELL PRESS</h3><p>Targets upper chest for a fuller look. Great for balanced chest development.</p><div class="ex-meta"><span class="ex-tag">Dumbbells</span><span class="ex-tag">Intermediate</span><span class="ex-tag">3×10-12</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1603287681836-b174ce5074c2?w=500&q=80" alt="Cable Flyes" class="ex-img"><div class="ex-body"><div class="ex-muscle">Chest</div><h3>CABLE CHEST FLYES</h3><p>Constant tension isolation for chest. Perfect finishing exercise for maximum pump.</p><div class="ex-meta"><span class="ex-tag">Cable</span><span class="ex-tag">Beginner</span><span class="ex-tag">3×12-15</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1534368270820-9de3d8053204?w=500&q=80" alt="Deadlift" class="ex-img"><div class="ex-body"><div class="ex-muscle">Back</div><h3>BARBELL DEADLIFT</h3><p>The ultimate full-body compound movement. Builds back thickness, hamstrings, and grip strength.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Advanced</span><span class="ex-tag">4×5-8</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=500&q=80" alt="Pull Ups" class="ex-img"><div class="ex-body"><div class="ex-muscle">Back</div><h3>PULL-UPS</h3><p>Bodyweight king for back width. Hits lats, rhomboids, and biceps simultaneously.</p><div class="ex-meta"><span class="ex-tag">Bodyweight</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×Max</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=500&q=80" alt="Rows" class="ex-img"><div class="ex-body"><div class="ex-muscle">Back</div><h3>BARBELL BENT-OVER ROW</h3><p>Essential for back thickness. Targets mid-back, lats, and rear delts.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×8-12</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1567598508481-65985588e295?w=500&q=80" alt="Squats" class="ex-img"><div class="ex-body"><div class="ex-muscle">Legs</div><h3>BARBELL BACK SQUAT</h3><p>The foundation of leg training. Builds quads, glutes, and total-body strength.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×6-10</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1434608519344-49d77a699e1d?w=500&q=80" alt="Leg Press" class="ex-img"><div class="ex-body"><div class="ex-muscle">Legs</div><h3>LEG PRESS</h3><p>Machine-based quad builder. Safer alternative to squats for higher volume training.</p><div class="ex-meta"><span class="ex-tag">Machine</span><span class="ex-tag">Beginner</span><span class="ex-tag">4×10-15</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&q=80" alt="Lunges" class="ex-img"><div class="ex-body"><div class="ex-muscle">Legs</div><h3>WALKING LUNGES</h3><p>Unilateral leg exercise that builds balance, glutes, and quads evenly.</p><div class="ex-meta"><span class="ex-tag">Dumbbells</span><span class="ex-tag">Beginner</span><span class="ex-tag">3×12/leg</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=500&q=80" alt="OHP" class="ex-img"><div class="ex-body"><div class="ex-muscle">Shoulders</div><h3>OVERHEAD PRESS</h3><p>Primary shoulder mass builder. Develops front and side delts with core stability.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×6-10</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&q=80" alt="Lateral Raises" class="ex-img"><div class="ex-body"><div class="ex-muscle">Shoulders</div><h3>LATERAL RAISES</h3><p>Isolation for side delts. Creates the wide shoulder look every lifter wants.</p><div class="ex-meta"><span class="ex-tag">Dumbbells</span><span class="ex-tag">Beginner</span><span class="ex-tag">4×12-15</span></div></div></div>
+ <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&q=80" alt="Bicep Curls" class="ex-img"><div class="ex-body"><div class="ex-muscle">Arms</div><h3>BARBELL BICEP CURL</h3><p>Classic arm builder. Targets both heads of the bicep for peak and thickness.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Beginner</span><span class="ex-tag">3×10-12</span></div></div></div>
  </div>
 </div>
 
-<!-- ========== FEATURES ========== -->
-<section id="features">
- <div class="sec-inner">
- <div class="sec-tag rv">Features</div>
- <h2 class="sec-title rv">EVERYTHING YOU NEED.<br>NOTHING YOU DON'T.</h2>
- <p class="sec-desc rv">One platform replaces your trainer, nutritionist, and fitness tracker.</p>
- <div class="feat-grid">
- <div class="feat rv">
- <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
- <h3>AI WORKOUT PLANS</h3>
- <p>Smart programs that adapt to your goals, equipment, and fitness level. Progressive overload built in automatically.</p>
+<!-- ========== MEALS PAGE ========== -->
+<div id="page-meals" class="page">
+ <div class="ip-hero">
+ <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
+ <h1>MEAL <span>PLANS</span></h1>
+ <p>Personalized nutrition with local Gulf dishes and international healthy options.</p>
  </div>
- <div class="feat rv">
- <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
- <h3>CUSTOM MEAL PLANS</h3>
- <p>Personalized nutrition with local dishes including Saudi and Gulf favorites. Macros calculated for your exact goals.</p>
+ <div class="ml-grid">
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&q=80" alt="Oatmeal" class="ml-img"><div class="ml-body"><div class="ml-type">Breakfast</div><h3>PROTEIN OATMEAL BOWL</h3><p>Oats with whey protein, banana, honey, and almonds. Quick and packed with energy.</p><div class="ml-macros"><div class="ml-m"><strong>420</strong>kcal</div><div class="ml-m"><strong>32g</strong>protein</div><div class="ml-m"><strong>52g</strong>carbs</div><div class="ml-m"><strong>12g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=80" alt="Eggs" class="ml-img"><div class="ml-body"><div class="ml-type">Breakfast</div><h3>EGGS & AVOCADO TOAST</h3><p>Whole grain toast with scrambled eggs, avocado, and cherry tomatoes.</p><div class="ml-macros"><div class="ml-m"><strong>380</strong>kcal</div><div class="ml-m"><strong>24g</strong>protein</div><div class="ml-m"><strong>28g</strong>carbs</div><div class="ml-m"><strong>18g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Shakshuka" class="ml-img"><div class="ml-body"><div class="ml-type">Breakfast</div><h3>SHAKSHUKA</h3><p>Eggs poached in spiced tomato sauce with bell peppers. Serve with whole wheat bread.</p><div class="ml-macros"><div class="ml-m"><strong>350</strong>kcal</div><div class="ml-m"><strong>22g</strong>protein</div><div class="ml-m"><strong>24g</strong>carbs</div><div class="ml-m"><strong>16g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500&q=80" alt="Kabsa" class="ml-img"><div class="ml-body"><div class="ml-type">Lunch — Saudi</div><h3>CHICKEN KABSA</h3><p>Saudi national dish. Spiced rice with roasted chicken, tomatoes, and raisins.</p><div class="ml-macros"><div class="ml-m"><strong>580</strong>kcal</div><div class="ml-m"><strong>42g</strong>protein</div><div class="ml-m"><strong>65g</strong>carbs</div><div class="ml-m"><strong>14g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80" alt="Grilled Chicken" class="ml-img"><div class="ml-body"><div class="ml-type">Lunch</div><h3>GRILLED CHICKEN SALAD</h3><p>Grilled chicken breast over mixed greens with quinoa, cucumber, and lemon dressing.</p><div class="ml-macros"><div class="ml-m"><strong>420</strong>kcal</div><div class="ml-m"><strong>45g</strong>protein</div><div class="ml-m"><strong>30g</strong>carbs</div><div class="ml-m"><strong>12g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80" alt="Mandi" class="ml-img"><div class="ml-body"><div class="ml-type">Lunch — Gulf</div><h3>LAMB MANDI</h3><p>Slow-cooked lamb with fragrant basmati rice. A Gulf classic high in protein.</p><div class="ml-macros"><div class="ml-m"><strong>650</strong>kcal</div><div class="ml-m"><strong>48g</strong>protein</div><div class="ml-m"><strong>58g</strong>carbs</div><div class="ml-m"><strong>22g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80" alt="Salmon" class="ml-img"><div class="ml-body"><div class="ml-type">Dinner</div><h3>GRILLED SALMON</h3><p>Omega-3 rich salmon fillet with roasted sweet potato and steamed broccoli.</p><div class="ml-macros"><div class="ml-m"><strong>480</strong>kcal</div><div class="ml-m"><strong>40g</strong>protein</div><div class="ml-m"><strong>35g</strong>carbs</div><div class="ml-m"><strong>18g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500&q=80" alt="Steak" class="ml-img"><div class="ml-body"><div class="ml-type">Dinner</div><h3>LEAN STEAK & RICE</h3><p>Grilled sirloin steak with brown rice and grilled vegetables. High protein recovery meal.</p><div class="ml-macros"><div class="ml-m"><strong>550</strong>kcal</div><div class="ml-m"><strong>50g</strong>protein</div><div class="ml-m"><strong>45g</strong>carbs</div><div class="ml-m"><strong>15g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1511690743698-d9d18f7e20f1?w=500&q=80" alt="Jareesh" class="ml-img"><div class="ml-body"><div class="ml-type">Dinner — Saudi</div><h3>JAREESH</h3><p>Crushed wheat cooked with chicken broth and spices. Traditional Saudi comfort food, high fiber.</p><div class="ml-macros"><div class="ml-m"><strong>380</strong>kcal</div><div class="ml-m"><strong>28g</strong>protein</div><div class="ml-m"><strong>48g</strong>carbs</div><div class="ml-m"><strong>8g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1622485831930-5eab6a538a2d?w=500&q=80" alt="Protein Shake" class="ml-img"><div class="ml-body"><div class="ml-type">Snack</div><h3>PROTEIN SMOOTHIE</h3><p>Whey protein, banana, peanut butter, oat milk. Perfect post-workout recovery shake.</p><div class="ml-macros"><div class="ml-m"><strong>320</strong>kcal</div><div class="ml-m"><strong>35g</strong>protein</div><div class="ml-m"><strong>30g</strong>carbs</div><div class="ml-m"><strong>10g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?w=500&q=80" alt="Greek Yogurt" class="ml-img"><div class="ml-body"><div class="ml-type">Snack</div><h3>GREEK YOGURT & NUTS</h3><p>Full-fat Greek yogurt with mixed nuts, honey drizzle, and berries.</p><div class="ml-macros"><div class="ml-m"><strong>280</strong>kcal</div><div class="ml-m"><strong>20g</strong>protein</div><div class="ml-m"><strong>18g</strong>carbs</div><div class="ml-m"><strong>14g</strong>fat</div></div></div></div>
+ <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1614961233913-a5113e3d6b22?w=500&q=80" alt="Dates" class="ml-img"><div class="ml-body"><div class="ml-type">Snack — Ramadan</div><h3>DATES & LABAN</h3><p>Traditional Iftar starter. 3 dates with a glass of laban. Quick energy and hydration.</p><div class="ml-macros"><div class="ml-m"><strong>220</strong>kcal</div><div class="ml-m"><strong>8g</strong>protein</div><div class="ml-m"><strong>42g</strong>carbs</div><div class="ml-m"><strong>3g</strong>fat</div></div></div></div>
  </div>
- <div class="feat rv">
- <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
- <h3>PROGRESS TRACKING</h3>
- <p>Visual charts for weight, strength, and body measurements. See exactly how far you've come every week.</p>
- </div>
- <div class="feat rv">
- <div class="feat-ico"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
- <h3>HD EXERCISE LIBRARY</h3>
- <p>1,000+ exercises with video demonstrations showing perfect form for every single movement.</p>
- </div>
- <div class="feat rv">
- <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
- <h3>SMART REMINDERS</h3>
- <p>Intelligent notifications that keep you consistent. Never miss a workout or meal window again.</p>
- </div>
- <div class="feat rv">
- <div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
- <h3>WHATSAPP COACH</h3>
- <p>Message your AI coach on WhatsApp anytime. Instant answers on form, nutrition, and programming 24/7.</p>
- </div>
- </div>
- </div>
-</section>
-
-<!-- ========== HOW IT WORKS ========== -->
-<section id="how">
- <div class="sec-inner">
- <div class="sec-tag rv">How It Works</div>
- <h2 class="sec-title rv">THREE STEPS.<br>ZERO CONFUSION.</h2>
- <p class="sec-desc rv">No complicated setup. No confusing dashboards. Just results.</p>
- <div class="steps">
- <div class="step rv">
- <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="Set Your Goals" class="step-img">
- <div class="step-overlay">
- <div class="step-num">1</div>
- <h3>SET YOUR GOALS</h3>
- <p>Tell us what you want — muscle gain, fat loss, strength — plus your equipment and schedule.</p>
- </div>
- </div>
- <div class="step rv">
- <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Get Your Plan" class="step-img">
- <div class="step-overlay">
- <div class="step-num">2</div>
- <h3>GET YOUR AI PLAN</h3>
- <p>Receive a personalized workout program and meal plan built specifically for you in seconds.</p>
- </div>
- </div>
- <div class="step rv">
- <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Train and Track" class="step-img">
- <div class="step-overlay">
- <div class="step-num">3</div>
- <h3>TRAIN & EVOLVE</h3>
- <p>Follow your program, log progress, and watch the AI adapt as you get stronger every week.</p>
- </div>
- </div>
- </div>
- </div>
-</section>
-
-<!-- ========== PRICING ========== -->
-<section id="pricing">
- <div class="sec-inner">
- <div class="sec-tag rv">Pricing</div>
- <h2 class="sec-title rv">SIMPLE. HONEST.<br>NO HIDDEN FEES.</h2>
- <p class="sec-desc rv">Start free for 7 days. Cancel anytime.</p>
- <div class="price-grid">
- <div class="pcard rv">
- <div class="pcard-name">STARTER</div>
- <div class="pcard-price">$14<small>.99/mo</small></div>
- <div class="pcard-note">Save 20% with annual billing</div>
- <ul>
- <li>AI workout plans</li>
- <li>Full exercise library</li>
- <li>Basic macro calculator</li>
- <li>Progress tracking</li>
- <li>Workout logging</li>
- </ul>
- <button class="pcard-btn outline">GET STARTED</button>
- </div>
- <div class="pcard pop rv">
- <div class="pop-badge">MOST POPULAR</div>
- <div class="pcard-name">PRO</div>
- <div class="pcard-price">$29<small>.99/mo</small></div>
- <div class="pcard-note">Save 20% with annual billing</div>
- <ul>
- <li>Everything in Starter</li>
- <li>Full weekly meal plans</li>
- <li>Recipes & grocery lists</li>
- <li>Community access</li>
- <li>Weekly AI progress reports</li>
- <li>Ramadan meal timing</li>
- </ul>
- <button class="pcard-btn fill">START FREE TRIAL</button>
- </div>
- <div class="pcard rv">
- <div class="pcard-name">ELITE</div>
- <div class="pcard-price">$59<small>.99/mo</small></div>
- <div class="pcard-note">Save 20% with annual billing</div>
- <ul>
- <li>Everything in Pro</li>
- <li>Monthly 1-on-1 coaching call</li>
- <li>WhatsApp chat support</li>
- <li>Custom program adjustments</li>
- <li>Injury modifications</li>
- <li>Advanced body analytics</li>
- </ul>
- <button class="pcard-btn outline">GET STARTED</button>
- </div>
- </div>
- </div>
-</section>
-
-<!-- ========== TESTIMONIALS ========== -->
-<section id="social">
- <div class="sec-inner">
- <div class="sec-tag rv">Results</div>
- <h2 class="sec-title rv">REAL PEOPLE.<br>REAL RESULTS.</h2>
- <p class="sec-desc rv">Don't take our word for it.</p>
- <div class="tgrid">
- <div class="tcard rv">
- <div class="tcard-stars">★★★★★</div>
- <p class="tcard-text">"I trained for 3 years with zero progress. SelfieGym's AI adjusted my program and I saw results in the first month. The Saudi meal plans are a game changer."</p>
- <div class="tcard-author">
- <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed" class="tcard-avatar">
- <div><div class="tcard-name">Ahmed K.</div><div class="tcard-role">Lost 12kg in 4 months</div></div>
- </div>
- </div>
- <div class="tcard rv">
- <div class="tcard-stars">★★★★★</div>
- <p class="tcard-text">"As a working mom I have zero time to plan workouts and meals. This does everything. I just follow what it says and the results speak for themselves."</p>
- <div class="tcard-author">
- <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sara" class="tcard-avatar">
- <div><div class="tcard-name">Sara M.</div><div class="tcard-role">Toned & energized</div></div>
- </div>
- </div>
- <div class="tcard rv">
- <div class="tcard-stars">★★★★★</div>
- <p class="tcard-text">"I was paying 800 SAR/month for a trainer. SelfieGym gives me better programming for a fraction of the price. The WhatsApp coach is incredibly helpful."</p>
- <div class="tcard-author">
- <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Khalid" class="tcard-avatar">
- <div><div class="tcard-name">Khalid R.</div><div class="tcard-role">Bench +30kg in 6 months</div></div>
- </div>
- </div>
- </div>
- </div>
-</section>
-
-<!-- ========== FAQ ========== -->
-<section id="faq">
- <div class="sec-inner">
- <div class="sec-tag rv">FAQ</div>
- <h2 class="sec-title rv">GOT QUESTIONS?</h2>
- <p class="sec-desc rv">Everything you need to know.</p>
- <div class="faq-list">
- <div class="faq-item rv">
- <button class="faq-q" onclick="tf(this)">Do I need gym experience? <span class="faq-arrow">▾</span></button>
- <div class="faq-a"><div class="faq-a-inner">Not at all. SelfieGym works for all levels — from complete beginners to advanced athletes. The AI adapts difficulty based on your experience and increases the challenge as you improve.</div></div>
- </div>
- <div class="faq-item rv">
- <button class="faq-q" onclick="tf(this)">How does the AI create my plan? <span class="faq-arrow">▾</span></button>
- <div class="faq-a"><div class="faq-a-inner">It analyzes your goals, equipment, fitness level, schedule, and preferences. Then it builds a periodized program with progressive overload. Each week it adjusts based on your performance — like a real trainer would.</div></div>
- </div>
- <div class="faq-item rv">
- <button class="faq-q" onclick="tf(this)">Do you have Saudi / Gulf meal options? <span class="faq-arrow">▾</span></button>
- <div class="faq-a"><div class="faq-a-inner">Yes! We have an extensive database of local dishes — kabsa, mandi, jareesh, saleeg, and more — all with accurate macros. We also support Ramadan scheduling with suhoor and iftar planning.</div></div>
- </div>
- <div class="faq-item rv">
- <button class="faq-q" onclick="tf(this)">Can I cancel anytime? <span class="faq-arrow">▾</span></button>
- <div class="faq-a"><div class="faq-a-inner">Absolutely. No contracts, no commitments. Cancel anytime and you won't be charged again. Your data stays for 30 days in case you return.</div></div>
- </div>
- <div class="faq-item rv">
- <button class="faq-q" onclick="tf(this)">What makes SelfieGym different? <span class="faq-arrow">▾</span></button>
- <div class="faq-a"><div class="faq-a-inner">Most apps offer workouts OR nutrition — never both done well. We combine AI training, personalized meals, progress tracking, and coaching in one platform. Plus we're the only app with Arabic support and Gulf food databases.</div></div>
- </div>
- <div class="faq-item rv">
- <button class="faq-q" onclick="tf(this)">How does WhatsApp coaching work? <span class="faq-arrow">▾</span></button>
- <div class="faq-a"><div class="faq-a-inner">Message your AI coach on WhatsApp anytime — ask about form, request meal swaps, get motivation, or adjust your program. Like having a personal trainer in your pocket 24/7.</div></div>
- </div>
- </div>
- </div>
-</section>
-
-<!-- ========== CTA ========== -->
-<section class="cta">
- <div class="cta-bg">
- <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1400&q=80" alt="Training">
- </div>
- <h2 class="rv">READY TO <span>TRANSFORM?</span></h2>
- <p class="rv">7 days free. No credit card. No excuses.</p>
- <a href="#pricing" class="btn-gold rv">START YOUR FREE TRIAL</a>
-</section>
-
-<!-- ========== FOOTER ========== -->
-<footer>
- <div class="f-inner">
- <div class="f-top">
- <div>
- <div class="f-brand">SELFIE<b>GYM</b></div>
- <p class="f-desc">Your AI personal trainer. Customized workouts, meal plans, and coaching — available 24/7.</p>
- </div>
- <div class="f-col"><h4>Product</h4><a href="#features">Features</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
- <div class="f-col"><h4>Company</h4><a href="#">About</a><a href="#">Blog</a><a href="#">Contact</a></div>
- <div class="f-col"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
- </div>
- <div class="f-bottom">
- <span>&copy; 2026 SelfieGym. All rights reserved.</span>
- <span>Built with ♥ in Saudi Arabia</span>
- </div>
- </div>
-</footer>
+</div>
 
 <script>
+// Gate
 function unlock(){const c=document.getElementById('gc').value.trim().toUpperCase();if(c==='NA88'){document.getElementById('gate').classList.add('off');sessionStorage.setItem('sg','1')}else{document.getElementById('ge').textContent='Invalid code.';document.getElementById('gc').value='';document.getElementById('gc').focus()}}
 document.getElementById('gc').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
 if(sessionStorage.getItem('sg')==='1')document.getElementById('gate').classList.add('off');
+
+// Nav scroll
 window.addEventListener('scroll',()=>{document.getElementById('nb').classList.toggle('solid',scrollY>60)});
-function cm(){document.getElementById('nl').classList.remove('open')}
+
+// Mobile menu
+function cm(){document.getElementById('nml').classList.remove('open')}
+
+// Page system
+function sp(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById('page-'+id).classList.add('active');
+ window.scrollTo(0,0);
+ // Re-observe reveals on new page
+ document.querySelectorAll('.rv:not(.vis)').forEach(el=>ob.observe(el));
+}
+
+// FAQ
 function tf(b){b.parentElement.classList.toggle('open')}
-const ob=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);ob.unobserve(e.target)}})},{threshold:.1});
+
+// Reveal
+const ob=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*60);ob.unobserve(e.target)}})},{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>ob.observe(el));
 </script>
 </body>

@@ -714,7 +714,7 @@ function submitSignup() {
  btn.textContent = 'CREATING ACCOUNT...';
  btn.disabled = true;
 
- fetch('http://localhost:5050/api/signup', {
+ fetch('https://api.selfigym.com/api/signup', {
  method: 'POST',
  headers: { 'Content-Type': 'application/json' },
  body: JSON.stringify({

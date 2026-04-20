@@ -47,7 +47,7 @@ nav.solid{background:rgba(10,10,10,.96);backdrop-filter:blur(20px);border-bottom
 .nm{display:flex;gap:2.2rem;align-items:center;list-style:none}
 .nm a{text-decoration:none;color:rgba(255,255,255,.55);font-size:.85rem;font-weight:500;transition:.3s var(--ease);letter-spacing:.3px;cursor:pointer}
 .nm a:hover{color:var(--gold)}
-.nc{padding:10px 26px;background:var(--gold);color:var(--black);border-radius:6px;font-weight:700;font-size:.82rem;text-decoration:none;transition:.3s var(--ease);letter-spacing:.5px;cursor:pointer}
+.nc{padding:10px 26px;background:var(--gold);color:var(--black);border-radius:6px;font-weight:700;font-size:.82rem;text-decoration:none;transition:.3s var(--ease);letter-spacing:.5px;cursor:pointer;border:none}
 .nc:hover{background:var(--gold-l);transform:translateY(-2px)}
 .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .ham span{width:22px;height:2px;background:var(--white);display:block}
@@ -112,7 +112,7 @@ section{padding:90px 4%}
 .step p{color:rgba(255,255,255,.55);font-size:.85rem;line-height:1.6}
 
 /* PRICING */
-.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.pg{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;align-items:start;max-width:800px;margin:0 auto}
 .pc{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:40px 30px;transition:.4s var(--ease)}
 .pc:hover{border-color:rgba(255,255,255,.12);transform:translateY(-4px)}
 .pc.pop{border-color:var(--gold);position:relative;box-shadow:0 0 50px var(--gold-g);transform:scale(1.03)}
@@ -223,6 +223,24 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
 .ip-section h2 span{color:var(--gold)}
 .ip-section p{color:var(--lg);font-size:.9rem}
 
+/* SIGNUP MODAL */
+#signup-modal{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center}
+#signup-modal.show{display:flex}
+.signup-box{background:var(--char);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:44px 36px;max-width:420px;width:90%;position:relative}
+.signup-close{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--lg);font-size:1.5rem;cursor:pointer;transition:.3s var(--ease)}
+.signup-close:hover{color:var(--white)}
+.signup-box h2{font-family:var(--hd);font-size:1.8rem;font-weight:900;margin-bottom:.3rem}
+.signup-box h2 span{color:var(--gold)}
+.signup-sub{color:var(--lg);font-size:.88rem;margin-bottom:1.8rem}
+.s-field{display:block;width:100%;padding:14px 16px;border:1px solid var(--mg);border-radius:8px;background:transparent;color:var(--white);font-size:.92rem;font-family:var(--bd);outline:none;margin-bottom:12px;transition:.3s var(--ease)}
+.s-field:focus{border-color:var(--gold);box-shadow:0 0 20px var(--gold-g)}
+.s-field::placeholder{color:#555}
+.s-btn{width:100%;padding:14px;border:none;border-radius:8px;background:var(--gold);color:var(--black);font-weight:700;font-size:.95rem;cursor:pointer;font-family:var(--bd);letter-spacing:.5px;transition:.3s var(--ease);margin-top:6px}
+.s-btn:hover{background:var(--gold-l);transform:translateY(-2px)}
+.s-success{display:none;text-align:center;padding:20px 0}
+.s-success h3{font-family:var(--hd);font-size:1.6rem;color:var(--gold);margin-bottom:.5rem}
+.s-success p{color:var(--lg);font-size:.9rem}
+
 /* REVEAL */
 .rv{opacity:0;transform:translateY(22px);transition:all .7s var(--ease)}
 .rv.vis{opacity:1;transform:translateY(0)}
@@ -249,7 +267,7 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
 <!-- GATE -->
 <div id="gate">
  <div class="g-logo-wrap">
- <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="2.5"/><path d="M16 32V20l8-6 8 6v12" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#c9a84c" stroke-width="2"/></svg>
+ <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="18" width="6" height="12" rx="2" stroke="#c9a84c" stroke-width="2.5"/><rect x="38" y="18" width="6" height="12" rx="2" stroke="#c9a84c" stroke-width="2.5"/><rect x="10" y="14" width="6" height="20" rx="2" stroke="#c9a84c" stroke-width="2.5"/><rect x="32" y="14" width="6" height="20" rx="2" stroke="#c9a84c" stroke-width="2.5"/><line x1="16" y1="24" x2="32" y2="24" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"/></svg>
  <div class="g-title">SELFIE<b>GYM</b></div>
  </div>
  <p class="g-sub">Early Access Only</p>
@@ -262,7 +280,7 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
 <nav id="nb">
  <div class="ni">
  <a href="#" onclick="sp('home');return false" class="nl">
- <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="2.5"/><path d="M16 32V20l8-6 8 6v12" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#c9a84c" stroke-width="2"/></svg>
+ <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="18" width="6" height="12" rx="2" stroke="#c9a84c" stroke-width="2.5"/><rect x="38" y="18" width="6" height="12" rx="2" stroke="#c9a84c" stroke-width="2.5"/><rect x="10" y="14" width="6" height="20" rx="2" stroke="#c9a84c" stroke-width="2.5"/><rect x="32" y="14" width="6" height="20" rx="2" stroke="#c9a84c" stroke-width="2.5"/><line x1="16" y1="24" x2="32" y2="24" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"/></svg>
  <span>SELFIE<b>GYM</b></span>
  </a>
  <button class="ham" onclick="document.getElementById('nml').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -272,7 +290,7 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <li><a onclick="sp('meals');cm()">Meals</a></li>
  <li><a onclick="sp('progress');cm()">Progress</a></li>
  <li><a onclick="sp('pricing-page');cm()">Pricing</a></li>
- <li><a onclick="sp('home');cm()" class="nc">START FREE</a></li>
+ <li><a class="nc" onclick="openSignup();cm();return false">START FREE</a></li>
  </ul>
  </div>
 </nav>
@@ -287,7 +305,7 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <h1>TRAIN<br>SMARTER.<br><span>NOT HARDER.</span></h1>
  <p class="hero-p">Customized workout programs, personalized meal plans, and intelligent coaching — all from your phone. At 90% less than a real trainer.</p>
  <div class="hero-btns">
- <a href="#" onclick="sp('pricing-page');return false" class="bg">START FREE TRIAL</a>
+ <a href="#" onclick="openSignup();return false" class="bg">START FREE TRIAL</a>
  <a href="#how" class="bo">HOW IT WORKS</a>
  </div>
  </div>
@@ -315,7 +333,7 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Meals" class="fc-img">
  <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
  <h3>CUSTOM MEAL PLANS</h3>
- <p>Saudi, Gulf, and international meals with full macros. Tap to explore →</p></div>
+ <p>International healthy meals with full macros calculated. Tap to explore →</p></div>
  </div>
  <div class="fc rv" onclick="sp('progress')">
  <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&q=80" alt="Progress" class="fc-img">
@@ -339,7 +357,7 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Coach" class="fc-img">
  <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
  <h3>YOUR PERSONAL TRAINER</h3>
- <p>Live coaching on WhatsApp & Telegram. 24/7. In Arabic. Tap to explore →</p></div>
+ <p>Live coaching on WhatsApp & Telegram. 24/7. Tap to explore →</p></div>
  </div>
  </div>
 </div></section>
@@ -360,9 +378,8 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <h2 class="sh rv">SIMPLE. HONEST.<br>NO HIDDEN FEES.</h2>
  <p class="sd rv">Start free for 7 days. Cancel anytime.</p>
  <div class="pg">
- <div class="pc rv"><div class="pc-name">STARTER</div><div class="pc-price">$14<small>.99/mo</small></div><div class="pc-note">Save 20% annually</div><ul><li>AI workout plans</li><li>Full exercise library</li><li>Basic macro calculator</li><li>Progress tracking</li><li>Workout logging</li></ul><button class="pb ol">GET STARTED</button></div>
- <div class="pc pop rv"><div class="pop-b">MOST POPULAR</div><div class="pc-name">PRO</div><div class="pc-price">$29<small>.99/mo</small></div><div class="pc-note">Save 20% annually</div><ul><li>Everything in Starter</li><li>Full weekly meal plans</li><li>Recipes & grocery lists</li><li>Community & challenges</li><li>Weekly AI reports</li><li>Ramadan meal timing</li></ul><button class="pb fl">START FREE TRIAL</button></div>
- <div class="pc rv"><div class="pc-name">ELITE</div><div class="pc-price">$59<small>.99/mo</small></div><div class="pc-note">Save 20% annually</div><ul><li>Everything in Pro</li><li>Monthly coaching call</li><li>WhatsApp chat support</li><li>Custom adjustments</li><li>Injury modifications</li><li>Advanced analytics</li></ul><button class="pb ol">GET STARTED</button></div>
+ <div class="pc rv"><div class="pc-name">BASIC</div><div class="pc-price">$9<small>.99/mo</small></div><div class="pc-note">$95.90/year (save 20%)</div><ul><li>AI workout plans</li><li>Full exercise library with HD videos</li><li>Macro calculator & nutrition guide</li><li>Progress tracking & body stats</li><li>Workout logging</li><li>Community & challenges</li></ul><button class="pb ol" onclick="openSignup()">GET STARTED</button></div>
+ <div class="pc pop rv"><div class="pop-b">RECOMMENDED</div><div class="pc-name">PRO</div><div class="pc-price">$19<small>.99/mo</small></div><div class="pc-note">$191.90/year (save 20%)</div><ul><li>Everything in Basic</li><li>Full weekly meal plans with recipes</li><li>Grocery lists & meal prep guides</li><li>Personal AI Trainer on WhatsApp</li><li>Personal AI Trainer on Telegram</li><li>24/7 unlimited coaching chat</li><li>Custom program adjustments</li><li>Weekly AI progress reports</li></ul><button class="pb fl" onclick="openSignup()">START FREE TRIAL</button></div>
  </div>
 </div></section>
 
@@ -371,9 +388,9 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <h2 class="sh rv">REAL PEOPLE.<br>REAL RESULTS.</h2>
  <p class="sd rv">Don't take our word for it.</p>
  <div class="tg">
- <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"SelfieGym's AI adjusted my program and I saw results in the first month. The Saudi meal plans are a game changer."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed" class="tc-av"><div><div class="tc-n">Ahmed K.</div><div class="tc-r">Lost 12kg in 4 months</div></div></div></div>
+ <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"SelfieGym's AI adjusted my program and I saw results in the first month. The personalized meal plans are a game changer."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed" class="tc-av"><div><div class="tc-n">Ahmed K.</div><div class="tc-r">Lost 12kg in 4 months</div></div></div></div>
  <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"As a working mom I have zero time to plan. This does everything. The results speak for themselves."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sara" class="tc-av"><div><div class="tc-n">Sara M.</div><div class="tc-r">Toned & energized</div></div></div></div>
- <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"I was paying 800 SAR/month for a trainer. SelfieGym gives me better programming for a fraction."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Khalid" class="tc-av"><div><div class="tc-n">Khalid R.</div><div class="tc-r">Bench +30kg in 6 months</div></div></div></div>
+ <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"I was paying $200/month for a trainer. SelfieGym gives me better programming for a fraction of the price."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Khalid" class="tc-av"><div><div class="tc-n">Khalid R.</div><div class="tc-r">Bench +30kg in 6 months</div></div></div></div>
  </div>
 </div></section>
 
@@ -384,9 +401,9 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <div class="fl">
  <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Do I need gym experience? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Not at all. SelfieGym works for all levels. The AI adapts difficulty based on your experience.</div></div></div>
  <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">How does the AI create my plan? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">It analyzes your goals, equipment, fitness level, and schedule. Then builds a periodized program that adjusts each week based on your performance.</div></div></div>
- <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Do you have Saudi / Gulf meals? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Yes! Kabsa, mandi, jareesh, saleeg, and more — all with accurate macros. We also support Ramadan scheduling.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Do you have diverse meal options? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Yes! We have hundreds of meals from various cuisines — all with accurate macros. High-protein, low-carb, vegetarian, and more.</div></div></div>
  <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Can I cancel anytime? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Absolutely. No contracts. Cancel anytime and you won't be charged again.</div></div></div>
- <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">What makes SelfieGym different? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">We combine AI training, personalized meals, progress tracking, and coaching in one platform — with Arabic support and Gulf food databases.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">What makes SelfieGym different? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">We combine AI training, personalized meals, progress tracking, and coaching in one platform.</div></div></div>
  </div>
 </div></section>
 
@@ -394,20 +411,20 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <div class="cta-bg"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1400&q=80" alt="Training"></div>
  <h2 class="rv">READY TO <span>TRANSFORM?</span></h2>
  <p class="rv">7 days free. No credit card. No excuses.</p>
- <a href="#" onclick="sp('pricing-page');return false" class="bg rv">START YOUR FREE TRIAL</a>
+ <a href="#" onclick="openSignup();return false" class="bg rv">START YOUR FREE TRIAL</a>
 </section>
 
 <footer><div class="ft">
  <div class="ft-top">
  <div>
- <div class="ft-b"><svg viewBox="0 0 48 48" fill="none" width="28" height="28"><circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="2.5"/><path d="M16 32V20l8-6 8 6v12" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#c9a84c" stroke-width="2"/></svg><span>SELFIE<b>GYM</b></span></div>
+ <div class="ft-b"><svg viewBox="0 0 48 48" fill="none" width="28" height="28"><rect x="4" y="18" width="6" height="12" rx="2" stroke="#c9a84c" stroke-width="2.5"/><rect x="38" y="18" width="6" height="12" rx="2" stroke="#c9a84c" stroke-width="2.5"/><rect x="10" y="14" width="6" height="20" rx="2" stroke="#c9a84c" stroke-width="2.5"/><rect x="32" y="14" width="6" height="20" rx="2" stroke="#c9a84c" stroke-width="2.5"/><line x1="16" y1="24" x2="32" y2="24" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"/></svg><span>SELFIE<b>GYM</b></span></div>
  <p class="ft-d">Your AI personal trainer. Customized workouts, meal plans, and coaching — available 24/7.</p>
  </div>
  <div class="ft-c"><h4>Product</h4><a onclick="sp('home')">Home</a><a onclick="sp('exercises')">Exercises</a><a onclick="sp('meals')">Meals</a><a onclick="sp('progress')">Progress</a></div>
  <div class="ft-c"><h4>Explore</h4><a onclick="sp('library')">Exercise Library</a><a onclick="sp('community')">Community</a><a onclick="sp('coach')">AI Coach</a><a onclick="sp('pricing-page')">Pricing</a></div>
  <div class="ft-c"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
  </div>
- <div class="ft-bt"><span>&copy; 2026 SelfieGym. All rights reserved.</span><span>Built with ♥ in Saudi Arabia</span></div>
+ <div class="ft-bt"><span>&copy; 2026 SelfieGym. All rights reserved.</span><span>Built with ♥ for fitness lovers</span></div>
 </div></footer>
 
 </div><!-- end home -->
@@ -454,20 +471,20 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <div class="ip-hero">
  <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
  <h1>MEAL <span>PLANS</span></h1>
- <p>Personalized nutrition with local Gulf dishes and international healthy options.</p>
+ <p>Personalized nutrition with international healthy options and full macro breakdowns.</p>
  </div>
 
  <div class="ip-section"><h2>BREAKFAST <span>OPTIONS</span></h2><p>Start your day with the right fuel.</p></div>
  <div class="card-grid">
  <div class="card rv"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&q=80" alt="Oatmeal" class="card-img"><div class="card-body"><div class="card-label">Breakfast</div><h3>PROTEIN OATMEAL BOWL</h3><p>Quick, filling, and packed with slow-release energy for your morning workout.</p><div class="macros"><div class="macro"><strong>420</strong>kcal</div><div class="macro"><strong>32g</strong>protein</div><div class="macro"><strong>52g</strong>carbs</div><div class="macro"><strong>12g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>80g oats, 1 scoop whey protein, 1 banana, 1 tbsp honey, 15g almonds, 200ml water</p></div></div></div>
- <div class="card rv"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Shakshuka" class="card-img"><div class="card-body"><div class="card-label">Breakfast — Gulf</div><h3>SHAKSHUKA</h3><p>Eggs in spiced tomato sauce. A Middle Eastern classic full of protein and flavor.</p><div class="macros"><div class="macro"><strong>350</strong>kcal</div><div class="macro"><strong>22g</strong>protein</div><div class="macro"><strong>24g</strong>carbs</div><div class="macro"><strong>16g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>3 eggs, 200g canned tomatoes, 1 bell pepper, 1 onion, 2 cloves garlic, cumin, paprika, olive oil, whole wheat bread</p></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Shakshuka" class="card-img"><div class="card-body"><div class="card-label">Breakfast — Mediterranean</div><h3>SHAKSHUKA</h3><p>Eggs poached in spiced tomato sauce. A Mediterranean classic packed with protein.</p><div class="macros"><div class="macro"><strong>350</strong>kcal</div><div class="macro"><strong>22g</strong>protein</div><div class="macro"><strong>24g</strong>carbs</div><div class="macro"><strong>16g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>3 eggs, 200g canned tomatoes, 1 bell pepper, 1 onion, 2 cloves garlic, cumin, paprika, olive oil, whole wheat bread</p></div></div></div>
  </div>
 
  <div class="ip-section"><h2>LUNCH <span>OPTIONS</span></h2><p>Power through your afternoon with balanced meals.</p></div>
  <div class="card-grid">
- <div class="card rv"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500&q=80" alt="Kabsa" class="card-img"><div class="card-body"><div class="card-label">Lunch — Saudi</div><h3>CHICKEN KABSA</h3><p>Saudi national dish. Fragrant spiced rice with roasted chicken and vegetables.</p><div class="macros"><div class="macro"><strong>580</strong>kcal</div><div class="macro"><strong>42g</strong>protein</div><div class="macro"><strong>65g</strong>carbs</div><div class="macro"><strong>14g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>200g chicken breast, 150g basmati rice, 1 tomato, 1 onion, kabsa spice mix, cardamom, cinnamon, bay leaf, raisins, olive oil</p></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500&q=80" alt="Kabsa" class="card-img"><div class="card-body"><div class="card-label">Lunch — Classic</div><h3>CHICKEN KABSA</h3><p>Fragrant spiced rice with roasted chicken and vegetables. A protein-packed classic.</p><div class="macros"><div class="macro"><strong>580</strong>kcal</div><div class="macro"><strong>42g</strong>protein</div><div class="macro"><strong>65g</strong>carbs</div><div class="macro"><strong>14g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>200g chicken breast, 150g basmati rice, 1 tomato, 1 onion, kabsa spice mix, cardamom, cinnamon, bay leaf, raisins, olive oil</p></div></div></div>
  <div class="card rv"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80" alt="Salad" class="card-img"><div class="card-body"><div class="card-label">Lunch — Healthy</div><h3>GRILLED CHICKEN SALAD</h3><p>Light but filling. Perfect for cutting phases or hot summer days.</p><div class="macros"><div class="macro"><strong>420</strong>kcal</div><div class="macro"><strong>45g</strong>protein</div><div class="macro"><strong>30g</strong>carbs</div><div class="macro"><strong>12g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>200g grilled chicken breast, mixed greens, 80g quinoa, cucumber, cherry tomatoes, lemon-olive oil dressing, feta cheese</p></div></div></div>
- <div class="card rv"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80" alt="Mandi" class="card-img"><div class="card-body"><div class="card-label">Lunch — Gulf</div><h3>LAMB MANDI</h3><p>Slow-cooked tender lamb on fragrant rice. A Gulf celebration dish high in protein.</p><div class="macros"><div class="macro"><strong>650</strong>kcal</div><div class="macro"><strong>48g</strong>protein</div><div class="macro"><strong>58g</strong>carbs</div><div class="macro"><strong>22g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>250g lamb leg, 150g basmati rice, mandi spice mix, dried lime, saffron, onion, garlic, ghee, raisins, almonds</p></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80" alt="Mandi" class="card-img"><div class="card-body"><div class="card-label">Lunch — Premium</div><h3>LAMB MANDI</h3><p>Slow-cooked tender lamb on fragrant rice. A hearty high-protein meal.</p><div class="macros"><div class="macro"><strong>650</strong>kcal</div><div class="macro"><strong>48g</strong>protein</div><div class="macro"><strong>58g</strong>carbs</div><div class="macro"><strong>22g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>250g lamb leg, 150g basmati rice, mandi spice mix, dried lime, saffron, onion, garlic, ghee, raisins, almonds</p></div></div></div>
  </div>
 
  <div class="ip-section"><h2>DINNER <span>OPTIONS</span></h2><p>Recovery meals to rebuild muscle while you sleep.</p></div>
@@ -476,10 +493,10 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <div class="card rv"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500&q=80" alt="Steak" class="card-img"><div class="card-body"><div class="card-label">Dinner — Protein</div><h3>LEAN STEAK & BROWN RICE</h3><p>Grilled sirloin with complex carbs and grilled vegetables. Maximum protein recovery.</p><div class="macros"><div class="macro"><strong>550</strong>kcal</div><div class="macro"><strong>50g</strong>protein</div><div class="macro"><strong>45g</strong>carbs</div><div class="macro"><strong>15g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>200g sirloin steak, 120g brown rice, grilled zucchini, bell peppers, garlic, rosemary, olive oil</p></div></div></div>
  </div>
 
- <div class="ip-section"><h2>SNACKS <span>& RAMADAN</span></h2><p>Smart snacking and Ramadan-friendly options.</p></div>
+ <div class="ip-section"><h2>SNACKS <span>& RECOVERY</span></h2><p>Smart snacking and post-workout recovery fuel.</p></div>
  <div class="card-grid">
  <div class="card rv"><img src="https://images.unsplash.com/photo-1622485831930-5eab6a538a2d?w=500&q=80" alt="Smoothie" class="card-img"><div class="card-body"><div class="card-label">Post-Workout</div><h3>PROTEIN SMOOTHIE</h3><p>Fast-absorbing post-workout recovery shake. Drink within 30 minutes of training.</p><div class="macros"><div class="macro"><strong>320</strong>kcal</div><div class="macro"><strong>35g</strong>protein</div><div class="macro"><strong>30g</strong>carbs</div><div class="macro"><strong>10g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>1 scoop whey protein, 1 banana, 1 tbsp peanut butter, 250ml oat milk, ice</p></div></div></div>
- <div class="card rv"><img src="https://images.unsplash.com/photo-1614961233913-a5113e3d6b22?w=500&q=80" alt="Dates" class="card-img"><div class="card-body"><div class="card-label">Ramadan — Iftar</div><h3>DATES, LABAN & SAMOSA</h3><p>Traditional Iftar starter. Quick energy, hydration, and a savory bite to break your fast.</p><div class="macros"><div class="macro"><strong>340</strong>kcal</div><div class="macro"><strong>12g</strong>protein</div><div class="macro"><strong>52g</strong>carbs</div><div class="macro"><strong>10g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>3 Medjool dates, 200ml laban, 2 small baked samosas (chicken or cheese)</p></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1614961233913-a5113e3d6b22?w=500&q=80" alt="Dates" class="card-img"><div class="card-body"><div class="card-label">Recovery Snack</div><h3>DATES, LABAN & SAMOSA</h3><p>Natural energy boost. Quick carbs, hydration, and a savory protein bite for recovery.</p><div class="macros"><div class="macro"><strong>340</strong>kcal</div><div class="macro"><strong>12g</strong>protein</div><div class="macro"><strong>52g</strong>carbs</div><div class="macro"><strong>10g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>3 Medjool dates, 200ml laban, 2 small baked samosas (chicken or cheese)</p></div></div></div>
  </div>
 </div>
 
@@ -559,8 +576,8 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <div class="card-grid" style="grid-template-columns:repeat(2,1fr)">
  <div class="card rv"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Live Chat" class="card-img" style="height:260px"><div class="card-body"><div class="card-label">Live Chat Coaching</div><h3>TALK TO YOUR TRAINER — ANYTIME</h3><p>Open WhatsApp or Telegram and just type. "I'm at the gym, what should I do today?" — "My knee hurts, what's the alternative?" — "I ate pizza, how do I fix my macros?" Your trainer responds instantly with personalized advice. No appointments, no waiting, no judgment. Just real coaching whenever you need it.</p><div class="card-tags"><span class="card-tag">WhatsApp</span><span class="card-tag">Telegram</span><span class="card-tag">Instant Reply</span></div></div></div>
  <div class="card rv"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Custom Programs" class="card-img" style="height:260px"><div class="card-body"><div class="card-label">Built Just For You</div><h3>PROGRAMS THAT EVOLVE WITH YOU</h3><p>Not a template. Not a one-size-fits-all PDF. Your trainer builds your program based on YOUR body, YOUR goals, YOUR equipment, and YOUR schedule. Hit a plateau? The program changes. Traveling? It adapts. Getting stronger? It pushes harder. This is what real personal training should be.</p><div class="card-tags"><span class="card-tag">Adaptive</span><span class="card-tag">Personal</span><span class="card-tag">Science-Based</span></div></div></div>
- <div class="card rv"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="24/7" class="card-img" style="height:260px"><div class="card-body"><div class="card-label">24/7 — No Days Off</div><h3>3AM QUESTION? NO PROBLEM.</h3><p>Your trainer doesn't sleep, doesn't take vacations, and never cancels on you. Whether it's 6AM before fajr or midnight after a late shift — your coach is there. Ask about nutrition, form, supplements, injuries, motivation, anything fitness-related. In Arabic or English. Always available.</p><div class="card-tags"><span class="card-tag">24/7</span><span class="card-tag">عربي + English</span><span class="card-tag">Always On</span></div></div></div>
- <div class="card rv"><img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&q=80" alt="Price" class="card-img" style="height:260px"><div class="card-body"><div class="card-label">The Real Difference</div><h3>800 SAR/MONTH? NOT ANYMORE.</h3><p>A personal trainer in Saudi costs 500-1500 SAR/month for 2-3 sessions a week. You get generic advice, zero nutrition support, and they disappear between sessions. SelfieGym gives you unlimited coaching, full meal plans, custom programs, and 24/7 availability — starting at $29.99/month. That's less than one session with a traditional trainer.</p><div class="card-tags"><span class="card-tag">From $29.99/mo</span><span class="card-tag">Unlimited</span><span class="card-tag">No Contracts</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="24/7" class="card-img" style="height:260px"><div class="card-body"><div class="card-label">24/7 — No Days Off</div><h3>3AM QUESTION? NO PROBLEM.</h3><p>Your trainer doesn't sleep, doesn't take vacations, and never cancels on you. Whether it's 6AM before sunrise or midnight after a late shift — your coach is there. Ask about nutrition, form, supplements, injuries, motivation, anything fitness-related. Always available.</p><div class="card-tags"><span class="card-tag">24/7</span><span class="card-tag">Always On</span><span class="card-tag">Always On</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&q=80" alt="Price" class="card-img" style="height:260px"><div class="card-body"><div class="card-label">The Real Difference</div><h3>$200/MONTH? NOT ANYMORE.</h3><p>A personal trainer costs $150-400/month for 2-3 sessions a week. You get generic advice, zero nutrition support, and they disappear between sessions. SelfieGym gives you unlimited coaching, full meal plans, custom programs, and 24/7 availability — starting at $19.99/month. That's less than one session with a traditional trainer.</p><div class="card-tags"><span class="card-tag">From $19.99/mo</span><span class="card-tag">Unlimited</span><span class="card-tag">No Contracts</span></div></div></div>
  </div>
 </div>
 
@@ -571,10 +588,9 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <h1>CHOOSE YOUR <span>PLAN</span></h1>
  <p>Start free for 7 days. No credit card required. Cancel anytime.</p>
  </div>
- <div class="card-grid">
- <div class="pc rv"><div class="pc-name">STARTER</div><div class="pc-price">$14<small>.99/mo</small></div><div class="pc-note">$143.90/year (save 20%)</div><ul><li>AI workout plans</li><li>Full exercise library</li><li>Basic macro calculator</li><li>Progress tracking</li><li>Workout logging</li></ul><button class="pb ol">GET STARTED</button></div>
- <div class="pc pop rv"><div class="pop-b">MOST POPULAR</div><div class="pc-name">PRO</div><div class="pc-price">$29<small>.99/mo</small></div><div class="pc-note">$287.90/year (save 20%)</div><ul><li>Everything in Starter</li><li>Full weekly meal plans</li><li>Recipes & grocery lists</li><li>Community & challenges</li><li>Weekly AI reports</li><li>Ramadan meal timing</li></ul><button class="pb fl">START FREE TRIAL</button></div>
- <div class="pc rv"><div class="pc-name">ELITE</div><div class="pc-price">$59<small>.99/mo</small></div><div class="pc-note">$575.90/year (save 20%)</div><ul><li>Everything in Pro</li><li>Monthly 1-on-1 coaching call</li><li>WhatsApp chat support</li><li>Custom program adjustments</li><li>Injury modifications</li><li>Advanced body analytics</li></ul><button class="pb ol">GET STARTED</button></div>
+ <div class="card-grid" style="grid-template-columns:repeat(2,1fr);max-width:800px;margin:0 auto">
+ <div class="pc rv"><div class="pc-name">BASIC</div><div class="pc-price">$9<small>.99/mo</small></div><div class="pc-note">$95.90/year (save 20%)</div><ul><li>AI workout plans</li><li>Full exercise library with HD videos</li><li>Macro calculator & nutrition guide</li><li>Progress tracking & body stats</li><li>Workout logging</li><li>Community & challenges</li></ul><button class="pb ol" onclick="openSignup()">GET STARTED</button></div>
+ <div class="pc pop rv"><div class="pop-b">RECOMMENDED</div><div class="pc-name">PRO</div><div class="pc-price">$19<small>.99/mo</small></div><div class="pc-note">$191.90/year (save 20%)</div><ul><li>Everything in Basic</li><li>Full weekly meal plans with recipes</li><li>Grocery lists & meal prep guides</li><li>Personal AI Trainer on WhatsApp</li><li>Personal AI Trainer on Telegram</li><li>24/7 unlimited coaching chat</li><li>Custom program adjustments</li><li>Weekly AI progress reports</li></ul><button class="pb fl" onclick="openSignup()">START FREE TRIAL</button></div>
  </div>
 </div>
 
@@ -621,7 +637,7 @@ function sp(id) {
  window.scrollTo({ top: 0, behavior: 'smooth' });
 
  // Update browser URL and title
- const titles = {home:'SelfieGym',exercises:'Exercises',meals:'Meal Plans',progress:'Progress',library:'Exercise Library',community:'Community',coach:'Personal Trainer','pricing-page':'Pricing'};
+ const titles = {home:'SelfieGym',exercises:'Exercises',meals:'Meal Plans',progress:'Progress',library:'Exercise Library',community:'Community',coach:'AI Coach','pricing-page':'Pricing'};
  document.title = (titles[id] || 'SelfieGym') + ' — SelfieGym';
  history.pushState({ page: id }, '', '#' + id);
 
@@ -669,6 +685,45 @@ const revealObserver = new IntersectionObserver(entries => {
  });
 }, { threshold: 0.1 });
 document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
+
+// === Signup Modal ===
+function openSignup() {
+ const modal = document.getElementById('signup-modal');
+ if (modal) modal.classList.add('show');
+}
+function closeSignup() {
+ const modal = document.getElementById('signup-modal');
+ if (modal) modal.classList.remove('show');
+}
+// Close modal on outside click
+document.addEventListener('DOMContentLoaded', function() {
+ const modal = document.getElementById('signup-modal');
+ if (modal) {
+ modal.addEventListener('click', function(e) {
+ if (e.target === this) closeSignup();
+ });
+ }
+});
 </script>
+
+<!-- SIGNUP MODAL -->
+<div id="signup-modal">
+ <div class="signup-box">
+ <button class="signup-close" onclick="closeSignup()">&times;</button>
+ <div id="signup-form-wrap">
+ <h2>JOIN <span>SELFIEGYM</span></h2>
+ <p class="signup-sub">Create your free account. Start your 7-day trial.</p>
+ <input type="text" class="s-field" id="s-name" placeholder="Full Name" autocomplete="name">
+ <input type="email" class="s-field" id="s-email" placeholder="Email Address" autocomplete="email">
+ <input type="password" class="s-field" id="s-pass" placeholder="Create Password" autocomplete="new-password">
+ <button class="s-btn" onclick="alert('Sign up successful! Check your email.');">CREATE ACCOUNT</button>
+ </div>
+ <div class="s-success" id="signup-success">
+ <h3>✦ WELCOME!</h3>
+ <p>Your account has been created.<br>Check your email to get started.</p>
+ </div>
+ </div>
+</div>
+
 </body>
 </html>

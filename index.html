@@ -26,7 +26,7 @@ body{font-family:var(--bd);background:var(--black);color:var(--white);overflow-x
 #gate>*{position:relative;z-index:1}
 .g-logo-wrap{display:flex;align-items:center;gap:14px;margin-bottom:.5rem}
 .g-logo-wrap svg{width:44px;height:44px}
-.g-title{font-family:var(--hd);font-size:2.8rem;font-weight:900;letter-spacing:3px;color:var(--white)}
+.g-title{font-family:var(--hd);font-size:2.8rem;font-weight:900;letter-spacing:3px}
 .g-title b{color:var(--gold)}
 .g-sub{color:var(--lg);margin:0 0 2rem;font-size:.9rem;letter-spacing:1px}
 .g-input{width:280px;padding:16px;border:2px solid var(--mg);border-radius:8px;background:transparent;color:var(--white);font-size:1.2rem;text-align:center;letter-spacing:6px;font-family:var(--bd);outline:none;transition:.3s var(--ease)}
@@ -45,9 +45,9 @@ nav.solid{background:rgba(10,10,10,.96);backdrop-filter:blur(20px);border-bottom
 .nl span{font-family:var(--hd);font-size:1.4rem;font-weight:800;color:var(--white);letter-spacing:2px}
 .nl b{color:var(--gold)}
 .nm{display:flex;gap:2.2rem;align-items:center;list-style:none}
-.nm a{text-decoration:none;color:rgba(255,255,255,.55);font-size:.85rem;font-weight:500;transition:.3s var(--ease);letter-spacing:.3px}
+.nm a{text-decoration:none;color:rgba(255,255,255,.55);font-size:.85rem;font-weight:500;transition:.3s var(--ease);letter-spacing:.3px;cursor:pointer}
 .nm a:hover{color:var(--gold)}
-.nc{padding:10px 26px;background:var(--gold);color:var(--black);border-radius:6px;font-weight:700;font-size:.82rem;text-decoration:none;transition:.3s var(--ease);letter-spacing:.5px}
+.nc{padding:10px 26px;background:var(--gold);color:var(--black);border-radius:6px;font-weight:700;font-size:.82rem;text-decoration:none;transition:.3s var(--ease);letter-spacing:.5px;cursor:pointer}
 .nc:hover{background:var(--gold-l);transform:translateY(-2px)}
 .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .ham span{width:22px;height:2px;background:var(--white);display:block}
@@ -89,7 +89,7 @@ section{padding:90px 4%}
 
 /* FEATURES */
 .fg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.fc{border-radius:12px;transition:.4s var(--ease);position:relative;overflow:hidden;cursor:default;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
+.fc{border-radius:12px;transition:.4s var(--ease);position:relative;overflow:hidden;cursor:pointer;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
 .fc:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(0,0,0,.5)}
 .fc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.4);transition:.4s var(--ease)}
 .fc:hover .fc-img{filter:brightness(.55)}
@@ -174,44 +174,54 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
 .ft-b b{color:var(--gold)}
 .ft-d{color:var(--lg);font-size:.82rem;line-height:1.7;max-width:260px}
 .ft-c h4{color:var(--gold);font-size:.72rem;font-weight:700;margin-bottom:.8rem;text-transform:uppercase;letter-spacing:2px}
-.ft-c a{display:block;color:var(--lg);text-decoration:none;font-size:.82rem;padding:3px 0;transition:.3s var(--ease)}
+.ft-c a{display:block;color:var(--lg);text-decoration:none;font-size:.82rem;padding:3px 0;transition:.3s var(--ease);cursor:pointer}
 .ft-c a:hover{color:var(--white)}
 .ft-bt{border-top:1px solid rgba(255,255,255,.05);padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--lg)}
 
-/* ====== INNER PAGES ====== */
-.ip-hero{padding:120px 4% 60px;text-align:center;background:linear-gradient(135deg,var(--black) 0%,var(--char) 100%)}
-.ip-hero h1{font-family:var(--hd);font-size:3.5rem;font-weight:900;margin-bottom:.5rem}
+/* INNER PAGES */
+.ip-hero{padding:120px 4% 50px;text-align:center;background:linear-gradient(135deg,var(--black) 0%,var(--char) 100%)}
+.ip-hero h1{font-family:var(--hd);font-size:3.2rem;font-weight:900;margin-bottom:.5rem}
 .ip-hero h1 span{color:var(--gold)}
 .ip-hero p{color:var(--lg);font-size:1rem;max-width:500px;margin:0 auto}
 .ip-back{display:inline-flex;align-items:center;gap:8px;color:var(--gold);text-decoration:none;font-size:.85rem;font-weight:600;margin-bottom:2rem;transition:.3s var(--ease)}
 .ip-back:hover{color:var(--gold-l)}
 
-/* Exercise Cards */
-.ex-grid{max-width:1100px;margin:0 auto;padding:40px 4% 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.ex-card{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;overflow:hidden;transition:.4s var(--ease)}
-.ex-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
-.ex-img{width:100%;height:200px;object-fit:cover;filter:brightness(.8);transition:.4s var(--ease)}
-.ex-card:hover .ex-img{filter:brightness(1)}
-.ex-body{padding:22px}
-.ex-muscle{font-size:.7rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem}
-.ex-card h3{font-family:var(--hd);font-size:1.05rem;font-weight:800;margin-bottom:.4rem;letter-spacing:.5px}
-.ex-card p{color:var(--lg);font-size:.82rem;line-height:1.6;margin-bottom:.8rem}
-.ex-meta{display:flex;gap:12px;flex-wrap:wrap}
-.ex-tag{padding:4px 10px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold);font-size:.7rem;font-weight:600}
+/* Exercise & General Cards */
+.card-grid{max-width:1100px;margin:0 auto;padding:40px 4% 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;overflow:hidden;transition:.4s var(--ease)}
+.card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.card-img{width:100%;height:200px;object-fit:cover;filter:brightness(.8);transition:.4s var(--ease)}
+.card:hover .card-img{filter:brightness(1)}
+.card-body{padding:22px}
+.card-label{font-size:.7rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem}
+.card h3{font-family:var(--hd);font-size:1rem;font-weight:800;margin-bottom:.4rem;letter-spacing:.5px}
+.card p{color:var(--lg);font-size:.82rem;line-height:1.6;margin-bottom:.8rem}
+.card-tags{display:flex;gap:8px;flex-wrap:wrap}
+.card-tag{padding:4px 10px;border-radius:4px;background:rgba(201,168,76,.1);color:var(--gold);font-size:.7rem;font-weight:600}
 
-/* Meal Cards */
-.ml-grid{max-width:1100px;margin:0 auto;padding:40px 4% 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.ml-card{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;overflow:hidden;transition:.4s var(--ease)}
-.ml-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
-.ml-img{width:100%;height:200px;object-fit:cover;filter:brightness(.85);transition:.4s var(--ease)}
-.ml-card:hover .ml-img{filter:brightness(1)}
-.ml-body{padding:22px}
-.ml-type{font-size:.7rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem}
-.ml-card h3{font-family:var(--hd);font-size:1.05rem;font-weight:800;margin-bottom:.4rem;letter-spacing:.5px}
-.ml-card p{color:var(--lg);font-size:.82rem;line-height:1.6;margin-bottom:.8rem}
-.ml-macros{display:flex;gap:8px;flex-wrap:wrap}
-.ml-m{padding:5px 12px;border-radius:4px;background:var(--dg);font-size:.72rem;color:rgba(255,255,255,.7);display:flex;flex-direction:column;align-items:center;min-width:60px}
-.ml-m strong{color:var(--gold);font-size:.85rem;font-weight:700}
+/* Meal macros */
+.macros{display:flex;gap:8px;flex-wrap:wrap}
+.macro{padding:5px 12px;border-radius:4px;background:var(--dg);font-size:.72rem;color:rgba(255,255,255,.7);display:flex;flex-direction:column;align-items:center;min-width:58px}
+.macro strong{color:var(--gold);font-size:.85rem;font-weight:700}
+
+/* Meal ingredients */
+.ingredients{margin-top:.6rem;padding-top:.6rem;border-top:1px solid rgba(255,255,255,.06)}
+.ingredients span{font-size:.72rem;color:var(--lg);font-weight:600;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:.3rem}
+.ingredients p{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.5;margin:0}
+
+/* Progress specific */
+.prog-stat{background:var(--char);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:30px;text-align:center;transition:.4s var(--ease)}
+.prog-stat:hover{border-color:var(--gold);transform:translateY(-4px)}
+.prog-num{font-family:var(--hd);font-size:2.8rem;font-weight:900;color:var(--gold);margin-bottom:.3rem}
+.prog-label{color:var(--lg);font-size:.82rem;text-transform:uppercase;letter-spacing:1px}
+.prog-bar-wrap{background:var(--mg);border-radius:8px;height:10px;margin-top:.6rem;overflow:hidden}
+.prog-bar{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+
+/* Section divider for inner pages */
+.ip-section{max-width:1100px;margin:0 auto;padding:0 4% 30px}
+.ip-section h2{font-family:var(--hd);font-size:1.8rem;font-weight:800;margin-bottom:.5rem;color:var(--white)}
+.ip-section h2 span{color:var(--gold)}
+.ip-section p{color:var(--lg);font-size:.9rem}
 
 /* REVEAL */
 .rv{opacity:0;transform:translateY(22px);transition:all .7s var(--ease)}
@@ -222,7 +232,7 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  .hero h1{font-size:3rem}
  .stats-in{grid-template-columns:repeat(2,1fr)}
  .st{border-right:none}
- .fg,.steps,.pg,.tg,.ex-grid,.ml-grid{grid-template-columns:1fr}
+ .fg,.steps,.pg,.tg,.card-grid{grid-template-columns:1fr}
  .pc.pop{transform:none}.pc.pop:hover{transform:translateY(-4px)}
  .sh{font-size:2.2rem}
  .cta h2{font-size:2.4rem}
@@ -239,7 +249,7 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
 <!-- GATE -->
 <div id="gate">
  <div class="g-logo-wrap">
- <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="2.5"/><path d="M16 32V20l8-6 8 6v12" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#c9a84c" stroke-width="2"/><path d="M24 20v-2M24 30v-2M18 24h-2M30 24h2" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/></svg>
+ <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="2.5"/><path d="M16 32V20l8-6 8 6v12" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#c9a84c" stroke-width="2"/></svg>
  <div class="g-title">SELFIE<b>GYM</b></div>
  </div>
  <p class="g-sub">Early Access Only</p>
@@ -257,20 +267,19 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  </a>
  <button class="ham" onclick="document.getElementById('nml').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
  <ul class="nm" id="nml">
- <li><a href="#" onclick="sp('home');cm();return false">Home</a></li>
- <li><a href="#" onclick="sp('exercises');cm();return false">Exercises</a></li>
- <li><a href="#" onclick="sp('meals');cm();return false">Meals</a></li>
- <li><a href="#features" onclick="sp('home');cm()">Features</a></li>
- <li><a href="#pricing" onclick="sp('home');cm()">Pricing</a></li>
- <li><a href="#" onclick="sp('home');cm();return false" class="nc">START FREE</a></li>
+ <li><a onclick="sp('home');cm()">Home</a></li>
+ <li><a onclick="sp('exercises');cm()">Exercises</a></li>
+ <li><a onclick="sp('meals');cm()">Meals</a></li>
+ <li><a onclick="sp('progress');cm()">Progress</a></li>
+ <li><a onclick="sp('pricing-page');cm()">Pricing</a></li>
+ <li><a onclick="sp('home');cm()" class="nc">START FREE</a></li>
  </ul>
  </div>
 </nav>
 
-<!-- ========== HOME PAGE ========== -->
+<!-- ==================== HOME ==================== -->
 <div id="page-home" class="page active">
 
-<!-- HERO -->
 <section class="hero" id="top">
  <div class="hero-bg"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80" alt="Gym"></div>
  <div class="hero-in">
@@ -278,13 +287,12 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <h1>TRAIN<br>SMARTER.<br><span>NOT HARDER.</span></h1>
  <p class="hero-p">Customized workout programs, personalized meal plans, and intelligent coaching — all from your phone. At 90% less than a real trainer.</p>
  <div class="hero-btns">
- <a href="#pricing" class="bg">START FREE TRIAL</a>
+ <a href="#" onclick="sp('pricing-page');return false" class="bg">START FREE TRIAL</a>
  <a href="#how" class="bo">HOW IT WORKS</a>
  </div>
  </div>
 </section>
 
-<!-- STATS -->
 <div class="stats"><div class="stats-in">
  <div class="st rv"><div class="st-n">24/7</div><div class="st-l">Always Available</div></div>
  <div class="st rv"><div class="st-n">90%</div><div class="st-l">Cost Savings</div></div>
@@ -292,43 +300,42 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  <div class="st rv"><div class="st-n">100+</div><div class="st-l">Meal Plans</div></div>
 </div></div>
 
-<!-- FEATURES -->
 <section id="features"><div class="si">
  <div class="stag rv">Features</div>
  <h2 class="sh rv">EVERYTHING YOU NEED.<br>NOTHING YOU DON'T.</h2>
  <p class="sd rv">One platform replaces your trainer, nutritionist, and fitness tracker.</p>
  <div class="fg">
- <div class="fc rv" onclick="sp('exercises')" style="cursor:pointer">
+ <div class="fc rv" onclick="sp('exercises')">
  <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Workout" class="fc-img">
  <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
  <h3>AI WORKOUT PLANS</h3>
- <p>Smart programs that adapt to your goals, equipment, and fitness level. Tap to explore →</p></div>
+ <p>Smart programs that adapt to your goals and equipment. Tap to explore →</p></div>
  </div>
- <div class="fc rv" onclick="sp('meals')" style="cursor:pointer">
+ <div class="fc rv" onclick="sp('meals')">
  <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Meals" class="fc-img">
  <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg></div>
  <h3>CUSTOM MEAL PLANS</h3>
- <p>Personalized nutrition with Saudi and Gulf favorites. Tap to explore →</p></div>
+ <p>Saudi, Gulf, and international meals with full macros. Tap to explore →</p></div>
  </div>
- <div class="fc rv" onclick="sp('progress')" style="cursor:pointer">
+ <div class="fc rv" onclick="sp('progress')">
  <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&q=80" alt="Progress" class="fc-img">
  <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
  <h3>PROGRESS TRACKING</h3>
- <p>Visual charts for weight, strength, and body measurements. Tap to explore →</p></div>
+ <p>Weight, strength, photos, and body stats. Tap to explore →</p></div>
  </div>
- <div class="fc rv" onclick="sp('library')" style="cursor:pointer">
- <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80" alt="Exercise Library" class="fc-img">
+ <div class="fc rv" onclick="sp('library')">
+ <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&q=80" alt="Library" class="fc-img">
  <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
  <h3>HD EXERCISE LIBRARY</h3>
  <p>1,000+ exercises with video demos. Tap to explore →</p></div>
  </div>
- <div class="fc rv" onclick="sp('reminders')" style="cursor:pointer">
- <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="Reminders" class="fc-img">
- <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
- <h3>SMART REMINDERS</h3>
- <p>Intelligent notifications that keep you on track. Tap to explore →</p></div>
+ <div class="fc rv" onclick="sp('community')">
+ <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80" alt="Community" class="fc-img">
+ <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+ <h3>COMMUNITY & CHALLENGES</h3>
+ <p>Join challenges, compete with friends, earn badges. Tap to explore →</p></div>
  </div>
- <div class="fc rv" onclick="sp('coach')" style="cursor:pointer">
+ <div class="fc rv" onclick="sp('coach')">
  <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Coach" class="fc-img">
  <div class="fc-content"><div class="fi"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
  <h3>WHATSAPP COACH</h3>
@@ -337,74 +344,67 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
  </div>
 </div></section>
 
-<!-- HOW IT WORKS -->
 <section id="how"><div class="si">
  <div class="stag rv">How It Works</div>
  <h2 class="sh rv">THREE STEPS.<br>ZERO CONFUSION.</h2>
- <p class="sd rv">No complicated setup. No confusing dashboards. Just results.</p>
+ <p class="sd rv">No complicated setup. Just results.</p>
  <div class="steps">
- <div class="step rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="Goals" class="step-img"><div class="step-ov"><div class="step-n">1</div><h3>SET YOUR GOALS</h3><p>Tell us what you want — muscle gain, fat loss, strength — plus your equipment and schedule.</p></div></div>
- <div class="step rv"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Plan" class="step-img"><div class="step-ov"><div class="step-n">2</div><h3>GET YOUR AI PLAN</h3><p>Receive a personalized workout program and meal plan built specifically for you in seconds.</p></div></div>
- <div class="step rv"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Train" class="step-img"><div class="step-ov"><div class="step-n">3</div><h3>TRAIN & EVOLVE</h3><p>Follow your program, log progress, and watch the AI adapt as you get stronger.</p></div></div>
+ <div class="step rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="Goals" class="step-img"><div class="step-ov"><div class="step-n">1</div><h3>SET YOUR GOALS</h3><p>Muscle gain, fat loss, strength — plus your equipment and schedule.</p></div></div>
+ <div class="step rv"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="Plan" class="step-img"><div class="step-ov"><div class="step-n">2</div><h3>GET YOUR AI PLAN</h3><p>Personalized workout program and meal plan built for you in seconds.</p></div></div>
+ <div class="step rv"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80" alt="Train" class="step-img"><div class="step-ov"><div class="step-n">3</div><h3>TRAIN & EVOLVE</h3><p>Log progress and watch the AI adapt as you get stronger.</p></div></div>
  </div>
 </div></section>
 
-<!-- PRICING -->
 <section id="pricing"><div class="si">
  <div class="stag rv">Pricing</div>
  <h2 class="sh rv">SIMPLE. HONEST.<br>NO HIDDEN FEES.</h2>
  <p class="sd rv">Start free for 7 days. Cancel anytime.</p>
  <div class="pg">
- <div class="pc rv"><div class="pc-name">STARTER</div><div class="pc-price">$14<small>.99/mo</small></div><div class="pc-note">Save 20% with annual billing</div><ul><li>AI workout plans</li><li>Full exercise library</li><li>Basic macro calculator</li><li>Progress tracking</li><li>Workout logging</li></ul><button class="pb ol">GET STARTED</button></div>
- <div class="pc pop rv"><div class="pop-b">MOST POPULAR</div><div class="pc-name">PRO</div><div class="pc-price">$29<small>.99/mo</small></div><div class="pc-note">Save 20% with annual billing</div><ul><li>Everything in Starter</li><li>Full weekly meal plans</li><li>Recipes & grocery lists</li><li>Community access</li><li>Weekly AI reports</li><li>Ramadan meal timing</li></ul><button class="pb fl">START FREE TRIAL</button></div>
- <div class="pc rv"><div class="pc-name">ELITE</div><div class="pc-price">$59<small>.99/mo</small></div><div class="pc-note">Save 20% with annual billing</div><ul><li>Everything in Pro</li><li>Monthly coaching call</li><li>WhatsApp chat support</li><li>Custom adjustments</li><li>Injury modifications</li><li>Advanced analytics</li></ul><button class="pb ol">GET STARTED</button></div>
+ <div class="pc rv"><div class="pc-name">STARTER</div><div class="pc-price">$14<small>.99/mo</small></div><div class="pc-note">Save 20% annually</div><ul><li>AI workout plans</li><li>Full exercise library</li><li>Basic macro calculator</li><li>Progress tracking</li><li>Workout logging</li></ul><button class="pb ol">GET STARTED</button></div>
+ <div class="pc pop rv"><div class="pop-b">MOST POPULAR</div><div class="pc-name">PRO</div><div class="pc-price">$29<small>.99/mo</small></div><div class="pc-note">Save 20% annually</div><ul><li>Everything in Starter</li><li>Full weekly meal plans</li><li>Recipes & grocery lists</li><li>Community & challenges</li><li>Weekly AI reports</li><li>Ramadan meal timing</li></ul><button class="pb fl">START FREE TRIAL</button></div>
+ <div class="pc rv"><div class="pc-name">ELITE</div><div class="pc-price">$59<small>.99/mo</small></div><div class="pc-note">Save 20% annually</div><ul><li>Everything in Pro</li><li>Monthly 1-on-1 coaching call</li><li>WhatsApp chat support</li><li>Custom program adjustments</li><li>Injury modifications</li><li>Advanced body analytics</li></ul><button class="pb ol">GET STARTED</button></div>
  </div>
 </div></section>
 
-<!-- TESTIMONIALS -->
 <section id="social"><div class="si">
  <div class="stag rv">Results</div>
  <h2 class="sh rv">REAL PEOPLE.<br>REAL RESULTS.</h2>
  <p class="sd rv">Don't take our word for it.</p>
  <div class="tg">
- <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"I trained for 3 years with zero progress. SelfieGym's AI adjusted my program and I saw results in the first month. The Saudi meal plans are a game changer."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed" class="tc-av"><div><div class="tc-n">Ahmed K.</div><div class="tc-r">Lost 12kg in 4 months</div></div></div></div>
- <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"As a working mom I have zero time to plan. This does everything. I just follow what it says and the results speak for themselves."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sara" class="tc-av"><div><div class="tc-n">Sara M.</div><div class="tc-r">Toned & energized</div></div></div></div>
- <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"I was paying 800 SAR/month for a trainer. SelfieGym gives me better programming for a fraction of the price."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Khalid" class="tc-av"><div><div class="tc-n">Khalid R.</div><div class="tc-r">Bench +30kg in 6 months</div></div></div></div>
+ <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"SelfieGym's AI adjusted my program and I saw results in the first month. The Saudi meal plans are a game changer."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed" class="tc-av"><div><div class="tc-n">Ahmed K.</div><div class="tc-r">Lost 12kg in 4 months</div></div></div></div>
+ <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"As a working mom I have zero time to plan. This does everything. The results speak for themselves."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sara" class="tc-av"><div><div class="tc-n">Sara M.</div><div class="tc-r">Toned & energized</div></div></div></div>
+ <div class="tc rv"><div class="tc-s">★★★★★</div><p class="tc-t">"I was paying 800 SAR/month for a trainer. SelfieGym gives me better programming for a fraction."</p><div class="tc-a"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Khalid" class="tc-av"><div><div class="tc-n">Khalid R.</div><div class="tc-r">Bench +30kg in 6 months</div></div></div></div>
  </div>
 </div></section>
 
-<!-- FAQ -->
 <section id="faq"><div class="si">
  <div class="stag rv">FAQ</div>
  <h2 class="sh rv">GOT QUESTIONS?</h2>
  <p class="sd rv">Everything you need to know.</p>
  <div class="fl">
- <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Do I need gym experience? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Not at all. SelfieGym works for all levels — from complete beginners to advanced athletes. The AI adapts difficulty based on your experience.</div></div></div>
- <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">How does the AI create my plan? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">It analyzes your goals, equipment, fitness level, and schedule. Then builds a periodized program with progressive overload — adjusting each week based on your performance.</div></div></div>
- <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Do you have Saudi / Gulf meals? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Yes! We have kabsa, mandi, jareesh, saleeg, and more — all with accurate macros. We also support Ramadan scheduling with suhoor and iftar planning.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Do I need gym experience? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Not at all. SelfieGym works for all levels. The AI adapts difficulty based on your experience.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">How does the AI create my plan? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">It analyzes your goals, equipment, fitness level, and schedule. Then builds a periodized program that adjusts each week based on your performance.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Do you have Saudi / Gulf meals? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Yes! Kabsa, mandi, jareesh, saleeg, and more — all with accurate macros. We also support Ramadan scheduling.</div></div></div>
  <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">Can I cancel anytime? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Absolutely. No contracts. Cancel anytime and you won't be charged again.</div></div></div>
- <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">What makes SelfieGym different? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">We combine AI training, personalized meals, progress tracking, and coaching in one platform. Plus we're the only app with Arabic support and Gulf food databases.</div></div></div>
- <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">How does WhatsApp coaching work? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">Message your AI coach on WhatsApp anytime — ask about form, request meal swaps, or adjust your program. Like a trainer in your pocket 24/7.</div></div></div>
+ <div class="fq-i rv"><button class="fq-q" onclick="tf(this)">What makes SelfieGym different? <span class="fq-ar">▾</span></button><div class="fq-a"><div class="fq-a-in">We combine AI training, personalized meals, progress tracking, and coaching in one platform — with Arabic support and Gulf food databases.</div></div></div>
  </div>
 </div></section>
 
-<!-- CTA -->
 <section class="cta">
  <div class="cta-bg"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1400&q=80" alt="Training"></div>
  <h2 class="rv">READY TO <span>TRANSFORM?</span></h2>
  <p class="rv">7 days free. No credit card. No excuses.</p>
- <a href="#pricing" class="bg rv">START YOUR FREE TRIAL</a>
+ <a href="#" onclick="sp('pricing-page');return false" class="bg rv">START YOUR FREE TRIAL</a>
 </section>
 
-<!-- FOOTER -->
 <footer><div class="ft">
  <div class="ft-top">
  <div>
  <div class="ft-b"><svg viewBox="0 0 48 48" fill="none" width="28" height="28"><circle cx="24" cy="24" r="22" stroke="#c9a84c" stroke-width="2.5"/><path d="M16 32V20l8-6 8 6v12" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="4" stroke="#c9a84c" stroke-width="2"/></svg><span>SELFIE<b>GYM</b></span></div>
  <p class="ft-d">Your AI personal trainer. Customized workouts, meal plans, and coaching — available 24/7.</p>
  </div>
- <div class="ft-c"><h4>Product</h4><a href="#features">Features</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></div>
- <div class="ft-c"><h4>Explore</h4><a href="#" onclick="sp('exercises');return false">Exercises</a><a href="#" onclick="sp('meals');return false">Meal Plans</a><a href="#">Blog</a></div>
+ <div class="ft-c"><h4>Product</h4><a onclick="sp('home')">Home</a><a onclick="sp('exercises')">Exercises</a><a onclick="sp('meals')">Meals</a><a onclick="sp('progress')">Progress</a></div>
+ <div class="ft-c"><h4>Explore</h4><a onclick="sp('library')">Exercise Library</a><a onclick="sp('community')">Community</a><a onclick="sp('coach')">AI Coach</a><a onclick="sp('pricing-page')">Pricing</a></div>
  <div class="ft-c"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div>
  </div>
  <div class="ft-bt"><span>&copy; 2026 SelfieGym. All rights reserved.</span><span>Built with ♥ in Saudi Arabia</span></div>
@@ -412,117 +412,169 @@ footer{background:var(--char);padding:55px 4% 25px;border-top:1px solid rgba(255
 
 </div><!-- end home -->
 
-<!-- ========== EXERCISES PAGE ========== -->
+<!-- ==================== EXERCISES ==================== -->
 <div id="page-exercises" class="page">
  <div class="ip-hero">
  <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
  <h1>WORKOUT <span>PROGRAMS</span></h1>
- <p>Explore our exercise library. Every movement demonstrated with perfect form.</p>
+ <p>Every exercise demonstrated with proper form. Build your perfect program.</p>
  </div>
- <div class="ex-grid">
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&q=80" alt="Bench Press" class="ex-img"><div class="ex-body"><div class="ex-muscle">Chest</div><h3>BARBELL BENCH PRESS</h3><p>The king of chest exercises. Builds overall chest mass, front delts, and triceps.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×8-12</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=500&q=80" alt="Incline Dumbbell" class="ex-img"><div class="ex-body"><div class="ex-muscle">Chest</div><h3>INCLINE DUMBBELL PRESS</h3><p>Targets upper chest for a fuller look. Great for balanced chest development.</p><div class="ex-meta"><span class="ex-tag">Dumbbells</span><span class="ex-tag">Intermediate</span><span class="ex-tag">3×10-12</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1603287681836-b174ce5074c2?w=500&q=80" alt="Cable Flyes" class="ex-img"><div class="ex-body"><div class="ex-muscle">Chest</div><h3>CABLE CHEST FLYES</h3><p>Constant tension isolation for chest. Perfect finishing exercise for maximum pump.</p><div class="ex-meta"><span class="ex-tag">Cable</span><span class="ex-tag">Beginner</span><span class="ex-tag">3×12-15</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1534368270820-9de3d8053204?w=500&q=80" alt="Deadlift" class="ex-img"><div class="ex-body"><div class="ex-muscle">Back</div><h3>BARBELL DEADLIFT</h3><p>The ultimate full-body compound movement. Builds back thickness, hamstrings, and grip strength.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Advanced</span><span class="ex-tag">4×5-8</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=500&q=80" alt="Pull Ups" class="ex-img"><div class="ex-body"><div class="ex-muscle">Back</div><h3>PULL-UPS</h3><p>Bodyweight king for back width. Hits lats, rhomboids, and biceps simultaneously.</p><div class="ex-meta"><span class="ex-tag">Bodyweight</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×Max</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=500&q=80" alt="Rows" class="ex-img"><div class="ex-body"><div class="ex-muscle">Back</div><h3>BARBELL BENT-OVER ROW</h3><p>Essential for back thickness. Targets mid-back, lats, and rear delts.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×8-12</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1567598508481-65985588e295?w=500&q=80" alt="Squats" class="ex-img"><div class="ex-body"><div class="ex-muscle">Legs</div><h3>BARBELL BACK SQUAT</h3><p>The foundation of leg training. Builds quads, glutes, and total-body strength.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×6-10</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1434608519344-49d77a699e1d?w=500&q=80" alt="Leg Press" class="ex-img"><div class="ex-body"><div class="ex-muscle">Legs</div><h3>LEG PRESS</h3><p>Machine-based quad builder. Safer alternative to squats for higher volume training.</p><div class="ex-meta"><span class="ex-tag">Machine</span><span class="ex-tag">Beginner</span><span class="ex-tag">4×10-15</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&q=80" alt="Lunges" class="ex-img"><div class="ex-body"><div class="ex-muscle">Legs</div><h3>WALKING LUNGES</h3><p>Unilateral leg exercise that builds balance, glutes, and quads evenly.</p><div class="ex-meta"><span class="ex-tag">Dumbbells</span><span class="ex-tag">Beginner</span><span class="ex-tag">3×12/leg</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=500&q=80" alt="OHP" class="ex-img"><div class="ex-body"><div class="ex-muscle">Shoulders</div><h3>OVERHEAD PRESS</h3><p>Primary shoulder mass builder. Develops front and side delts with core stability.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Intermediate</span><span class="ex-tag">4×6-10</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&q=80" alt="Lateral Raises" class="ex-img"><div class="ex-body"><div class="ex-muscle">Shoulders</div><h3>LATERAL RAISES</h3><p>Isolation for side delts. Creates the wide shoulder look every lifter wants.</p><div class="ex-meta"><span class="ex-tag">Dumbbells</span><span class="ex-tag">Beginner</span><span class="ex-tag">4×12-15</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&q=80" alt="Bicep Curls" class="ex-img"><div class="ex-body"><div class="ex-muscle">Arms</div><h3>BARBELL BICEP CURL</h3><p>Classic arm builder. Targets both heads of the bicep for peak and thickness.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Beginner</span><span class="ex-tag">3×10-12</span></div></div></div>
+
+ <div class="ip-section"><h2>CHEST <span>EXERCISES</span></h2><p>Build a powerful, well-rounded chest.</p></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&q=80" alt="Bench Press" class="card-img"><div class="card-body"><div class="card-label">Chest</div><h3>BARBELL BENCH PRESS</h3><p>The king of chest exercises. Lie flat, grip bar shoulder-width, lower to chest, press up explosively.</p><div class="card-tags"><span class="card-tag">Barbell</span><span class="card-tag">Compound</span><span class="card-tag">4×8-12</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=500&q=80" alt="Incline DB" class="card-img"><div class="card-body"><div class="card-label">Upper Chest</div><h3>INCLINE DUMBBELL PRESS</h3><p>Set bench to 30-45°. Press dumbbells up and squeeze at the top. Targets upper chest fibers.</p><div class="card-tags"><span class="card-tag">Dumbbells</span><span class="card-tag">Intermediate</span><span class="card-tag">3×10-12</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1603287681836-b174ce5074c2?w=500&q=80" alt="Cable Flyes" class="card-img"><div class="card-body"><div class="card-label">Chest Isolation</div><h3>CABLE CHEST FLYES</h3><p>Constant tension throughout the movement. Bring hands together in an arc, squeeze chest hard at peak.</p><div class="card-tags"><span class="card-tag">Cable</span><span class="card-tag">Isolation</span><span class="card-tag">3×12-15</span></div></div></div>
+ </div>
+
+ <div class="ip-section"><h2>BACK <span>EXERCISES</span></h2><p>Build width and thickness for a V-taper back.</p></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1534368270820-9de3d8053204?w=500&q=80" alt="Deadlift" class="card-img"><div class="card-body"><div class="card-label">Back — Full</div><h3>BARBELL DEADLIFT</h3><p>Hinge at hips, grip bar outside knees, drive through heels. Keep back neutral throughout.</p><div class="card-tags"><span class="card-tag">Barbell</span><span class="card-tag">Compound</span><span class="card-tag">4×5-8</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=500&q=80" alt="Pull Ups" class="card-img"><div class="card-body"><div class="card-label">Back — Width</div><h3>PULL-UPS</h3><p>Grip bar wider than shoulders. Pull chest to bar, squeeze lats at top. Control the descent.</p><div class="card-tags"><span class="card-tag">Bodyweight</span><span class="card-tag">Compound</span><span class="card-tag">4×Max</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=500&q=80" alt="Row" class="card-img"><div class="card-body"><div class="card-label">Back — Thickness</div><h3>BARBELL ROW</h3><p>Bend at 45°, pull bar to lower chest. Squeeze shoulder blades together at the top.</p><div class="card-tags"><span class="card-tag">Barbell</span><span class="card-tag">Compound</span><span class="card-tag">4×8-12</span></div></div></div>
+ </div>
+
+ <div class="ip-section"><h2>LEG <span>EXERCISES</span></h2><p>Complete lower body development — quads, hamstrings, and glutes.</p></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1567598508481-65985588e295?w=500&q=80" alt="Squat" class="card-img"><div class="card-body"><div class="card-label">Quads & Glutes</div><h3>BARBELL BACK SQUAT</h3><p>Bar on upper traps, feet shoulder-width. Descend until thighs parallel, drive up through heels.</p><div class="card-tags"><span class="card-tag">Barbell</span><span class="card-tag">Compound</span><span class="card-tag">4×6-10</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1434608519344-49d77a699e1d?w=500&q=80" alt="Leg Press" class="card-img"><div class="card-body"><div class="card-label">Quads</div><h3>LEG PRESS</h3><p>Feet shoulder-width on platform. Lower until 90° knee angle, press up without locking knees.</p><div class="card-tags"><span class="card-tag">Machine</span><span class="card-tag">Beginner</span><span class="card-tag">4×10-15</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&q=80" alt="Lunges" class="card-img"><div class="card-body"><div class="card-label">Glutes & Balance</div><h3>WALKING LUNGES</h3><p>Step forward, lower back knee to floor, push through front heel. Alternate legs continuously.</p><div class="card-tags"><span class="card-tag">Dumbbells</span><span class="card-tag">Functional</span><span class="card-tag">3×12/leg</span></div></div></div>
+ </div>
+
+ <div class="ip-section"><h2>SHOULDERS <span>& ARMS</span></h2><p>Build boulder shoulders and sleeve-busting arms.</p></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=500&q=80" alt="OHP" class="card-img"><div class="card-body"><div class="card-label">Shoulders</div><h3>OVERHEAD PRESS</h3><p>Press barbell from shoulders to overhead lockout. Core tight, squeeze glutes for stability.</p><div class="card-tags"><span class="card-tag">Barbell</span><span class="card-tag">Compound</span><span class="card-tag">4×6-10</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&q=80" alt="Lateral Raise" class="card-img"><div class="card-body"><div class="card-label">Side Delts</div><h3>LATERAL RAISES</h3><p>Raise dumbbells to sides until parallel with floor. Lead with elbows, controlled descent.</p><div class="card-tags"><span class="card-tag">Dumbbells</span><span class="card-tag">Isolation</span><span class="card-tag">4×12-15</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&q=80" alt="Curls" class="card-img"><div class="card-body"><div class="card-label">Biceps</div><h3>BARBELL BICEP CURL</h3><p>Elbows pinned to sides. Curl bar up, squeeze at top, slow 3-second negative on the way down.</p><div class="card-tags"><span class="card-tag">Barbell</span><span class="card-tag">Isolation</span><span class="card-tag">3×10-12</span></div></div></div>
  </div>
 </div>
 
-<!-- ========== MEALS PAGE ========== -->
+<!-- ==================== MEALS ==================== -->
 <div id="page-meals" class="page">
  <div class="ip-hero">
  <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
  <h1>MEAL <span>PLANS</span></h1>
  <p>Personalized nutrition with local Gulf dishes and international healthy options.</p>
  </div>
- <div class="ml-grid">
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&q=80" alt="Oatmeal" class="ml-img"><div class="ml-body"><div class="ml-type">Breakfast</div><h3>PROTEIN OATMEAL BOWL</h3><p>Oats with whey protein, banana, honey, and almonds. Quick and packed with energy.</p><div class="ml-macros"><div class="ml-m"><strong>420</strong>kcal</div><div class="ml-m"><strong>32g</strong>protein</div><div class="ml-m"><strong>52g</strong>carbs</div><div class="ml-m"><strong>12g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=80" alt="Eggs" class="ml-img"><div class="ml-body"><div class="ml-type">Breakfast</div><h3>EGGS & AVOCADO TOAST</h3><p>Whole grain toast with scrambled eggs, avocado, and cherry tomatoes.</p><div class="ml-macros"><div class="ml-m"><strong>380</strong>kcal</div><div class="ml-m"><strong>24g</strong>protein</div><div class="ml-m"><strong>28g</strong>carbs</div><div class="ml-m"><strong>18g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Shakshuka" class="ml-img"><div class="ml-body"><div class="ml-type">Breakfast</div><h3>SHAKSHUKA</h3><p>Eggs poached in spiced tomato sauce with bell peppers. Serve with whole wheat bread.</p><div class="ml-macros"><div class="ml-m"><strong>350</strong>kcal</div><div class="ml-m"><strong>22g</strong>protein</div><div class="ml-m"><strong>24g</strong>carbs</div><div class="ml-m"><strong>16g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500&q=80" alt="Kabsa" class="ml-img"><div class="ml-body"><div class="ml-type">Lunch — Saudi</div><h3>CHICKEN KABSA</h3><p>Saudi national dish. Spiced rice with roasted chicken, tomatoes, and raisins.</p><div class="ml-macros"><div class="ml-m"><strong>580</strong>kcal</div><div class="ml-m"><strong>42g</strong>protein</div><div class="ml-m"><strong>65g</strong>carbs</div><div class="ml-m"><strong>14g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80" alt="Grilled Chicken" class="ml-img"><div class="ml-body"><div class="ml-type">Lunch</div><h3>GRILLED CHICKEN SALAD</h3><p>Grilled chicken breast over mixed greens with quinoa, cucumber, and lemon dressing.</p><div class="ml-macros"><div class="ml-m"><strong>420</strong>kcal</div><div class="ml-m"><strong>45g</strong>protein</div><div class="ml-m"><strong>30g</strong>carbs</div><div class="ml-m"><strong>12g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80" alt="Mandi" class="ml-img"><div class="ml-body"><div class="ml-type">Lunch — Gulf</div><h3>LAMB MANDI</h3><p>Slow-cooked lamb with fragrant basmati rice. A Gulf classic high in protein.</p><div class="ml-macros"><div class="ml-m"><strong>650</strong>kcal</div><div class="ml-m"><strong>48g</strong>protein</div><div class="ml-m"><strong>58g</strong>carbs</div><div class="ml-m"><strong>22g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80" alt="Salmon" class="ml-img"><div class="ml-body"><div class="ml-type">Dinner</div><h3>GRILLED SALMON</h3><p>Omega-3 rich salmon fillet with roasted sweet potato and steamed broccoli.</p><div class="ml-macros"><div class="ml-m"><strong>480</strong>kcal</div><div class="ml-m"><strong>40g</strong>protein</div><div class="ml-m"><strong>35g</strong>carbs</div><div class="ml-m"><strong>18g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500&q=80" alt="Steak" class="ml-img"><div class="ml-body"><div class="ml-type">Dinner</div><h3>LEAN STEAK & RICE</h3><p>Grilled sirloin steak with brown rice and grilled vegetables. High protein recovery meal.</p><div class="ml-macros"><div class="ml-m"><strong>550</strong>kcal</div><div class="ml-m"><strong>50g</strong>protein</div><div class="ml-m"><strong>45g</strong>carbs</div><div class="ml-m"><strong>15g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1511690743698-d9d18f7e20f1?w=500&q=80" alt="Jareesh" class="ml-img"><div class="ml-body"><div class="ml-type">Dinner — Saudi</div><h3>JAREESH</h3><p>Crushed wheat cooked with chicken broth and spices. Traditional Saudi comfort food, high fiber.</p><div class="ml-macros"><div class="ml-m"><strong>380</strong>kcal</div><div class="ml-m"><strong>28g</strong>protein</div><div class="ml-m"><strong>48g</strong>carbs</div><div class="ml-m"><strong>8g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1622485831930-5eab6a538a2d?w=500&q=80" alt="Protein Shake" class="ml-img"><div class="ml-body"><div class="ml-type">Snack</div><h3>PROTEIN SMOOTHIE</h3><p>Whey protein, banana, peanut butter, oat milk. Perfect post-workout recovery shake.</p><div class="ml-macros"><div class="ml-m"><strong>320</strong>kcal</div><div class="ml-m"><strong>35g</strong>protein</div><div class="ml-m"><strong>30g</strong>carbs</div><div class="ml-m"><strong>10g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?w=500&q=80" alt="Greek Yogurt" class="ml-img"><div class="ml-body"><div class="ml-type">Snack</div><h3>GREEK YOGURT & NUTS</h3><p>Full-fat Greek yogurt with mixed nuts, honey drizzle, and berries.</p><div class="ml-macros"><div class="ml-m"><strong>280</strong>kcal</div><div class="ml-m"><strong>20g</strong>protein</div><div class="ml-m"><strong>18g</strong>carbs</div><div class="ml-m"><strong>14g</strong>fat</div></div></div></div>
- <div class="ml-card rv"><img src="https://images.unsplash.com/photo-1614961233913-a5113e3d6b22?w=500&q=80" alt="Dates" class="ml-img"><div class="ml-body"><div class="ml-type">Snack — Ramadan</div><h3>DATES & LABAN</h3><p>Traditional Iftar starter. 3 dates with a glass of laban. Quick energy and hydration.</p><div class="ml-macros"><div class="ml-m"><strong>220</strong>kcal</div><div class="ml-m"><strong>8g</strong>protein</div><div class="ml-m"><strong>42g</strong>carbs</div><div class="ml-m"><strong>3g</strong>fat</div></div></div></div>
+
+ <div class="ip-section"><h2>BREAKFAST <span>OPTIONS</span></h2><p>Start your day with the right fuel.</p></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&q=80" alt="Oatmeal" class="card-img"><div class="card-body"><div class="card-label">Breakfast</div><h3>PROTEIN OATMEAL BOWL</h3><p>Quick, filling, and packed with slow-release energy for your morning workout.</p><div class="macros"><div class="macro"><strong>420</strong>kcal</div><div class="macro"><strong>32g</strong>protein</div><div class="macro"><strong>52g</strong>carbs</div><div class="macro"><strong>12g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>80g oats, 1 scoop whey protein, 1 banana, 1 tbsp honey, 15g almonds, 200ml water</p></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Shakshuka" class="card-img"><div class="card-body"><div class="card-label">Breakfast — Gulf</div><h3>SHAKSHUKA</h3><p>Eggs in spiced tomato sauce. A Middle Eastern classic full of protein and flavor.</p><div class="macros"><div class="macro"><strong>350</strong>kcal</div><div class="macro"><strong>22g</strong>protein</div><div class="macro"><strong>24g</strong>carbs</div><div class="macro"><strong>16g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>3 eggs, 200g canned tomatoes, 1 bell pepper, 1 onion, 2 cloves garlic, cumin, paprika, olive oil, whole wheat bread</p></div></div></div>
+ </div>
+
+ <div class="ip-section"><h2>LUNCH <span>OPTIONS</span></h2><p>Power through your afternoon with balanced meals.</p></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500&q=80" alt="Kabsa" class="card-img"><div class="card-body"><div class="card-label">Lunch — Saudi</div><h3>CHICKEN KABSA</h3><p>Saudi national dish. Fragrant spiced rice with roasted chicken and vegetables.</p><div class="macros"><div class="macro"><strong>580</strong>kcal</div><div class="macro"><strong>42g</strong>protein</div><div class="macro"><strong>65g</strong>carbs</div><div class="macro"><strong>14g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>200g chicken breast, 150g basmati rice, 1 tomato, 1 onion, kabsa spice mix, cardamom, cinnamon, bay leaf, raisins, olive oil</p></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80" alt="Salad" class="card-img"><div class="card-body"><div class="card-label">Lunch — Healthy</div><h3>GRILLED CHICKEN SALAD</h3><p>Light but filling. Perfect for cutting phases or hot summer days.</p><div class="macros"><div class="macro"><strong>420</strong>kcal</div><div class="macro"><strong>45g</strong>protein</div><div class="macro"><strong>30g</strong>carbs</div><div class="macro"><strong>12g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>200g grilled chicken breast, mixed greens, 80g quinoa, cucumber, cherry tomatoes, lemon-olive oil dressing, feta cheese</p></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80" alt="Mandi" class="card-img"><div class="card-body"><div class="card-label">Lunch — Gulf</div><h3>LAMB MANDI</h3><p>Slow-cooked tender lamb on fragrant rice. A Gulf celebration dish high in protein.</p><div class="macros"><div class="macro"><strong>650</strong>kcal</div><div class="macro"><strong>48g</strong>protein</div><div class="macro"><strong>58g</strong>carbs</div><div class="macro"><strong>22g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>250g lamb leg, 150g basmati rice, mandi spice mix, dried lime, saffron, onion, garlic, ghee, raisins, almonds</p></div></div></div>
+ </div>
+
+ <div class="ip-section"><h2>DINNER <span>OPTIONS</span></h2><p>Recovery meals to rebuild muscle while you sleep.</p></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80" alt="Salmon" class="card-img"><div class="card-body"><div class="card-label">Dinner — Healthy</div><h3>GRILLED SALMON & SWEET POTATO</h3><p>Omega-3 rich salmon with complex carbs. The perfect recovery dinner.</p><div class="macros"><div class="macro"><strong>480</strong>kcal</div><div class="macro"><strong>40g</strong>protein</div><div class="macro"><strong>35g</strong>carbs</div><div class="macro"><strong>18g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>180g salmon fillet, 150g sweet potato, 100g steamed broccoli, lemon, dill, olive oil, salt and pepper</p></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=500&q=80" alt="Steak" class="card-img"><div class="card-body"><div class="card-label">Dinner — Protein</div><h3>LEAN STEAK & BROWN RICE</h3><p>Grilled sirloin with complex carbs and grilled vegetables. Maximum protein recovery.</p><div class="macros"><div class="macro"><strong>550</strong>kcal</div><div class="macro"><strong>50g</strong>protein</div><div class="macro"><strong>45g</strong>carbs</div><div class="macro"><strong>15g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>200g sirloin steak, 120g brown rice, grilled zucchini, bell peppers, garlic, rosemary, olive oil</p></div></div></div>
+ </div>
+
+ <div class="ip-section"><h2>SNACKS <span>& RAMADAN</span></h2><p>Smart snacking and Ramadan-friendly options.</p></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1622485831930-5eab6a538a2d?w=500&q=80" alt="Smoothie" class="card-img"><div class="card-body"><div class="card-label">Post-Workout</div><h3>PROTEIN SMOOTHIE</h3><p>Fast-absorbing post-workout recovery shake. Drink within 30 minutes of training.</p><div class="macros"><div class="macro"><strong>320</strong>kcal</div><div class="macro"><strong>35g</strong>protein</div><div class="macro"><strong>30g</strong>carbs</div><div class="macro"><strong>10g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>1 scoop whey protein, 1 banana, 1 tbsp peanut butter, 250ml oat milk, ice</p></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1614961233913-a5113e3d6b22?w=500&q=80" alt="Dates" class="card-img"><div class="card-body"><div class="card-label">Ramadan — Iftar</div><h3>DATES, LABAN & SAMOSA</h3><p>Traditional Iftar starter. Quick energy, hydration, and a savory bite to break your fast.</p><div class="macros"><div class="macro"><strong>340</strong>kcal</div><div class="macro"><strong>12g</strong>protein</div><div class="macro"><strong>52g</strong>carbs</div><div class="macro"><strong>10g</strong>fat</div></div><div class="ingredients"><span>Ingredients</span><p>3 Medjool dates, 200ml laban, 2 small baked samosas (chicken or cheese)</p></div></div></div>
  </div>
 </div>
 
-<!-- ========== PROGRESS PAGE ========== -->
+<!-- ==================== PROGRESS ==================== -->
 <div id="page-progress" class="page">
  <div class="ip-hero">
  <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
- <h1>PROGRESS <span>TRACKING</span></h1>
- <p>See your transformation unfold with data-driven insights.</p>
+ <h1>YOUR <span>PROGRESS</span></h1>
+ <p>Every rep, every meal, every kilo — tracked and visualized.</p>
  </div>
- <div class="ex-grid">
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=500&q=80" alt="Weight Tracking" class="ex-img"><div class="ex-body"><div class="ex-muscle">Body Stats</div><h3>WEIGHT TRACKING</h3><p>Log your daily weight and see trends over weeks and months. Smart averages filter out daily fluctuations.</p><div class="ex-meta"><span class="ex-tag">Daily</span><span class="ex-tag">Auto-chart</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&q=80" alt="Strength Progress" class="ex-img"><div class="ex-body"><div class="ex-muscle">Performance</div><h3>STRENGTH PROGRESSION</h3><p>Track your personal records on every exercise. See your bench, squat, and deadlift numbers climb over time.</p><div class="ex-meta"><span class="ex-tag">Per Exercise</span><span class="ex-tag">PR Alerts</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=500&q=80" alt="Body Measurements" class="ex-img"><div class="ex-body"><div class="ex-muscle">Measurements</div><h3>BODY MEASUREMENTS</h3><p>Track chest, waist, arms, thighs, and more. See which areas are growing or leaning out.</p><div class="ex-meta"><span class="ex-tag">Bi-weekly</span><span class="ex-tag">Visual Charts</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&q=80" alt="Progress Photos" class="ex-img"><div class="ex-body"><div class="ex-muscle">Visual</div><h3>PROGRESS PHOTOS</h3><p>Take front, side, and back photos. Compare side-by-side over weeks to see your transformation.</p><div class="ex-meta"><span class="ex-tag">Monthly</span><span class="ex-tag">Side-by-side</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&q=80" alt="Workout Stats" class="ex-img"><div class="ex-body"><div class="ex-muscle">Activity</div><h3>WORKOUT STATS</h3><p>Total workouts completed, calories burned, volume lifted, and training streaks. Stay motivated with data.</p><div class="ex-meta"><span class="ex-tag">Real-time</span><span class="ex-tag">Streaks</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=80" alt="Nutrition Stats" class="ex-img"><div class="ex-body"><div class="ex-muscle">Nutrition</div><h3>NUTRITION ADHERENCE</h3><p>See how well you're hitting your daily calorie and macro targets. Weekly compliance reports.</p><div class="ex-meta"><span class="ex-tag">Weekly</span><span class="ex-tag">Reports</span></div></div></div>
+
+ <div class="ip-section"><h2>YOUR <span>STATS</span></h2><p>Key metrics at a glance.</p></div>
+ <div class="card-grid">
+ <div class="prog-stat rv"><div class="prog-num">47</div><div class="prog-label">Workouts Completed</div><div class="prog-bar-wrap"><div class="prog-bar" style="width:78%"></div></div></div>
+ <div class="prog-stat rv"><div class="prog-num">18,240</div><div class="prog-label">Calories Burned</div><div class="prog-bar-wrap"><div class="prog-bar" style="width:65%"></div></div></div>
+ <div class="prog-stat rv"><div class="prog-num">23</div><div class="prog-label">Day Streak 🔥</div><div class="prog-bar-wrap"><div class="prog-bar" style="width:92%"></div></div></div>
+ </div>
+
+ <div class="ip-section"><h2>BODY <span>TRACKING</span></h2><p>Monitor your transformation over time.</p></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=500&q=80" alt="Weight" class="card-img"><div class="card-body"><div class="card-label">Body Stats</div><h3>WEIGHT TRACKING</h3><p>Log daily weight. Smart 7-day averages filter out water fluctuations. See the real trend.</p><div class="card-tags"><span class="card-tag">Daily</span><span class="card-tag">Auto-chart</span><span class="card-tag">7-day avg</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=500&q=80" alt="Measurements" class="card-img"><div class="card-body"><div class="card-label">Measurements</div><h3>BODY MEASUREMENTS</h3><p>Track chest, waist, arms, thighs. See which areas are growing or leaning out week by week.</p><div class="card-tags"><span class="card-tag">Bi-weekly</span><span class="card-tag">6 areas</span><span class="card-tag">Charts</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1550345332-09e3ac987658?w=500&q=80" alt="Photos" class="card-img"><div class="card-body"><div class="card-label">Visual</div><h3>PROGRESS PHOTOS</h3><p>Front, side, and back photos. Side-by-side comparison slider to see your transformation.</p><div class="card-tags"><span class="card-tag">Monthly</span><span class="card-tag">Side-by-side</span><span class="card-tag">Private</span></div></div></div>
+ </div>
+
+ <div class="ip-section"><h2>STRENGTH <span>RECORDS</span></h2><p>Watch your numbers climb over time.</p></div>
+ <div class="card-grid">
+ <div class="prog-stat rv"><div class="prog-num">80kg</div><div class="prog-label">Bench Press PR</div><div class="prog-bar-wrap"><div class="prog-bar" style="width:70%"></div></div></div>
+ <div class="prog-stat rv"><div class="prog-num">120kg</div><div class="prog-label">Squat PR</div><div class="prog-bar-wrap"><div class="prog-bar" style="width:82%"></div></div></div>
+ <div class="prog-stat rv"><div class="prog-num">140kg</div><div class="prog-label">Deadlift PR</div><div class="prog-bar-wrap"><div class="prog-bar" style="width:88%"></div></div></div>
  </div>
 </div>
 
-<!-- ========== EXERCISE LIBRARY PAGE ========== -->
+<!-- ==================== EXERCISE LIBRARY ==================== -->
 <div id="page-library" class="page">
  <div class="ip-hero">
  <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
  <h1>EXERCISE <span>LIBRARY</span></h1>
- <p>1,000+ exercises with HD video demonstrations. Perfect form, every rep.</p>
+ <p>1,000+ exercises organized by muscle group. HD video for every movement.</p>
  </div>
- <div class="ex-grid">
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&q=80" alt="Chest" class="ex-img"><div class="ex-body"><div class="ex-muscle">Chest — 45 Exercises</div><h3>CHEST EXERCISES</h3><p>Bench press variations, flyes, push-ups, dips, and cable work. Build a complete chest from every angle.</p><div class="ex-meta"><span class="ex-tag">Barbell</span><span class="ex-tag">Dumbbell</span><span class="ex-tag">Cable</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=500&q=80" alt="Back" class="ex-img"><div class="ex-body"><div class="ex-muscle">Back — 50 Exercises</div><h3>BACK EXERCISES</h3><p>Pull-ups, rows, deadlifts, lat pulldowns. Build width and thickness for a V-taper back.</p><div class="ex-meta"><span class="ex-tag">Pull</span><span class="ex-tag">Row</span><span class="ex-tag">Deadlift</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1567598508481-65985588e295?w=500&q=80" alt="Legs" class="ex-img"><div class="ex-body"><div class="ex-muscle">Legs — 60 Exercises</div><h3>LEG EXERCISES</h3><p>Squats, leg press, lunges, hamstring curls, calf raises. Complete lower body development.</p><div class="ex-meta"><span class="ex-tag">Quads</span><span class="ex-tag">Hamstrings</span><span class="ex-tag">Glutes</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=500&q=80" alt="Shoulders" class="ex-img"><div class="ex-body"><div class="ex-muscle">Shoulders — 35 Exercises</div><h3>SHOULDER EXERCISES</h3><p>Overhead press, lateral raises, face pulls, rear delt work. Build boulder shoulders.</p><div class="ex-meta"><span class="ex-tag">Front</span><span class="ex-tag">Side</span><span class="ex-tag">Rear</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&q=80" alt="Arms" class="ex-img"><div class="ex-body"><div class="ex-muscle">Arms — 40 Exercises</div><h3>ARM EXERCISES</h3><p>Bicep curls, tricep extensions, hammer curls, skull crushers. Sleeve-busting arms.</p><div class="ex-meta"><span class="ex-tag">Biceps</span><span class="ex-tag">Triceps</span><span class="ex-tag">Forearms</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&q=80" alt="Core" class="ex-img"><div class="ex-body"><div class="ex-muscle">Core — 30 Exercises</div><h3>CORE & ABS</h3><p>Planks, crunches, leg raises, Russian twists, cable woodchops. Bulletproof midsection.</p><div class="ex-meta"><span class="ex-tag">Upper Abs</span><span class="ex-tag">Lower Abs</span><span class="ex-tag">Obliques</span></div></div></div>
+ <div class="card-grid">
+ <div class="card rv" onclick="sp('exercises')"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&q=80" alt="Chest" class="card-img"><div class="card-body"><div class="card-label">45 Exercises</div><h3>CHEST</h3><p>Bench press, flyes, push-ups, dips, cable work. Every angle covered.</p><div class="card-tags"><span class="card-tag">Tap to view</span></div></div></div>
+ <div class="card rv" onclick="sp('exercises')"><img src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=500&q=80" alt="Back" class="card-img"><div class="card-body"><div class="card-label">50 Exercises</div><h3>BACK</h3><p>Pull-ups, rows, deadlifts, lat pulldowns. Width and thickness.</p><div class="card-tags"><span class="card-tag">Tap to view</span></div></div></div>
+ <div class="card rv" onclick="sp('exercises')"><img src="https://images.unsplash.com/photo-1567598508481-65985588e295?w=500&q=80" alt="Legs" class="card-img"><div class="card-body"><div class="card-label">60 Exercises</div><h3>LEGS</h3><p>Squats, leg press, lunges, curls, extensions. Complete lower body.</p><div class="card-tags"><span class="card-tag">Tap to view</span></div></div></div>
+ <div class="card rv" onclick="sp('exercises')"><img src="https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=500&q=80" alt="Shoulders" class="card-img"><div class="card-body"><div class="card-label">35 Exercises</div><h3>SHOULDERS</h3><p>Overhead press, lateral raises, face pulls, rear delts. Boulder shoulders.</p><div class="card-tags"><span class="card-tag">Tap to view</span></div></div></div>
+ <div class="card rv" onclick="sp('exercises')"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&q=80" alt="Arms" class="card-img"><div class="card-body"><div class="card-label">40 Exercises</div><h3>ARMS</h3><p>Bicep curls, tricep work, hammer curls, skull crushers.</p><div class="card-tags"><span class="card-tag">Tap to view</span></div></div></div>
+ <div class="card rv" onclick="sp('exercises')"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&q=80" alt="Core" class="card-img"><div class="card-body"><div class="card-label">30 Exercises</div><h3>CORE & ABS</h3><p>Planks, crunches, leg raises, cable woodchops. Bulletproof midsection.</p><div class="card-tags"><span class="card-tag">Tap to view</span></div></div></div>
  </div>
 </div>
 
-<!-- ========== REMINDERS PAGE ========== -->
-<div id="page-reminders" class="page">
+<!-- ==================== COMMUNITY ==================== -->
+<div id="page-community" class="page">
  <div class="ip-hero">
  <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
- <h1>SMART <span>REMINDERS</span></h1>
- <p>Never miss a workout or meal again. Your AI keeps you accountable.</p>
+ <h1>COMMUNITY & <span>CHALLENGES</span></h1>
+ <p>Train together. Compete. Win. Stay accountable with your fitness tribe.</p>
  </div>
- <div class="ex-grid">
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&q=80" alt="Workout Reminder" class="ex-img"><div class="ex-body"><div class="ex-muscle">Fitness</div><h3>WORKOUT REMINDERS</h3><p>Get notified before your scheduled workout. The AI picks the best time based on your habits and calendar.</p><div class="ex-meta"><span class="ex-tag">Daily</span><span class="ex-tag">Smart Timing</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=80" alt="Meal Reminder" class="ex-img"><div class="ex-body"><div class="ex-muscle">Nutrition</div><h3>MEAL REMINDERS</h3><p>Reminders for breakfast, lunch, dinner, and snacks. Stay on your nutrition plan without thinking about it.</p><div class="ex-meta"><span class="ex-tag">4x Daily</span><span class="ex-tag">Custom Times</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=500&q=80" alt="Progress Check" class="ex-img"><div class="ex-body"><div class="ex-muscle">Tracking</div><h3>WEEKLY CHECK-IN</h3><p>Sunday reminders to log your weight, measurements, and progress photos. Keep your data up to date.</p><div class="ex-meta"><span class="ex-tag">Weekly</span><span class="ex-tag">Sunday</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80" alt="Streak" class="ex-img"><div class="ex-body"><div class="ex-muscle">Motivation</div><h3>STREAK PROTECTION</h3><p>Don't break your streak! Get a gentle push if you're about to lose your training consistency record.</p><div class="ex-meta"><span class="ex-tag">Adaptive</span><span class="ex-tag">Motivational</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=500&q=80" alt="Water" class="ex-img"><div class="ex-body"><div class="ex-muscle">Hydration</div><h3>WATER INTAKE</h3><p>Hourly hydration reminders based on your body weight and activity level. Stay hydrated for peak performance.</p><div class="ex-meta"><span class="ex-tag">Hourly</span><span class="ex-tag">Personalized</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&q=80" alt="Rest" class="ex-img"><div class="ex-body"><div class="ex-muscle">Recovery</div><h3>REST DAY ALERTS</h3><p>The AI detects when you need rest based on training volume and performance. Prevents overtraining.</p><div class="ex-meta"><span class="ex-tag">AI-Powered</span><span class="ex-tag">Recovery</span></div></div></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=500&q=80" alt="30 Day" class="card-img"><div class="card-body"><div class="card-label">Challenge</div><h3>30-DAY TRANSFORMATION</h3><p>Follow a structured 30-day program. Track daily, share progress, win prizes. New challenge every month.</p><div class="card-tags"><span class="card-tag">Monthly</span><span class="card-tag">Prizes</span><span class="card-tag">Popular</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&q=80" alt="Leaderboard" class="card-img"><div class="card-body"><div class="card-label">Competition</div><h3>WEEKLY LEADERBOARD</h3><p>Earn XP for completing workouts and hitting nutrition targets. Climb the leaderboard and earn badges.</p><div class="card-tags"><span class="card-tag">XP System</span><span class="card-tag">Badges</span><span class="card-tag">Ranks</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&q=80" alt="Groups" class="card-img"><div class="card-body"><div class="card-label">Social</div><h3>ACCOUNTABILITY GROUPS</h3><p>Join a small group of 5-10 members with similar goals. Daily check-ins keep everyone motivated.</p><div class="card-tags"><span class="card-tag">5-10 members</span><span class="card-tag">Daily</span><span class="card-tag">Goals</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=500&q=80" alt="Streak" class="card-img"><div class="card-body"><div class="card-label">Gamification</div><h3>STREAK REWARDS</h3><p>Maintain your training streak and unlock rewards: badges, profile frames, and exclusive content.</p><div class="card-tags"><span class="card-tag">Streaks</span><span class="card-tag">Rewards</span><span class="card-tag">Levels</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80" alt="Events" class="card-img"><div class="card-body"><div class="card-label">Events</div><h3>LIVE WORKOUT EVENTS</h3><p>Monthly live group workouts on WhatsApp. Train at the same time as hundreds of other members.</p><div class="card-tags"><span class="card-tag">Monthly</span><span class="card-tag">Live</span><span class="card-tag">WhatsApp</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=80" alt="Nutrition Challenge" class="card-img"><div class="card-body"><div class="card-label">Challenge</div><h3>CLEAN EATING WEEK</h3><p>7-day nutrition challenge. Follow the meal plan perfectly, share your meals, earn a special badge.</p><div class="card-tags"><span class="card-tag">7 Days</span><span class="card-tag">Nutrition</span><span class="card-tag">Badge</span></div></div></div>
  </div>
 </div>
 
-<!-- ========== COACH PAGE ========== -->
+<!-- ==================== COACH ==================== -->
 <div id="page-coach" class="page">
  <div class="ip-hero">
  <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
  <h1>WHATSAPP <span>COACH</span></h1>
- <p>Your personal AI trainer — available 24/7 on WhatsApp. Ask anything.</p>
+ <p>Your personal AI trainer — available 24/7 on WhatsApp.</p>
  </div>
- <div class="ex-grid">
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=500&q=80" alt="Form Check" class="ex-img"><div class="ex-body"><div class="ex-muscle">Coaching</div><h3>FORM CHECK</h3><p>Send a video of your exercise and get instant feedback on your form. Fix mistakes before they cause injury.</p><div class="ex-meta"><span class="ex-tag">Video</span><span class="ex-tag">Instant</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=80" alt="Meal Swap" class="ex-img"><div class="ex-body"><div class="ex-muscle">Nutrition</div><h3>MEAL SWAPS</h3><p>"I don't like broccoli" — get instant alternatives with the same macros. No more forcing foods you hate.</p><div class="ex-meta"><span class="ex-tag">Instant</span><span class="ex-tag">Same Macros</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80" alt="Program Adjust" class="ex-img"><div class="ex-body"><div class="ex-muscle">Training</div><h3>PROGRAM ADJUSTMENTS</h3><p>"My shoulder hurts" — the AI modifies your program instantly. Safe alternatives for every exercise.</p><div class="ex-meta"><span class="ex-tag">Real-time</span><span class="ex-tag">Safe</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&q=80" alt="Motivation" class="ex-img"><div class="ex-body"><div class="ex-muscle">Mindset</div><h3>DAILY MOTIVATION</h3><p>Feeling lazy? Your coach checks in, reminds you of your goals, and gets you moving. Accountability built in.</p><div class="ex-meta"><span class="ex-tag">Daily</span><span class="ex-tag">Personalized</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&q=80" alt="Q&A" class="ex-img"><div class="ex-body"><div class="ex-muscle">Knowledge</div><h3>ASK ANYTHING</h3><p>"How much protein do I need?" "Should I do cardio?" — instant, science-backed answers to any fitness question.</p><div class="ex-meta"><span class="ex-tag">24/7</span><span class="ex-tag">Science-based</span></div></div></div>
- <div class="ex-card rv"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&q=80" alt="Weekly Review" class="ex-img"><div class="ex-body"><div class="ex-muscle">Reports</div><h3>WEEKLY REVIEW</h3><p>Every Sunday, your coach sends a summary: what you crushed, what to improve, and next week's focus.</p><div class="ex-meta"><span class="ex-tag">Weekly</span><span class="ex-tag">Automated</span></div></div></div>
+ <div class="card-grid">
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=500&q=80" alt="Form" class="card-img"><div class="card-body"><div class="card-label">Coaching</div><h3>FORM CHECK</h3><p>Send a video of your exercise. Get instant AI feedback on your form and technique to prevent injuries.</p><div class="card-tags"><span class="card-tag">Video</span><span class="card-tag">Instant</span><span class="card-tag">Safe</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Meal Swap" class="card-img"><div class="card-body"><div class="card-label">Nutrition</div><h3>MEAL SWAPS</h3><p>"I don't like broccoli" — get instant alternatives with identical macros. Never force food you hate.</p><div class="card-tags"><span class="card-tag">Instant</span><span class="card-tag">Same Macros</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=500&q=80" alt="Adjust" class="card-img"><div class="card-body"><div class="card-label">Training</div><h3>PROGRAM ADJUSTMENTS</h3><p>"My shoulder hurts" — the AI modifies your program instantly with safe alternatives.</p><div class="card-tags"><span class="card-tag">Real-time</span><span class="card-tag">Injury-safe</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500&q=80" alt="Motivation" class="card-img"><div class="card-body"><div class="card-label">Mindset</div><h3>DAILY CHECK-IN</h3><p>Your coach checks in daily. Reminds you of your goals, celebrates wins, and pushes you through low days.</p><div class="card-tags"><span class="card-tag">Daily</span><span class="card-tag">Personal</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1534368270820-9de3d8053204?w=500&q=80" alt="QA" class="card-img"><div class="card-body"><div class="card-label">Knowledge</div><h3>ASK ANYTHING</h3><p>"How much protein?" "Should I do cardio?" — instant science-backed answers to any fitness question.</p><div class="card-tags"><span class="card-tag">24/7</span><span class="card-tag">Science</span></div></div></div>
+ <div class="card rv"><img src="https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=500&q=80" alt="Review" class="card-img"><div class="card-body"><div class="card-label">Reports</div><h3>WEEKLY REVIEW</h3><p>Every Sunday: what you crushed, what to improve, and next week's focus. Automated and personalized.</p><div class="card-tags"><span class="card-tag">Weekly</span><span class="card-tag">Auto</span></div></div></div>
+ </div>
+</div>
+
+<!-- ==================== PRICING PAGE ==================== -->
+<div id="page-pricing-page" class="page">
+ <div class="ip-hero">
+ <a href="#" onclick="sp('home');return false" class="ip-back">← Back to Home</a>
+ <h1>CHOOSE YOUR <span>PLAN</span></h1>
+ <p>Start free for 7 days. No credit card required. Cancel anytime.</p>
+ </div>
+ <div class="card-grid">
+ <div class="pc rv"><div class="pc-name">STARTER</div><div class="pc-price">$14<small>.99/mo</small></div><div class="pc-note">$143.90/year (save 20%)</div><ul><li>AI workout plans</li><li>Full exercise library</li><li>Basic macro calculator</li><li>Progress tracking</li><li>Workout logging</li></ul><button class="pb ol">GET STARTED</button></div>
+ <div class="pc pop rv"><div class="pop-b">MOST POPULAR</div><div class="pc-name">PRO</div><div class="pc-price">$29<small>.99/mo</small></div><div class="pc-note">$287.90/year (save 20%)</div><ul><li>Everything in Starter</li><li>Full weekly meal plans</li><li>Recipes & grocery lists</li><li>Community & challenges</li><li>Weekly AI reports</li><li>Ramadan meal timing</li></ul><button class="pb fl">START FREE TRIAL</button></div>
+ <div class="pc rv"><div class="pc-name">ELITE</div><div class="pc-price">$59<small>.99/mo</small></div><div class="pc-note">$575.90/year (save 20%)</div><ul><li>Everything in Pro</li><li>Monthly 1-on-1 coaching call</li><li>WhatsApp chat support</li><li>Custom program adjustments</li><li>Injury modifications</li><li>Advanced body analytics</li></ul><button class="pb ol">GET STARTED</button></div>
  </div>
 </div>
 
@@ -548,58 +600,66 @@ function unlock() {
  gc.focus();
  }
 }
-
 if (gc) {
- gc.addEventListener('keydown', e => {
- if (e.key === 'Enter') unlock();
- });
- gc.addEventListener('input', () => {
- if (ge) ge.textContent = '';
- });
+ gc.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+ gc.addEventListener('input', () => { if (ge) ge.textContent = ''; });
 }
-
-if (gate && sessionStorage.getItem('sg') === '1') {
- gate.classList.add('off');
-}
+if (gate && sessionStorage.getItem('sg') === '1') gate.classList.add('off');
 
 // === Nav Scroll ===
-if (nb) {
- window.addEventListener('scroll', () => {
- nb.classList.toggle('solid', window.scrollY > 60);
- });
-}
+if (nb) window.addEventListener('scroll', () => { nb.classList.toggle('solid', window.scrollY > 60); });
 
 // === Mobile Menu ===
-function closeMenu() {
- if (nml) nml.classList.remove('open');
-}
-// Keep cm() as alias for inline onclick handlers
-function cm() { closeMenu(); }
+function cm() { if (nml) nml.classList.remove('open'); }
 
-// === Page Navigation ===
-function showPage(id) {
+// === Page Navigation with Browser History ===
+function sp(id) {
  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
  const target = document.getElementById('page-' + id);
  if (!target) return;
  target.classList.add('active');
  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+ // Update browser URL and title
+ const titles = {home:'SelfieGym',exercises:'Exercises',meals:'Meal Plans',progress:'Progress',library:'Exercise Library',community:'Community',coach:'AI Coach','pricing-page':'Pricing'};
+ document.title = (titles[id] || 'SelfieGym') + ' — SelfieGym';
+ history.pushState({ page: id }, '', '#' + id);
+
+ // Re-observe reveals
  if (typeof revealObserver !== 'undefined') {
  document.querySelectorAll('.rv:not(.vis)').forEach(el => revealObserver.observe(el));
  }
 }
-// Keep sp() as alias for inline onclick handlers
-function sp(id) { showPage(id); }
+
+// === Browser Back Button Support ===
+window.addEventListener('popstate', (e) => {
+ if (e.state && e.state.page) {
+ document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+ const target = document.getElementById('page-' + e.state.page);
+ if (target) { target.classList.add('active'); window.scrollTo(0, 0); }
+ } else {
+ document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+ const home = document.getElementById('page-home');
+ if (home) { home.classList.add('active'); window.scrollTo(0, 0); }
+ }
+});
+
+// Load page from URL hash on first visit
+(function() {
+ const hash = window.location.hash.replace('#', '');
+ if (hash && document.getElementById('page-' + hash)) {
+ document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+ document.getElementById('page-' + hash).classList.add('active');
+ history.replaceState({ page: hash }, '', '#' + hash);
+ } else {
+ history.replaceState({ page: 'home' }, '', '#home');
+ }
+})();
 
 // === FAQ Toggle ===
-function toggleFaq(btn) {
- if (btn && btn.parentElement) {
- btn.parentElement.classList.toggle('open');
- }
-}
-// Keep tf() as alias for inline onclick handlers
-function tf(b) { toggleFaq(b); }
+function tf(b) { if (b && b.parentElement) b.parentElement.classList.toggle('open'); }
 
-// === Scroll Reveal Animation ===
+// === Scroll Reveal ===
 const revealObserver = new IntersectionObserver(entries => {
  entries.forEach((entry, i) => {
  if (entry.isIntersecting) {
@@ -608,7 +668,6 @@ const revealObserver = new IntersectionObserver(entries => {
  }
  });
 }, { threshold: 0.1 });
-
 document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
 </script>
 </body>

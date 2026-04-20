@@ -695,6 +695,59 @@ function closeSignup() {
  const modal = document.getElementById('signup-modal');
  if (modal) modal.classList.remove('show');
 }
+function submitSignup() {
+ const name = document.getElementById('s-name');
+ const email = document.getElementById('s-email');
+ const pass = document.getElementById('s-pass');
+ if (!name || !email || !pass) return;
+ if (!name.value.trim() || !email.value.trim() || !pass.value.trim()) {
+ alert('Please fill in all fields');
+ return;
+ }
+ if (pass.value.length < 6) {
+ alert('Password must be at least 6 characters');
+ return;
+ }
+
+ const btn = document.querySelector('.s-btn');
+ const originalText = btn.textContent;
+ btn.textContent = 'CREATING ACCOUNT...';
+ btn.disabled = true;
+
+ fetch('http://localhost:5050/api/signup', {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({
+ name: name.value.trim(),
+ email: email.value.trim(),
+ password: pass.value
+ })
+ })
+ .then(res => res.json())
+ .then(data => {
+ if (data.success) {
+ document.getElementById('signup-form-wrap').style.display = 'none';
+ document.getElementById('signup-success').style.display = 'block';
+ setTimeout(() => {
+ closeSignup();
+ document.getElementById('signup-form-wrap').style.display = 'block';
+ document.getElementById('signup-success').style.display = 'none';
+ name.value = '';
+ email.value = '';
+ pass.value = '';
+ }, 3000);
+ } else {
+ alert(data.error || 'Signup failed. Please try again.');
+ }
+ btn.textContent = originalText;
+ btn.disabled = false;
+ })
+ .catch(err => {
+ alert('Connection error. Please try again.');
+ btn.textContent = originalText;
+ btn.disabled = false;
+ });
+}
 // Close modal on outside click
 document.addEventListener('DOMContentLoaded', function() {
  const modal = document.getElementById('signup-modal');
@@ -716,7 +769,7 @@ document.addEventListener('DOMContentLoaded', function() {
  <input type="text" class="s-field" id="s-name" placeholder="Full Name" autocomplete="name">
  <input type="email" class="s-field" id="s-email" placeholder="Email Address" autocomplete="email">
  <input type="password" class="s-field" id="s-pass" placeholder="Create Password" autocomplete="new-password">
- <button class="s-btn" onclick="alert('Sign up successful! Check your email.');">CREATE ACCOUNT</button>
+ <button class="s-btn" onclick="submitSignup()">CREATE ACCOUNT</button>
  </div>
  <div class="s-success" id="signup-success">
  <h3>✦ WELCOME!</h3>

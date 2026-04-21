@@ -94,7 +94,7 @@ function renderMuscleGrid(exercises) {
     const count = getExercisesByMuscle(exercises, group.key).length;
     const slug = group.key.toLowerCase().replace(/\s+/g, '-');
     return `
-      <div class="card rv muscle-card" onclick="showMuscleDetail('${group.key}')" style="cursor:pointer">
+      <div class="card muscle-card" onclick="showMuscleDetail('${group.key}')" style="cursor:pointer">
         <img src="${muscleCardSVG(group.label)}" alt="${group.label}" class="card-img">
         <div class="card-body">
           <div class="card-label">${count} Exercise${count !== 1 ? 's' : ''}</div>
@@ -140,7 +140,7 @@ function renderMuscleDetail(muscleKey, exercises) {
     const difficulty = ex.difficulty || 'Beginner';
     const setsReps = `${ex.default_sets || 3}×${ex.default_reps || '10-12'}`;
     return `
-      <div class="card rv" data-exercise-id="${ex.id}">
+      <div class="card" data-exercise-id="${ex.id}">
         <img src="${PLACEHOLDER_IMG}" alt="${ex.name}" class="card-img" data-exercise-image="${ex.slug}">
         <div class="card-body">
           <div class="card-label">${muscleKey}</div>

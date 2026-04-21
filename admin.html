@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SelfieGym Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --black:#0a0a0a; --dg:#1c1c1c; --mg:#2a2a2a; --lg:#888;
+  --white:#fff; --gold:#c9a84c; --gold-l:#e0c97f; --red:#e74c3c;
+  --green:#27ae60; --blue:#3498db;
+}
+body {
+  font-family:'Poppins',sans-serif; background:var(--black); color:var(--white);
+  min-height:100vh;
+}
+
+/* ===== LOGIN ===== */
+#login-screen {
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background:var(--black); z-index:100;
+}
+#login-screen.hidden { display:none; }
+.login-box {
+  background:var(--dg); padding:3rem; border-radius:12px; border:1px solid var(--mg);
+  width:90%; max-width:400px; text-align:center;
+}
+.login-box h1 {
+  font-family:'Montserrat',sans-serif; font-weight:900; letter-spacing:3px;
+  margin-bottom:.5rem; font-size:1.8rem;
+}
+.login-box h1 span { color:var(--gold); }
+.login-box p { color:var(--lg); margin-bottom:2rem; font-size:.9rem; }
+.login-box input {
+  width:100%; padding:14px; background:var(--mg); border:2px solid var(--mg);
+  border-radius:8px; color:var(--white); font-size:1rem; margin-bottom:1rem;
+  font-family:inherit; outline:none; transition:.2s;
+}
+.login-box input:focus { border-color:var(--gold); }
+.login-box button {
+  width:100%; padding:14px; background:var(--gold); color:var(--black);
+  border:none; border-radius:8px; font-weight:700; font-size:1rem;
+  cursor:pointer; font-family:inherit; letter-spacing:1px; transition:.2s;
+}
+.login-box button:hover { background:var(--gold-l); }
+.login-err { color:var(--red); margin-top:1rem; font-size:.85rem; min-height:1.2rem; }
+
+/* ===== MAIN ===== */
+#main { display:none; }
+#main.visible { display:block; }
+
+header {
+  background:var(--dg); padding:1rem 2rem; border-bottom:1px solid var(--mg);
+  display:flex; justify-content:space-between; align-items:center;
+  position:sticky; top:0; z-index:10;
+}
+header h1 {
+  font-family:'Montserrat',sans-serif; font-weight:900; letter-spacing:2px;
+  font-size:1.2rem;
+}
+header h1 span { color:var(--gold); }
+.header-actions { display:flex; gap:.8rem; align-items:center; }
+.btn {
+  padding:10px 20px; border-radius:6px; border:none; cursor:pointer;
+  font-family:inherit; font-weight:600; font-size:.9rem; transition:.2s;
+}
+.btn-gold { background:var(--gold); color:var(--black); }
+.btn-gold:hover { background:var(--gold-l); }
+.btn-dg { background:var(--mg); color:var(--white); border:1px solid #444; }
+.btn-dg:hover { background:#333; }
+.btn-red { background:var(--red); color:var(--white); }
+.btn-red:hover { background:#c0392b; }
+.btn-green { background:var(--green); color:var(--white); }
+.btn-green:hover { background:#229954; }
+
+.toolbar {
+  padding:1.5rem 2rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap;
+  background:var(--dg); border-bottom:1px solid var(--mg);
+}
+.toolbar input, .toolbar select {
+  padding:10px 14px; background:var(--mg); border:1px solid #333; border-radius:6px;
+  color:var(--white); font-family:inherit; font-size:.9rem; outline:none;
+}
+.toolbar input:focus, .toolbar select:focus { border-color:var(--gold); }
+.toolbar input { flex:1; min-width:200px; max-width:400px; }
+.count-badge {
+  padding:8px 14px; background:var(--mg); border-radius:6px; font-size:.85rem;
+  color:var(--lg);
+}
+
+/* ===== TABLE ===== */
+.table-wrap { padding:2rem; overflow-x:auto; }
+table { width:100%; border-collapse:collapse; background:var(--dg); border-radius:8px; overflow:hidden; }
+th {
+  background:var(--mg); color:var(--gold); text-align:left; padding:14px 12px;
+  font-size:.8rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+  border-bottom:2px solid #333;
+}
+td { padding:12px; border-bottom:1px solid #222; font-size:.9rem; vertical-align:middle; }
+tr:hover td { background:#161616; }
+.img-thumb {
+  width:60px; height:60px; border-radius:4px; object-fit:cover;
+  background:var(--mg); border:1px solid #333;
+}
+.img-missing {
+  width:60px; height:60px; background:var(--mg); border-radius:4px;
+  display:flex; align-items:center; justify-content:center; color:var(--lg);
+  font-size:.7rem; border:1px dashed #444;
+}
+.action-btns { display:flex; gap:6px; }
+.icon-btn {
+  padding:6px 10px; border-radius:4px; border:none; cursor:pointer;
+  font-size:.8rem; font-weight:600;
+}
+.badge {
+  display:inline-block; padding:3px 8px; border-radius:3px; font-size:.75rem;
+  background:var(--mg); color:var(--gold);
+}
+
+/* ===== MODAL ===== */
+#modal {
+  position:fixed; inset:0; background:rgba(0,0,0,.8); display:none;
+  align-items:flex-start; justify-content:center; z-index:50; overflow-y:auto;
+  padding:2rem;
+}
+#modal.visible { display:flex; }
+.modal-box {
+  background:var(--dg); border-radius:12px; width:100%; max-width:700px;
+  border:1px solid var(--mg); margin:auto;
+}
+.modal-head {
+  padding:1.5rem 2rem; border-bottom:1px solid var(--mg);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.modal-head h2 { font-family:'Montserrat',sans-serif; font-size:1.3rem; letter-spacing:1px; }
+.close-btn {
+  background:transparent; border:none; color:var(--lg); font-size:1.5rem;
+  cursor:pointer; padding:0 .5rem;
+}
+.modal-body { padding:2rem; max-height:70vh; overflow-y:auto; }
+.field { margin-bottom:1.2rem; }
+.field label {
+  display:block; margin-bottom:.4rem; color:var(--gold);
+  font-size:.8rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+}
+.field input, .field textarea, .field select {
+  width:100%; padding:10px 12px; background:var(--mg); border:1px solid #333;
+  border-radius:6px; color:var(--white); font-family:inherit; font-size:.9rem;
+  outline:none; transition:.2s;
+}
+.field input:focus, .field textarea:focus, .field select:focus { border-color:var(--gold); }
+.field textarea { min-height:80px; resize:vertical; }
+.field-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.img-preview {
+  margin-top:.5rem; max-width:200px; max-height:120px; border-radius:6px;
+  border:1px solid #333; object-fit:cover;
+}
+.modal-foot {
+  padding:1.5rem 2rem; border-top:1px solid var(--mg);
+  display:flex; justify-content:flex-end; gap:.8rem;
+}
+
+/* ===== TOAST ===== */
+#toast {
+  position:fixed; bottom:2rem; right:2rem; padding:14px 20px; border-radius:8px;
+  color:white; font-weight:600; z-index:200; display:none;
+  box-shadow:0 8px 30px rgba(0,0,0,.5);
+}
+#toast.show { display:block; animation:slideIn .3s; }
+#toast.success { background:var(--green); }
+#toast.error { background:var(--red); }
+@keyframes slideIn { from{transform:translateX(100%);opacity:0} to{transform:none;opacity:1} }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:768px) {
+  .field-row { grid-template-columns:1fr; }
+  th, td { padding:8px; font-size:.8rem; }
+  .img-thumb, .img-missing { width:40px; height:40px; }
+  .toolbar { padding:1rem; }
+  .table-wrap { padding:1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>SELFIE<span>GYM</span></h1>
+    <p>ADMIN PANEL</p>
+    <input type="password" id="pw-input" placeholder="Password" autofocus>
+    <button onclick="doLogin()">LOGIN</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <header>
+    <h1>SELFIE<span>GYM</span> · ADMIN</h1>
+    <div class="header-actions">
+      <button class="btn btn-gold" onclick="openAddModal()">+ Add Exercise</button>
+      <button class="btn btn-dg" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="🔍 Search by name..." oninput="filterTable()">
+    <select id="filter-muscle" onchange="filterTable()">
+      <option value="">All Muscles</option>
+    </select>
+    <select id="filter-difficulty" onchange="filterTable()">
+      <option value="">All Difficulties</option>
+    </select>
+    <span class="count-badge" id="count">0 exercises</span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Muscle</th>
+          <th>Difficulty</th>
+          <th>Sets×Reps</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 id="modal-title">Edit Exercise</h2>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="f-id">
+      <div class="field">
+        <label>Name *</label>
+        <input type="text" id="f-name" required>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Primary Muscle</label>
+          <select id="f-muscle"></select>
+        </div>
+        <div class="field">
+          <label>Difficulty</label>
+          <select id="f-difficulty"></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Default Sets</label>
+          <input type="number" id="f-sets" min="1" max="10">
+        </div>
+        <div class="field">
+          <label>Default Reps</label>
+          <input type="text" id="f-reps" placeholder="e.g. 8-12">
+        </div>
+      </div>
+      <div class="field">
+        <label>Rest Seconds</label>
+        <input type="number" id="f-rest" min="0" max="600">
+      </div>
+      <div class="field">
+        <label>Image URL</label>
+        <input type="text" id="f-image" placeholder="https://..." oninput="previewImg()">
+        <img id="img-preview" class="img-preview" style="display:none" alt="Preview">
+      </div>
+      <div class="field">
+        <label>Video URL (YouTube)</label>
+        <input type="text" id="f-video" placeholder="https://youtube.com/...">
+      </div>
+      <div class="field">
+        <label>Instructions</label>
+        <textarea id="f-instructions"></textarea>
+      </div>
+      <div class="field">
+        <label>Benefits</label>
+        <textarea id="f-benefits"></textarea>
+      </div>
+      <div class="field">
+        <label>Safety Notes</label>
+        <textarea id="f-safety"></textarea>
+      </div>
+      <div class="field">
+        <label>Common Mistakes</label>
+        <textarea id="f-mistakes"></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-red" id="btn-delete" onclick="deleteExercise()" style="margin-right:auto">Delete</button>
+      <button class="btn btn-dg" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-green" onclick="saveExercise()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+const API = 'https://api.selfigym.com';
+let TOKEN = localStorage.getItem('admin_token') || '';
+let EXERCISES = [];
+let MUSCLES = [];
+let DIFFICULTIES = [];
+let EDITING_ID = null;
+
+// ===== INIT =====
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('pw-input').addEventListener('keypress', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+  if (TOKEN) verifyAndLoad();
+});
+
+async function verifyAndLoad() {
+  try {
+    const res = await fetch(`${API}/api/admin/exercises`, {
+      headers: { 'X-Admin-Token': TOKEN }
+    });
+    if (res.ok) {
+      showMain();
+      loadAll();
+    } else {
+      TOKEN = '';
+      localStorage.removeItem('admin_token');
+    }
+  } catch (e) { console.error(e); }
+}
+
+// ===== LOGIN =====
+async function doLogin() {
+  const pw = document.getElementById('pw-input').value;
+  const err = document.getElementById('login-err');
+  err.textContent = '';
+  try {
+    const res = await fetch(`${API}/api/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    const data = await res.json();
+    if (res.ok && data.token) {
+      TOKEN = data.token;
+      localStorage.setItem('admin_token', TOKEN);
+      showMain();
+      loadAll();
+    } else {
+      err.textContent = data.error || 'Login failed';
+    }
+  } catch (e) {
+    err.textContent = 'Connection error';
+  }
+}
+
+function logout() {
+  TOKEN = '';
+  localStorage.removeItem('admin_token');
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('main').classList.remove('visible');
+  document.getElementById('pw-input').value = '';
+}
+
+function showMain() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('main').classList.add('visible');
+}
+
+// ===== LOAD DATA =====
+async function loadAll() {
+  try {
+    const [exRes, mRes, dRes] = await Promise.all([
+      fetch(`${API}/api/admin/exercises`, { headers: { 'X-Admin-Token': TOKEN } }),
+      fetch(`${API}/api/admin/muscles`, { headers: { 'X-Admin-Token': TOKEN } }),
+      fetch(`${API}/api/admin/difficulties`, { headers: { 'X-Admin-Token': TOKEN } })
+    ]);
+    const exData = await exRes.json();
+    const mData = await mRes.json();
+    const dData = await dRes.json();
+    
+    EXERCISES = exData.exercises || [];
+    MUSCLES = mData.muscles || [];
+    DIFFICULTIES = dData.difficulties || [];
+    
+    populateFilters();
+    renderTable();
+  } catch (e) {
+    toast('Failed to load data', 'error');
+  }
+}
+
+function populateFilters() {
+  const mSel = document.getElementById('filter-muscle');
+  const dSel = document.getElementById('filter-difficulty');
+  mSel.innerHTML = '<option value="">All Muscles</option>' + 
+    MUSCLES.map(m => `<option value="${m.name}">${m.name}</option>`).join('');
+  dSel.innerHTML = '<option value="">All Difficulties</option>' + 
+    DIFFICULTIES.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
+  
+  // Also for modal
+  document.getElementById('f-muscle').innerHTML = '<option value="">-- None --</option>' + 
+    MUSCLES.map(m => `<option value="${m.name}">${m.name}</option>`).join('');
+  document.getElementById('f-difficulty').innerHTML = 
+    DIFFICULTIES.map(d => `<option value="${d.name}">${d.name}</option>`).join('');
+}
+
+function renderTable() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const fm = document.getElementById('filter-muscle').value;
+  const fd = document.getElementById('filter-difficulty').value;
+  
+  const filtered = EXERCISES.filter(e => {
+    if (q && !e.name.toLowerCase().includes(q)) return false;
+    if (fm && e.primary_muscle !== fm) return false;
+    if (fd && e.difficulty !== fd) return false;
+    return true;
+  });
+  
+  document.getElementById('count').textContent = `${filtered.length} of ${EXERCISES.length} exercises`;
+  
+  const tbody = document.getElementById('tbody');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:3rem;color:var(--lg)">No exercises match your filters</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = filtered.map(ex => `
+    <tr>
+      <td>${ex.id}</td>
+      <td>${ex.image_url 
+        ? `<img src="${ex.image_url}" class="img-thumb" onerror="this.outerHTML='<div class=img-missing>No img</div>'">` 
+        : '<div class="img-missing">No img</div>'}</td>
+      <td><strong>${escapeHtml(ex.name)}</strong></td>
+      <td>${ex.primary_muscle ? `<span class="badge">${ex.primary_muscle}</span>` : '-'}</td>
+      <td>${ex.difficulty || '-'}</td>
+      <td>${ex.default_sets || '?'}×${ex.default_reps || '?'}</td>
+      <td class="action-btns">
+        <button class="icon-btn btn-gold" onclick="openEditModal(${ex.id})">Edit</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function filterTable() { renderTable(); }
+
+// ===== MODAL =====
+function openAddModal() {
+  EDITING_ID = null;
+  document.getElementById('modal-title').textContent = 'Add Exercise';
+  document.getElementById('btn-delete').style.display = 'none';
+  clearForm();
+  document.getElementById('modal').classList.add('visible');
+}
+
+function openEditModal(id) {
+  const ex = EXERCISES.find(e => e.id === id);
+  if (!ex) return;
+  EDITING_ID = id;
+  document.getElementById('modal-title').textContent = `Edit: ${ex.name}`;
+  document.getElementById('btn-delete').style.display = 'inline-block';
+  
+  document.getElementById('f-id').value = ex.id;
+  document.getElementById('f-name').value = ex.name || '';
+  document.getElementById('f-muscle').value = ex.primary_muscle || '';
+  document.getElementById('f-difficulty').value = ex.difficulty || 'Beginner';
+  document.getElementById('f-sets').value = ex.default_sets || '';
+  document.getElementById('f-reps').value = ex.default_reps || '';
+  document.getElementById('f-rest').value = ex.rest_seconds || '';
+  document.getElementById('f-image').value = ex.image_url || '';
+  document.getElementById('f-video').value = ex.video_url || '';
+  document.getElementById('f-instructions').value = ex.instructions || '';
+  document.getElementById('f-benefits').value = ex.benefits || '';
+  document.getElementById('f-safety').value = ex.safety_notes || '';
+  document.getElementById('f-mistakes').value = ex.common_mistakes || '';
+  previewImg();
+  document.getElementById('modal').classList.add('visible');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('visible');
+  clearForm();
+}
+
+function clearForm() {
+  ['f-id','f-name','f-sets','f-reps','f-rest','f-image','f-video',
+   'f-instructions','f-benefits','f-safety','f-mistakes'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('img-preview').style.display = 'none';
+}
+
+function previewImg() {
+  const url = document.getElementById('f-image').value;
+  const img = document.getElementById('img-preview');
+  if (url && url.startsWith('http')) {
+    img.src = url;
+    img.style.display = 'block';
+    img.onerror = () => { img.style.display = 'none'; };
+  } else {
+    img.style.display = 'none';
+  }
+}
+
+async function saveExercise() {
+  const payload = {
+    name: document.getElementById('f-name').value.trim(),
+    primary_muscle: document.getElementById('f-muscle').value,
+    difficulty: document.getElementById('f-difficulty').value,
+    default_sets: parseInt(document.getElementById('f-sets').value) || null,
+    default_reps: document.getElementById('f-reps').value.trim(),
+    rest_seconds: parseInt(document.getElementById('f-rest').value) || null,
+    image_url: document.getElementById('f-image').value.trim(),
+    video_url: document.getElementById('f-video').value.trim(),
+    instructions: document.getElementById('f-instructions').value.trim(),
+    benefits: document.getElementById('f-benefits').value.trim(),
+    safety_notes: document.getElementById('f-safety').value.trim(),
+    common_mistakes: document.getElementById('f-mistakes').value.trim()
+  };
+  
+  if (!payload.name) {
+    toast('Name is required', 'error');
+    return;
+  }
+  
+  try {
+    const url = EDITING_ID 
+      ? `${API}/api/admin/exercises/${EDITING_ID}`
+      : `${API}/api/admin/exercises`;
+    const method = EDITING_ID ? 'PUT' : 'POST';
+    
+    const res = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Admin-Token': TOKEN
+      },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    
+    if (res.ok) {
+      toast(EDITING_ID ? 'Updated!' : 'Created!', 'success');
+      closeModal();
+      loadAll();
+    } else {
+      toast(data.error || 'Save failed', 'error');
+    }
+  } catch (e) {
+    toast('Network error', 'error');
+  }
+}
+
+async function deleteExercise() {
+  if (!EDITING_ID) return;
+  if (!confirm('Delete this exercise? This cannot be undone.')) return;
+  
+  try {
+    const res = await fetch(`${API}/api/admin/exercises/${EDITING_ID}`, {
+      method: 'DELETE',
+      headers: { 'X-Admin-Token': TOKEN }
+    });
+    if (res.ok) {
+      toast('Deleted', 'success');
+      closeModal();
+      loadAll();
+    } else {
+      const data = await res.json();
+      toast(data.error || 'Delete failed', 'error');
+    }
+  } catch (e) {
+    toast('Network error', 'error');
+  }
+}
+
+// ===== UTILITIES =====
+function toast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `show ${type}`;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+</script>
+
+</body>
+</html>

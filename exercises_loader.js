@@ -1,14 +1,11 @@
 // ============================================================
-// EXERCISES LOADER v2 — Muscle Grid + Detail Pages
-// Replace the existing exercises_loader.js
+// EXERCISES LOADER v2.3 — Muscle Grid + Detail Pages + Menu Fix
 // ============================================================
 
 const EXERCISES_API = 'https://api.selfigym.com/api/exercises';
 
-// Cached exercises (loaded once)
 let EXERCISES_CACHE = null;
 
-// 10 muscle groups with display info
 const MUSCLE_GROUPS = [
   { key: 'Chest',       label: 'CHEST',       sub: 'Build a powerful chest' },
   { key: 'Back',        label: 'BACK',        sub: 'Develop a strong back' },
@@ -22,7 +19,6 @@ const MUSCLE_GROUPS = [
   { key: 'Flexibility', label: 'FLEXIBILITY', sub: 'Mobility & recovery' }
 ];
 
-// Placeholder image (SVG - matches theme)
 const PLACEHOLDER_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300">
     <defs>
@@ -42,7 +38,6 @@ const PLACEHOLDER_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   </svg>`
 );
 
-// Muscle card background SVG
 function muscleCardSVG(label) {
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350">
@@ -57,10 +52,6 @@ function muscleCardSVG(label) {
     </svg>`
   );
 }
-
-// ============================================================
-// DATA LOADING
-// ============================================================
 
 async function loadAllExercises() {
   if (EXERCISES_CACHE) return EXERCISES_CACHE;
@@ -82,17 +73,12 @@ function getExercisesByMuscle(exercises, muscleKey) {
   );
 }
 
-// ============================================================
-// RENDER: MAIN MUSCLE GRID
-// ============================================================
-
 function renderMuscleGrid(exercises) {
   const container = document.getElementById('exercises-container');
   if (!container) return;
 
   const cards = MUSCLE_GROUPS.map(group => {
     const count = getExercisesByMuscle(exercises, group.key).length;
-    const slug = group.key.toLowerCase().replace(/\s+/g, '-');
     return `
       <div class="card muscle-card" onclick="showMuscleDetail('${group.key}')" style="cursor:pointer">
         <img src="${muscleCardSVG(group.label)}" alt="${group.label}" class="card-img">
@@ -108,14 +94,8 @@ function renderMuscleGrid(exercises) {
     `;
   }).join('');
 
-  container.innerHTML = `
-    <div class="card-grid">${cards}</div>
-  `;
+  container.innerHTML = `<div class="card-grid">${cards}</div>`;
 }
-
-// ============================================================
-// RENDER: MUSCLE DETAIL (exercises for one muscle)
-// ============================================================
 
 function renderMuscleDetail(muscleKey, exercises) {
   const container = document.getElementById('exercises-container');
@@ -129,7 +109,7 @@ function renderMuscleDetail(muscleKey, exercises) {
       <div style="text-align:center;padding:3rem;color:var(--lg)">
         <a href="#" onclick="showMuscleGrid();return false" class="ip-back" style="display:inline-block;margin-bottom:1.5rem">← Back to Muscle Groups</a>
         <h2 style="color:var(--gold);margin-bottom:1rem">${group?.label || muscleKey}</h2>
-        <p>No exercises available for this muscle group yet.</p>
+        <p>No exercises available yet.</p>
       </div>
     `;
     return;
@@ -167,90 +147,81 @@ function renderMuscleDetail(muscleKey, exercises) {
     <div class="card-grid">${cards}</div>
   `;
 
-  // Scroll to top smoothly
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-// ============================================================
-// NAVIGATION (called from HTML onclick)
-// ============================================================
 
 async function showMuscleGrid() {
   const exercises = await loadAllExercises();
   renderMuscleGrid(exercises);
-  // Update URL hash without triggering scroll
   history.replaceState(null, '', '#exercises');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 async function showMuscleDetail(muscleKey) {
   const exercises = await loadAllExercises();
   renderMuscleDetail(muscleKey, exercises);
-  // Update URL hash
   const slug = muscleKey.toLowerCase().replace(/\s+/g, '-');
   history.replaceState(null, '', `#exercises/${slug}`);
 }
-
-// ============================================================
-// INIT + URL ROUTING
-// ============================================================
 
 async function initExercises() {
   const container = document.getElementById('exercises-container');
   if (!container) return;
 
-  // Show loading state
-  container.innerHTML = `
-    <div style="text-align:center;padding:3rem;color:var(--lg)">
-      <p>Loading exercises...</p>
-    </div>
-  `;
+  container.innerHTML = `<div style="text-align:center;padding:3rem;color:var(--lg)"><p>Loading exercises...</p></div>`;
 
   const exercises = await loadAllExercises();
 
   if (!exercises.length) {
-    container.innerHTML = `
-      <div style="text-align:center;padding:3rem;color:var(--lg)">
-        <p>Unable to load exercises right now.</p>
-        <p style="font-size:.85rem;margin-top:.5rem">Please try again later.</p>
-      </div>
-    `;
+    container.innerHTML = `<div style="text-align:center;padding:3rem;color:var(--lg)"><p>Unable to load exercises right now.</p></div>`;
     return;
   }
 
-  // Check URL for deep-link to a muscle
   const hash = window.location.hash;
   const match = hash.match(/^#exercises\/(.+)$/);
   if (match) {
     const slug = match[1];
-    // Find matching muscle group by slug
-    const group = MUSCLE_GROUPS.find(g => 
-      g.key.toLowerCase().replace(/\s+/g, '-') === slug
-    );
+    const group = MUSCLE_GROUPS.find(g => g.key.toLowerCase().replace(/\s+/g, '-') === slug);
     if (group) {
       renderMuscleDetail(group.key, exercises);
       return;
     }
   }
 
-  // Default: show muscle grid
   renderMuscleGrid(exercises);
 }
 
-// Load on page ready
 document.addEventListener('DOMContentLoaded', initExercises);
 
-// Handle browser back/forward
 window.addEventListener('hashchange', () => {
   const hash = window.location.hash;
   if (hash === '#exercises' || hash === '#exercises/') {
     initExercises();
   } else if (hash.startsWith('#exercises/')) {
     const slug = hash.replace('#exercises/', '');
-    const group = MUSCLE_GROUPS.find(g => 
-      g.key.toLowerCase().replace(/\s+/g, '-') === slug
-    );
+    const group = MUSCLE_GROUPS.find(g => g.key.toLowerCase().replace(/\s+/g, '-') === slug);
     if (group && EXERCISES_CACHE) {
       renderMuscleDetail(group.key, EXERCISES_CACHE);
     }
   }
 });
+
+// ============================================================
+// MENU FIX: Hook site's sp() navigation to reset muscle grid
+// ============================================================
+(function() {
+  const hookSp = () => {
+    if (typeof window.sp !== 'function') {
+      setTimeout(hookSp, 100);
+      return;
+    }
+    const _originalSp = window.sp;
+    window.sp = function(page) {
+      _originalSp.call(this, page);
+      if (page === 'exercises') {
+        setTimeout(() => showMuscleGrid(), 50);
+      }
+    };
+  };
+  hookSp();
+})();

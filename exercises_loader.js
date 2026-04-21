@@ -141,7 +141,7 @@ function renderMuscleDetail(muscleKey, exercises) {
     const setsReps = `${ex.default_sets || 3}×${ex.default_reps || '10-12'}`;
     return `
       <div class="card" data-exercise-id="${ex.id}">
-        <img src="${PLACEHOLDER_IMG}" alt="${ex.name}" class="card-img" data-exercise-image="${ex.slug}">
+        <img src="${ex.image_url || PLACEHOLDER_IMG}" alt="${ex.name}" class="card-img" data-exercise-image="${ex.slug}">
         <div class="card-body">
           <div class="card-label">${muscleKey}</div>
           <h3>${ex.name.toUpperCase()}</h3>

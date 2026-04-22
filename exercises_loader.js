@@ -225,3 +225,5 @@ window.addEventListener('hashchange', () => {
   };
   hookSp();
 })();
+
+// Updated: 2026-04-22 — Fixed API response format
